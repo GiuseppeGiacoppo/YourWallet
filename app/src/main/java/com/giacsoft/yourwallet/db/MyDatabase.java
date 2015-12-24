@@ -20,19 +20,19 @@ public class MyDatabase {
 
     private static final String DB_NAME = "yourwallet";
     private static final int DB_VERSION = 2;
-    private static final String TRANSAZIONI_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " + TransactionsTable.TABLE_NAME + " ( " + TransactionsTable._ID + " integer primary key autoincrement, " + TransactionsTable.NOTA + " text not null, "
-            + TransactionsTable.IMPORTO + " double not null, " + TransactionsTable.CATEGORIA + " integer not null, " + TransactionsTable.CONTO + " integer not null, " + TransactionsTable.GIORNO + " integer not null, " + TransactionsTable.DAY
+    private static final String TRANSAZIONI_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " + TransactionsTable.TABLE_NAME + " ( " + TransactionsTable._ID + " integer primary key autoincrement, " + TransactionsTable.NOTE + " text not null, "
+            + TransactionsTable.AMOUNT + " double not null, " + TransactionsTable.CATEGORY + " integer not null, " + TransactionsTable.ACCOUNT + " integer not null, " + TransactionsTable.DAYOFWEEK + " integer not null, " + TransactionsTable.DAY
             + " integer not null, " + TransactionsTable.MONTH + " integer not null, " + TransactionsTable.YEAR + " integer not null );";
-    private static final String CONTI_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " + AccountsTable.TABLE_NAME + " ( " + AccountsTable._ID + " integer primary key autoincrement, " + AccountsTable.NOME + " text not null, " + AccountsTable.TOTALE
+    private static final String CONTI_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " + AccountsTable.TABLE_NAME + " ( " + AccountsTable._ID + " integer primary key autoincrement, " + AccountsTable.NAME + " text not null, " + AccountsTable.TOTAL
             + " double not null );";
-    private static final String CATEGORIA_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " + CategoriesTable.TABLE_NAME + " ( " + CategoriesTable._ID + " integer primary key autoincrement, " + CategoriesTable.NOME + " text not null, "
-            + CategoriesTable.COLORE + " text not null default 'color0' );";
+    private static final String CATEGORIA_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " + CategoriesTable.TABLE_NAME + " ( " + CategoriesTable._ID + " integer primary key autoincrement, " + CategoriesTable.NAME + " text not null, "
+            + CategoriesTable.COLOR + " text not null default 'color0' );";
 
 	/*
      * Versione 1: Tabelle dei conti, delle transazioni e delle categorie.
 	 * Versione 2: aggiunta colonna colore nella tabella categorie.
 	 */
-    private static final String CATEGORIA_TABLE_UPDATE = "ALTER TABLE " + CategoriesTable.TABLE_NAME + " ADD " + CategoriesTable.COLORE + " text not null default 'color0' ";
+    private static final String CATEGORIA_TABLE_UPDATE = "ALTER TABLE " + CategoriesTable.TABLE_NAME + " ADD " + CategoriesTable.COLOR + " text not null default 'color0' ";
     SQLiteDatabase mDb;
     DbHelper mDbHelper;
     Context mContext;
@@ -54,8 +54,8 @@ public class MyDatabase {
 
     public long addAccount(String nome) {
         ContentValues v = new ContentValues();
-        v.put(AccountsTable.NOME, nome);
-        v.put(AccountsTable.TOTALE, 0);
+        v.put(AccountsTable.NAME, nome);
+        v.put(AccountsTable.TOTAL, 0);
         return mDb.insert(AccountsTable.TABLE_NAME, null, v);
     }
 
@@ -64,7 +64,7 @@ public class MyDatabase {
         ArrayList<Account> res = new ArrayList<Account>();
 
         while (c.moveToNext()) {
-            res.add(new Account(c.getLong(0), c.getString(1), c.getDouble(2), getNumTransConto(c.getLong(0))));
+            res.add(new Account(c.getLong(0), c.getString(1), c.getDouble(2), getTransactionsNumberByAccount(c.getLong(0))));
         }
 
         return res;
@@ -77,7 +77,7 @@ public class MyDatabase {
         return res;
     }
 
-    public double getTotConti() {
+    public double getTotalAccountsAmount() {
         double tot = 0;
         Cursor c = mDb.query(AccountsTable.TABLE_NAME, null, null, null, null, null, null);
         while (c.moveToNext()) {
@@ -86,25 +86,25 @@ public class MyDatabase {
         return tot;
     }
 
-    public void updateTotalAmountAccount(long id, double amount) {
+    private void updateTotalAccountsAmount(long id, double amount) {
         Account account = getAccount(id);
         double tot = account.total + amount;
 
         ContentValues v = new ContentValues();
-        v.put(AccountsTable.TOTALE, tot);
+        v.put(AccountsTable.TOTAL, tot);
         String[] wargs = {String.valueOf(id)};
         mDb.update(AccountsTable.TABLE_NAME, v, AccountsTable._ID + " = ?", wargs);
     }
 
     public void updateAccount(long id, String name) {
         ContentValues v = new ContentValues();
-        v.put(AccountsTable.NOME, name);
+        v.put(AccountsTable.NAME, name);
         String[] args = {String.valueOf(id)};
         mDb.update(AccountsTable.TABLE_NAME, v, AccountsTable._ID + " = ?", args);
     }
 
-    public int getNumTransConto(long id) {
-        final String QUERY_NUMTRANSCONTO = "SELECT COUNT(" + TransactionsTable.CONTO + ") FROM " + TransactionsTable.TABLE_NAME + " WHERE " + TransactionsTable.CONTO + " = ? GROUP BY " + TransactionsTable.CONTO;
+    private int getTransactionsNumberByAccount(long id) {
+        final String QUERY_NUMTRANSCONTO = "SELECT COUNT(" + TransactionsTable.ACCOUNT + ") FROM " + TransactionsTable.TABLE_NAME + " WHERE " + TransactionsTable.ACCOUNT + " = ? GROUP BY " + TransactionsTable.ACCOUNT;
         String[] wargs = {String.valueOf(id)};
         Cursor c = mDb.rawQuery(QUERY_NUMTRANSCONTO, wargs);
         if (c.moveToFirst())
@@ -126,26 +126,26 @@ public class MyDatabase {
         delTransactionFromDBByAccount(accountID);
 
         ContentValues v = new ContentValues();
-        v.put(AccountsTable.TOTALE, 0);
+        v.put(AccountsTable.TOTAL, 0);
         String[] args = {String.valueOf(accountID)};
         mDb.update(AccountsTable.TABLE_NAME, v, AccountsTable._ID + " = ?", args);
     }
 
     // OPERAZIONI SULLE TRANSAZIONI
 
-    public long newTransaction(String nota, double amount, long categoryID, long accountID, int dayofWeek, int day, int month, int year) {
+    public long addTransaction(String nota, double amount, long categoryID, long accountID, int dayofWeek, int day, int month, int year) {
         long id = addTransactionToDB(nota, amount, categoryID, accountID, dayofWeek, day, month, year);
-        updateTotalAmountAccount(accountID, amount);
+        updateTotalAccountsAmount(accountID, amount);
         return id;
     }
 
-    public long addTransactionToDB(String nota, double amount, long categoryID, long accountID, int dayofWeek, int day, int month, int year) {
+    private long addTransactionToDB(String nota, double amount, long categoryID, long accountID, int dayofWeek, int day, int month, int year) {
         ContentValues v = new ContentValues();
-        v.put(TransactionsTable.NOTA, nota);
-        v.put(TransactionsTable.IMPORTO, amount);
-        v.put(TransactionsTable.CATEGORIA, categoryID);
-        v.put(TransactionsTable.CONTO, accountID);
-        v.put(TransactionsTable.GIORNO, dayofWeek);
+        v.put(TransactionsTable.NOTE, nota);
+        v.put(TransactionsTable.AMOUNT, amount);
+        v.put(TransactionsTable.CATEGORY, categoryID);
+        v.put(TransactionsTable.ACCOUNT, accountID);
+        v.put(TransactionsTable.DAYOFWEEK, dayofWeek);
         v.put(TransactionsTable.DAY, day);
         v.put(TransactionsTable.MONTH, month);
         v.put(TransactionsTable.YEAR, year);
@@ -156,17 +156,17 @@ public class MyDatabase {
         Transaction t = getTransaction(id);
         double tot = t.amount+ differenza;
         ContentValues v = new ContentValues();
-        v.put(TransactionsTable.NOTA, nota);
-        v.put(TransactionsTable.IMPORTO, tot);
-        v.put(TransactionsTable.CATEGORIA, categoryID);
-        v.put(TransactionsTable.CONTO, accountID);
-        v.put(TransactionsTable.GIORNO, dayofWeek);
+        v.put(TransactionsTable.NOTE, nota);
+        v.put(TransactionsTable.AMOUNT, tot);
+        v.put(TransactionsTable.CATEGORY, categoryID);
+        v.put(TransactionsTable.ACCOUNT, accountID);
+        v.put(TransactionsTable.DAYOFWEEK, dayofWeek);
         v.put(TransactionsTable.DAY, day);
         v.put(TransactionsTable.MONTH, month);
         v.put(TransactionsTable.YEAR, year);
         String[] wargs = {String.valueOf(id)};
         mDb.update(TransactionsTable.TABLE_NAME, v, TransactionsTable._ID + " = ?", wargs);
-        updateTotalAmountAccount(accountID, differenza);
+        updateTotalAccountsAmount(accountID, differenza);
     }
 
     public Transaction getTransaction(long id) {
@@ -177,21 +177,21 @@ public class MyDatabase {
         return res;
     }
 
-    public ArrayList<Transaction> getLastMov(int order, double accountID, int lim) {
+    public ArrayList<Transaction> getLastTransactions(int order, double accountID, int limit) {
         Cursor c = null;
         long id = (long) accountID;
         switch (order) {
             case Utils.ASC:
                 if(accountID==0)
-                    c = mDb.query(TransactionsTable.TABLE_NAME, null, null, null, null, null, TransactionsTable._ID + " ASC", "" + lim);
+                    c = mDb.query(TransactionsTable.TABLE_NAME, null, null, null, null, null, TransactionsTable._ID + " ASC", "" + limit);
                 else
-                    c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.CONTO + " = " + id, null, null, null, TransactionsTable._ID + " ASC", "" + lim);
+                    c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.ACCOUNT + " = " + id, null, null, null, TransactionsTable._ID + " ASC", "" + limit);
                 break;
             case Utils.DESC:
                 if(accountID==0)
-                    c = mDb.query(TransactionsTable.TABLE_NAME, null, null, null, null, null, TransactionsTable._ID + " DESC", "" + lim);
+                    c = mDb.query(TransactionsTable.TABLE_NAME, null, null, null, null, null, TransactionsTable._ID + " DESC", "" + limit);
                 else
-                    c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.CONTO + " = " + id, null, null, null, TransactionsTable._ID + " DESC", "" + lim);
+                    c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.ACCOUNT + " = " + id, null, null, null, TransactionsTable._ID + " DESC", "" + limit);
                 break;
         }
         ArrayList<Transaction> res = new ArrayList<Transaction>();
@@ -203,7 +203,7 @@ public class MyDatabase {
         return res;
     }
 
-    public ArrayList<Transaction> getMovbyMonth(int amount_filter, boolean reverse, double accountID, int m, int y) {
+    public ArrayList<Transaction> getTransactions(int amount_filter, boolean reverse, double accountID, int m, int y) {
         long id = (long) accountID;
         Cursor c =null;
         switch (amount_filter) {
@@ -215,22 +215,22 @@ public class MyDatabase {
                         c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.YEAR + " = " + y + " AND " + TransactionsTable.MONTH + " = " + m, null, null, null, TransactionsTable.DAY + " ASC, " + TransactionsTable._ID + " ASC", null);
                 } else {
                     if (reverse)
-                        c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.YEAR + " = " + y + " AND " + TransactionsTable.MONTH + " = " + m + " AND " + TransactionsTable.CONTO + " = " + id, null, null, null, TransactionsTable.DAY + " DESC, " + TransactionsTable._ID + " DESC", null);
+                        c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.YEAR + " = " + y + " AND " + TransactionsTable.MONTH + " = " + m + " AND " + TransactionsTable.ACCOUNT + " = " + id, null, null, null, TransactionsTable.DAY + " DESC, " + TransactionsTable._ID + " DESC", null);
                     else
-                        c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.YEAR + " = " + y + " AND " + TransactionsTable.MONTH + " = " + m + " AND " + TransactionsTable.CONTO + " = " + id, null, null, null, TransactionsTable.DAY + " ASC, " + TransactionsTable._ID + " ASC", null);
+                        c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.YEAR + " = " + y + " AND " + TransactionsTable.MONTH + " = " + m + " AND " + TransactionsTable.ACCOUNT + " = " + id, null, null, null, TransactionsTable.DAY + " ASC, " + TransactionsTable._ID + " ASC", null);
                 }
                 break;
             case Utils.AMOUNT_POSITIVE:
                 if(accountID==0)
-                    c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.YEAR + " = " + y + " AND " + TransactionsTable.MONTH + " = " + m + " AND " + TransactionsTable.IMPORTO + " >= " + 0, null, null, null, TransactionsTable.DAY+ " ASC, " + TransactionsTable._ID + " ASC", null);
+                    c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.YEAR + " = " + y + " AND " + TransactionsTable.MONTH + " = " + m + " AND " + TransactionsTable.AMOUNT + " >= " + 0, null, null, null, TransactionsTable.DAY+ " ASC, " + TransactionsTable._ID + " ASC", null);
                 else
-                    c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.YEAR + " = " + y + " AND " + TransactionsTable.MONTH + " = " + m + " AND " + TransactionsTable.CONTO + " = " + id + " AND " + TransactionsTable.IMPORTO + " >= "+ 0, null, null, null, TransactionsTable.DAY + " ASC, " + TransactionsTable._ID + " ASC", null);
+                    c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.YEAR + " = " + y + " AND " + TransactionsTable.MONTH + " = " + m + " AND " + TransactionsTable.ACCOUNT + " = " + id + " AND " + TransactionsTable.AMOUNT + " >= "+ 0, null, null, null, TransactionsTable.DAY + " ASC, " + TransactionsTable._ID + " ASC", null);
                 break;
             case Utils.AMOUNT_NEGATIVE:
                 if(accountID==0)
-                    c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.YEAR + " = " + y + " AND " + TransactionsTable.MONTH + " = " + m + " AND " + TransactionsTable.IMPORTO + " < " + 0, null, null, null, TransactionsTable.DAY+ " ASC, " + TransactionsTable._ID + " ASC", null);
+                    c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.YEAR + " = " + y + " AND " + TransactionsTable.MONTH + " = " + m + " AND " + TransactionsTable.AMOUNT + " < " + 0, null, null, null, TransactionsTable.DAY+ " ASC, " + TransactionsTable._ID + " ASC", null);
                 else
-                    c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.YEAR + " = " + y + " AND " + TransactionsTable.MONTH + " = " + m + " AND " + TransactionsTable.CONTO + " = " + id + " AND " + TransactionsTable.IMPORTO + " < "+ 0, null, null, null, TransactionsTable.DAY + " ASC, " + TransactionsTable._ID + " ASC", null);
+                    c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.YEAR + " = " + y + " AND " + TransactionsTable.MONTH + " = " + m + " AND " + TransactionsTable.ACCOUNT + " = " + id + " AND " + TransactionsTable.AMOUNT + " < "+ 0, null, null, null, TransactionsTable.DAY + " ASC, " + TransactionsTable._ID + " ASC", null);
                 break;
         }
 
@@ -241,22 +241,22 @@ public class MyDatabase {
         return res;
     }
 
-    public ArrayList<Transaction> getTransazionibyFiltroMY(long accountID, int m, int y) {
+    public ArrayList<Transaction> getTransactionsMYFiltered(long accountID, int month, int y) {
         Cursor c;
 
         Calendar cal = new GregorianCalendar();
         int year = cal.get(Calendar.YEAR);
         int anno = year + 1 - y;
-        if (m == 0 && y == 0) {
-            c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.CONTO + " = " + accountID, null, null, null, null, null);
-        } else if (m == 0) {
-            c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.CONTO + " = " + accountID + " AND " + TransactionsTable.YEAR + " = " + anno, null, null, null, TransactionsTable.YEAR + " ASC, " + TransactionsTable.MONTH + " ASC, "
+        if (month == 0 && y == 0) {
+            c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.ACCOUNT + " = " + accountID, null, null, null, null, null);
+        } else if (month == 0) {
+            c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.ACCOUNT + " = " + accountID + " AND " + TransactionsTable.YEAR + " = " + anno, null, null, null, TransactionsTable.YEAR + " ASC, " + TransactionsTable.MONTH + " ASC, "
                     + TransactionsTable.DAY + " ASC, " + TransactionsTable._ID + " ASC", null);
         } else if (y == 0) {
-            c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.CONTO + " = " + accountID + " AND " + TransactionsTable.MONTH + " = " + m, null, null, null, TransactionsTable.YEAR + " ASC, " + TransactionsTable.MONTH + " ASC, "
+            c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.ACCOUNT + " = " + accountID + " AND " + TransactionsTable.MONTH + " = " + month, null, null, null, TransactionsTable.YEAR + " ASC, " + TransactionsTable.MONTH + " ASC, "
                     + TransactionsTable.DAY + " ASC, " + TransactionsTable._ID + " ASC", null);
         } else {
-            c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.CONTO + " = " + accountID + " AND " + TransactionsTable.MONTH + " = " + m + " AND " + TransactionsTable.YEAR + " = " + anno, null, null, null, TransactionsTable.YEAR
+            c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.ACCOUNT + " = " + accountID + " AND " + TransactionsTable.MONTH + " = " + month + " AND " + TransactionsTable.YEAR + " = " + anno, null, null, null, TransactionsTable.YEAR
                     + " ASC, " + TransactionsTable.MONTH + " ASC, " + TransactionsTable.DAY + " ASC, " + TransactionsTable._ID + " ASC", null);
         }
         ArrayList<Transaction> res = new ArrayList<Transaction>();
@@ -268,7 +268,7 @@ public class MyDatabase {
         return res;
     }
 
-    public double getTotaleTransazionibyFiltroMY(long accountID, int m, int y) {
+    public double getAmountTransactionsMYFiltered(long accountID, int m, int y) {
         double totale = 0;
         Cursor c;
         Calendar cal = new GregorianCalendar();
@@ -276,15 +276,15 @@ public class MyDatabase {
         int anno = year + 1 - y;
 
         if (m == 0 && y == 0) {
-            c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.CONTO + " = " + accountID, null, null, null, null, null);
+            c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.ACCOUNT + " = " + accountID, null, null, null, null, null);
         } else if (m == 0) {
-            c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.CONTO + " = " + accountID + " AND " + TransactionsTable.YEAR + " = " + anno, null, null, null, TransactionsTable.YEAR + " ASC, " + TransactionsTable.MONTH + " ASC, "
+            c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.ACCOUNT + " = " + accountID + " AND " + TransactionsTable.YEAR + " = " + anno, null, null, null, TransactionsTable.YEAR + " ASC, " + TransactionsTable.MONTH + " ASC, "
                     + TransactionsTable.DAY + " ASC, " + TransactionsTable._ID + " ASC", null);
         } else if (y == 0) {
-            c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.CONTO + " = " + accountID + " AND " + TransactionsTable.MONTH + " = " + m, null, null, null, TransactionsTable.YEAR + " ASC, " + TransactionsTable.MONTH + " ASC, "
+            c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.ACCOUNT + " = " + accountID + " AND " + TransactionsTable.MONTH + " = " + m, null, null, null, TransactionsTable.YEAR + " ASC, " + TransactionsTable.MONTH + " ASC, "
                     + TransactionsTable.DAY + " ASC, " + TransactionsTable._ID + " ASC", null);
         } else {
-            c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.CONTO + " = " + accountID + " AND " + TransactionsTable.MONTH + " = " + m + " AND " + TransactionsTable.YEAR + " = " + anno, null, null, null, TransactionsTable.YEAR
+            c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.ACCOUNT + " = " + accountID + " AND " + TransactionsTable.MONTH + " = " + m + " AND " + TransactionsTable.YEAR + " = " + anno, null, null, null, TransactionsTable.YEAR
                     + " ASC, " + TransactionsTable.MONTH + " ASC, " + TransactionsTable.DAY + " ASC, " + TransactionsTable._ID + " ASC", null);
         }
         while (c.moveToNext())
@@ -292,11 +292,11 @@ public class MyDatabase {
         return totale;
     }
 
-    public void delTransactionFromDBByAccount(long accountID) {
-        mDb.delete(TransactionsTable.TABLE_NAME, TransactionsTable.CONTO + " = \'" + accountID + "\'", null);
+    private void delTransactionFromDBByAccount(long accountID) {
+        mDb.delete(TransactionsTable.TABLE_NAME, TransactionsTable.ACCOUNT + " = \'" + accountID + "\'", null);
     }
 
-    public void delTransactionFromDB(long id) {
+    private void delTransactionFromDB(long id) {
         mDb.delete(TransactionsTable.TABLE_NAME, TransactionsTable._ID + " = \'" + id + "\'", null);
     }
 
@@ -304,20 +304,20 @@ public class MyDatabase {
         Transaction t = getTransaction(id);
         delTransactionFromDB(id);
         double negativo = t.amount * (-1);
-        updateTotalAmountAccount(t.accountID, negativo);
+        updateTotalAccountsAmount(t.accountID, negativo);
     }
 
     public long addCategory(String nome, String colore) {
         ContentValues v = new ContentValues();
-        v.put(CategoriesTable.NOME, nome);
-        v.put(CategoriesTable.COLORE, colore);
+        v.put(CategoriesTable.NAME, nome);
+        v.put(CategoriesTable.COLOR, colore);
         return mDb.insert(CategoriesTable.TABLE_NAME, null, v);
     }
 
     public void editCategory(long id, String nome, String colore) {
         ContentValues v = new ContentValues();
-        v.put(CategoriesTable.NOME, nome);
-        v.put(CategoriesTable.COLORE, colore);
+        v.put(CategoriesTable.NAME, nome);
+        v.put(CategoriesTable.COLOR, colore);
         String[] wargs = {String.valueOf(id)};
         mDb.update(CategoriesTable.TABLE_NAME, v, CategoriesTable._ID + " = ?", wargs);
     }
@@ -333,8 +333,8 @@ public class MyDatabase {
 
     // METODI PER MODIFICARE DATI
 
-    public int getNumTransCat(long id) {
-        final String QUERY_NUMTRANSCAT = "SELECT COUNT(" + TransactionsTable.CATEGORIA + ") FROM " + TransactionsTable.TABLE_NAME + " WHERE " + TransactionsTable.CATEGORIA + " = ? GROUP BY " + TransactionsTable.CATEGORIA;
+    public int getTransactionsNumberByCategory(long id) {
+        final String QUERY_NUMTRANSCAT = "SELECT COUNT(" + TransactionsTable.CATEGORY + ") FROM " + TransactionsTable.TABLE_NAME + " WHERE " + TransactionsTable.CATEGORY + " = ? GROUP BY " + TransactionsTable.CATEGORY;
         String[] wargs = {String.valueOf(id)};
         Cursor c = mDb.rawQuery(QUERY_NUMTRANSCAT, wargs);
         if (c.moveToFirst())
@@ -343,8 +343,8 @@ public class MyDatabase {
             return 0;
     }
 
-    public double getTotbyCat(long id) {
-        final String QUERY_TOTCAT = "SELECT SUM(" + TransactionsTable.IMPORTO + ") FROM " + TransactionsTable.TABLE_NAME + " WHERE " + TransactionsTable.CATEGORIA + " = ? GROUP BY " + TransactionsTable.CATEGORIA;
+    public double getTotalAmountbyCategory(long id) {
+        final String QUERY_TOTCAT = "SELECT SUM(" + TransactionsTable.AMOUNT + ") FROM " + TransactionsTable.TABLE_NAME + " WHERE " + TransactionsTable.CATEGORY + " = ? GROUP BY " + TransactionsTable.CATEGORY;
         String[] args = {String.valueOf(id)};
         Cursor c = mDb.rawQuery(QUERY_TOTCAT, args);
         if (c.moveToFirst())
@@ -355,9 +355,9 @@ public class MyDatabase {
 
     public void moveTransactionsByCategories(long id_from, long id_to) {
         ContentValues v = new ContentValues();
-        v.put(TransactionsTable.CATEGORIA, id_to);
+        v.put(TransactionsTable.CATEGORY, id_to);
         String[] wargs = {String.valueOf(id_from)};
-        mDb.update(TransactionsTable.TABLE_NAME, v, TransactionsTable.CATEGORIA + " = ?", wargs);
+        mDb.update(TransactionsTable.TABLE_NAME, v, TransactionsTable.CATEGORY + " = ?", wargs);
     }
 
     public void delCategory(long id) {

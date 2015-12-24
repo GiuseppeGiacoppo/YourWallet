@@ -101,16 +101,16 @@ public class AccountFragment extends Fragment implements AdapterView.OnItemClick
     public void aggiornaTransazioni(long id, int p) {
         switch (p) {
             case 0:
-                    nuove_transazioni = db.getLastMov(Utils.DESC, id,20);
+                    nuove_transazioni = db.getLastTransactions(Utils.DESC, id, 20);
                 break;
             case 1:
-                    nuove_transazioni = db.getMovbyMonth(Utils.AMOUNT_ALL, true, id, mMonth, mYear);
+                    nuove_transazioni = db.getTransactions(Utils.AMOUNT_ALL, true, id, mMonth, mYear);
                 break;
             case 2:
-                    nuove_transazioni = db.getMovbyMonth(Utils.AMOUNT_POSITIVE,false,id, mMonth, mYear);
+                    nuove_transazioni = db.getTransactions(Utils.AMOUNT_POSITIVE, false, id, mMonth, mYear);
                 break;
             case 3:
-                    nuove_transazioni = db.getMovbyMonth(Utils.AMOUNT_NEGATIVE,false,id, mMonth, mYear);
+                    nuove_transazioni = db.getTransactions(Utils.AMOUNT_NEGATIVE, false, id, mMonth, mYear);
                 break;
         }
 

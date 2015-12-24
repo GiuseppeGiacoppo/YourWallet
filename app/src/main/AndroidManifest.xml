@@ -27,9 +27,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activities.TransactionDetailActivity"
-            android:label="@string/menu_newtransaction"/>
+        <activity android:name=".activities.TransactionDetailActivity" />
         <activity android:name=".activities.AccountDetailActivity" />
         <activity android:name=".activities.AccountFiltersActivity"/>
         <activity android:name=".activities.CategoriesActivity"/>

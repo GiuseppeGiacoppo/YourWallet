@@ -229,10 +229,10 @@ public class TransactionDialogFragment extends DialogFragment implements View.On
 
                         } else {
                             if (idconto == 0) {
-                                id_nuova_trans = db.newTransaction(nameET.getText().toString(), Double.parseDouble(amountET.getText().toString()), categoriesSP.getSelectedItemId(), accountsSP.getSelectedItemId(), dayOfWeek, cDay, mese, cYear);
+                                id_nuova_trans = db.addTransaction(nameET.getText().toString(), Double.parseDouble(amountET.getText().toString()), categoriesSP.getSelectedItemId(), accountsSP.getSelectedItemId(), dayOfWeek, cDay, mese, cYear);
                                 tdlistener.doTransaction(Utils.ADD, new Transaction(id_nuova_trans, nameET.getText().toString(), Double.parseDouble(amountET.getText().toString()), categoriesSP.getSelectedItemId(), accountsSP.getSelectedItemId(), dayOfWeek, cDay, mese, cYear), 0,0);
                             } else {
-                                id_nuova_trans = db.newTransaction(nameET.getText().toString(), Double.parseDouble(amountET.getText().toString()), categoriesSP.getSelectedItemId(), idconto, dayOfWeek, cDay, mese, cYear);
+                                id_nuova_trans = db.addTransaction(nameET.getText().toString(), Double.parseDouble(amountET.getText().toString()), categoriesSP.getSelectedItemId(), idconto, dayOfWeek, cDay, mese, cYear);
                                 tdlistener.doTransaction(Utils.ADD, new Transaction(id_nuova_trans, nameET.getText().toString(), Double.parseDouble(amountET.getText().toString()), categoriesSP.getSelectedItemId(), idconto, dayOfWeek, cDay, mese, cYear),0,0);
                             }
                             Toast.makeText(ctx, R.string.toast_successful_transaction_add, Toast.LENGTH_SHORT).show();

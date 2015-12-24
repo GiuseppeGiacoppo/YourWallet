@@ -74,9 +74,9 @@ public class MyCategoryAdapter extends ArrayAdapter<Category> {
         if (!isSpinner) {
             TextView tci = (TextView) v.findViewById(R.id.tv_category_amount);
             TextView tct = (TextView) v.findViewById(R.id.tv_category_trans_num);
-            double catTotale = db.getTotbyCat(istanzaCategoria.id);
+            double catTotale = db.getTotalAmountbyCategory(istanzaCategoria.id);
             tci.setText(df.format(catTotale) + " " + cur);
-            int catTotaleTrans = db.getNumTransCat(istanzaCategoria.id);
+            int catTotaleTrans = db.getTransactionsNumberByCategory(istanzaCategoria.id);
             tct.setText(context.getResources().getQuantityString(R.plurals.transactionPlurals, catTotaleTrans, catTotaleTrans));
             if (catTotale >= 0)
                 tci.setTextColor(resources.getColor(R.color.positive));

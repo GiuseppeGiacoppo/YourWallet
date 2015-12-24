@@ -6,7 +6,7 @@ public interface CategoriesTable extends BaseColumns {
 
     String TABLE_NAME = "categorie";
 
-    String NOME = "nome";
+    String NAME = "nome";
 
-    String COLORE = "colore";
+    String COLOR = "colore";
 }

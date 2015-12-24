@@ -47,7 +47,7 @@ public class Widget_Total_4x1 extends AppWidgetProvider {
             String cur = preferences.getString("currency", "$");
             db = new MyDatabase(context);
             db.open();
-            double tot = db.getTotConti();
+            double tot = db.getTotalAccountsAmount();
 
             views.setTextViewText(R.id.tv_total_widget, df.format(tot) + " " + cur);
 

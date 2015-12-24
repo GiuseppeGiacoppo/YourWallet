@@ -106,7 +106,7 @@ public class TransactionDetailActivity extends Activity implements OnClickListen
                     } else if (categoriesSP.getCount() < 1) {
                         Toast.makeText(getApplicationContext(), R.string.toast_alert_nocategory, Toast.LENGTH_SHORT).show();
                     } else {
-                        db.newTransaction(nameET.getText().toString(), Double.parseDouble(amountET.getText().toString()), categoriesSP.getSelectedItemId(), accountsSP.getSelectedItemId(), dayOfWeek, cDay, mese, cYear);
+                        db.addTransaction(nameET.getText().toString(), Double.parseDouble(amountET.getText().toString()), categoriesSP.getSelectedItemId(), accountsSP.getSelectedItemId(), dayOfWeek, cDay, mese, cYear);
                         Toast.makeText(getApplicationContext(), R.string.toast_successful_transaction_add, Toast.LENGTH_SHORT).show();
                         onBackPressed();
                     }

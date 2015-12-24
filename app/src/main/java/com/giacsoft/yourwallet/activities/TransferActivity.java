@@ -103,8 +103,8 @@ public class TransferActivity extends Activity implements View.OnClickListener {
                                     double aggiungi = Double.parseDouble(amountET.getText().toString());
                                     int mese = mMonth + 1;
 
-                                    db.newTransaction(res.getString(R.string.txt_transfer_desc), sottrai, cat.getSelectedItemId(), fromSP.getSelectedItemId(), dayOfWeek, mDay, mese, mYear);
-                                    db.newTransaction(res.getString(R.string.txt_transfer_desc), aggiungi, cat.getSelectedItemId(), toSP.getSelectedItemId(), dayOfWeek, mDay, mese, mYear);
+                                    db.addTransaction(res.getString(R.string.txt_transfer_desc), sottrai, cat.getSelectedItemId(), fromSP.getSelectedItemId(), dayOfWeek, mDay, mese, mYear);
+                                    db.addTransaction(res.getString(R.string.txt_transfer_desc), aggiungi, cat.getSelectedItemId(), toSP.getSelectedItemId(), dayOfWeek, mDay, mese, mYear);
                                     finish();
                                 }
                             }

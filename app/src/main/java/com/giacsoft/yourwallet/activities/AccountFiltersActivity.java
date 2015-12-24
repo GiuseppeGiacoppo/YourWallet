@@ -54,7 +54,7 @@ public class AccountFiltersActivity extends Activity implements AdapterView.OnIt
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_view_conto);
+        setContentView(R.layout.layout_account_filters);
 
         actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -207,9 +207,9 @@ public class AccountFiltersActivity extends Activity implements AdapterView.OnIt
 
         protected Void doInBackground(SelectedItems... arg0) {
 
-            nuove_transazioni = db.getTransazionibyFiltroMY(accountID, arg0[0].filterMonth, arg0[0].filterYear);
+            nuove_transazioni = db.getTransactionsMYFiltered(accountID, arg0[0].filterMonth, arg0[0].filterYear);
             list_cat = db.getCategories();
-            total = db.getTotaleTransazionibyFiltroMY(accountID, arg0[0].filterMonth, arg0[0].filterYear);
+            total = db.getAmountTransactionsMYFiltered(accountID, arg0[0].filterMonth, arg0[0].filterYear);
             return null;
         }
 

@@ -56,7 +56,7 @@ public class CategoriesActivity extends Activity implements AdapterView.OnItemLo
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_categorie);
+        setContentView(R.layout.layout_categories);
 
         accountID = getIntent().getExtras().getLong(Utils.ACCOUNT_ID);
         provenienza = getIntent().getExtras().getInt(Utils.CAT_PREV_ACTIVITY);

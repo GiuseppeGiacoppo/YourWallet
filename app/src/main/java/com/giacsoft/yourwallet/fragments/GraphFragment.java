@@ -97,16 +97,16 @@ public class GraphFragment extends Fragment implements TransactionDialogFragment
 
         switch (p) {
             case 0:
-                    mesecorr = db.getMovbyMonth(Utils.AMOUNT_ALL,false,id, mMonth, mYear);
+                    mesecorr = db.getTransactions(Utils.AMOUNT_ALL, false, id, mMonth, mYear);
                 break;
             case 1:
-                    mesecorr = db.getLastMov(Utils.ASC,id, 20);
+                    mesecorr = db.getLastTransactions(Utils.ASC, id, 20);
                 break;
             case 2:
-                    mesecorr = db.getMovbyMonth(Utils.AMOUNT_POSITIVE, false, id, mMonth, mYear);
+                    mesecorr = db.getTransactions(Utils.AMOUNT_POSITIVE, false, id, mMonth, mYear);
                 break;
             case 3:
-                    mesecorr = db.getMovbyMonth(Utils.AMOUNT_NEGATIVE,false,id, mMonth, mYear);
+                    mesecorr = db.getTransactions(Utils.AMOUNT_NEGATIVE, false, id, mMonth, mYear);
                 break;
         } // prendo i movimenti
 

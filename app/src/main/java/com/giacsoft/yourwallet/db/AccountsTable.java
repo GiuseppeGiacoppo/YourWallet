@@ -5,6 +5,6 @@ import android.provider.BaseColumns;
 public interface AccountsTable extends BaseColumns {
     String TABLE_NAME = "conti";
 
-    String NOME = "nome";
-    String TOTALE = "totale";
+    String NAME = "nome";
+    String TOTAL = "totale";
 }

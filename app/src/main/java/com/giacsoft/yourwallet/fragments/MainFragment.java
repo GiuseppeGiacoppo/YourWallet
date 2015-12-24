@@ -99,9 +99,9 @@ public class MainFragment extends Fragment implements View.OnClickListener, Adap
     public void aggiornaConti() {
 
         conti_array = db.getAccounts();
-        totalAccountsAmount = db.getTotConti();
+        totalAccountsAmount = db.getTotalAccountsAmount();
         totalTV.setText(df.format(totalAccountsAmount) + " " + cur);
-        if (db.getTotConti() >= 0)
+        if (db.getTotalAccountsAmount() >= 0)
             totalTV.setTextColor(ContextCompat.getColor(ctx, R.color.positive));
         else
             totalTV.setTextColor(ContextCompat.getColor(ctx, R.color.negative));
