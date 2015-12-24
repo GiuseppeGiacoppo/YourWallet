@@ -36,20 +36,20 @@ public class TransactionDialogFragment extends DialogFragment implements View.On
     // int provenienza; // serve per capire se � stato richiamato da
     // mainfragmactivity(0) o accountfragmactivity(1) o
     // viewcontoactivity(2)
-    static int posizione;
+    static int position;
     Resources res;
     Context ctx;
     MyDatabase db;
-    EditText etnome, etimp;
-    Spinner spincat, spinconti;
-    Button data, cancel_btn, add_btn;
+    EditText nameET, amountET;
+    Spinner categoriesSP, accountsSP;
+    Button dateBTN, cancelBTN, addBTN;
     public DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
             cYear = year;
             cMonth = monthOfYear;
             cDay = dayOfMonth;
             String txt = String.format(res.getString(R.string.txt_transaction_date_format), res.getStringArray(R.array.months_filter_spinner)[cMonth + 1], cDay, cYear);
-            data.setText(txt);
+            dateBTN.setText(txt);
         }
     };
     int mYear, mMonth, mDay, cYear, cMonth, cDay, poscat;
@@ -74,7 +74,7 @@ public class TransactionDialogFragment extends DialogFragment implements View.On
     // momento del longpress
     public static TransactionDialogFragment newInstance(long idc, long idt, int p) {
         TransactionDialogFragment frag = new TransactionDialogFragment();
-        posizione = p;
+        position = p;
         Bundle b = new Bundle();
         b.putLong("idc", idc);
         b.putLong("idt", idt);
@@ -89,7 +89,7 @@ public class TransactionDialogFragment extends DialogFragment implements View.On
         if (activity instanceof OnTransazioneDialogListener) {
             tdlistener = (OnTransazioneDialogListener) activity;
         } else {
-            throw new ClassCastException(activity.toString() + " must implement TransazioneDialogFragment.OnTransazioneDialogListener");
+            throw new ClassCastException(activity.toString() + " must implement TransactionDialogFragment.OnTransactionDialogListener");
         }
     }
 
@@ -115,14 +115,14 @@ public class TransactionDialogFragment extends DialogFragment implements View.On
         LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view_dialog = inflater.inflate(R.layout.dialog_add_transazione, null);
 
-        etnome = (EditText) view_dialog.findViewById(R.id.ettra);
-        etimp = (EditText) view_dialog.findViewById(R.id.etimp);
-        spincat = (Spinner) view_dialog.findViewById(R.id.spincat);
-        data = (Button) view_dialog.findViewById(R.id.date);
-        spinconti = (Spinner) view_dialog.findViewById(R.id.spinconti);
+        nameET = (EditText) view_dialog.findViewById(R.id.ettra);
+        amountET = (EditText) view_dialog.findViewById(R.id.etimp);
+        categoriesSP = (Spinner) view_dialog.findViewById(R.id.spincat);
+        dateBTN = (Button) view_dialog.findViewById(R.id.date);
+        accountsSP = (Spinner) view_dialog.findViewById(R.id.spinconti);
         layoutconti = (LinearLayout) view_dialog.findViewById(R.id.layoutconti);
-        add_btn = (Button) view_dialog.findViewById(R.id.add_btn);
-        cancel_btn = (Button) view_dialog.findViewById(R.id.cancel_btn);
+        addBTN = (Button) view_dialog.findViewById(R.id.add_btn);
+        cancelBTN = (Button) view_dialog.findViewById(R.id.cancel_btn);
 
         doubleBackToExitPressedOnce = false;
 
@@ -130,7 +130,7 @@ public class TransactionDialogFragment extends DialogFragment implements View.On
         ArrayList<Account> arrayconti = db.getAccounts();
         MyAccountTitleAdapter adconti = new MyAccountTitleAdapter(getActivity(), R.layout.item_spinner1line_spinner, arrayconti);
         adconti.setDropDownViewResource(R.layout.item_spinner1line);
-        spinconti.setAdapter(adconti);
+        accountsSP.setAdapter(adconti);
 
         if (idconto != 0) {
             layoutconti.setVisibility(View.GONE);
@@ -139,28 +139,28 @@ public class TransactionDialogFragment extends DialogFragment implements View.On
         if (idtrans != 0) {
             t = db.getTransaction(idtrans);
             layoutconti.setVisibility(View.GONE);
-            etnome.setText(t.note);
-            etimp.setText(t.amount + "");
+            nameET.setText(t.note);
+            amountET.setText(t.amount + "");
             String txt = String.format(res.getString(R.string.txt_transaction_date_format), res.getStringArray(R.array.months_filter_spinner)[t.month], t.day, t.year);
-            data.setText(txt);
+            dateBTN.setText(txt);
             poscat = (int) t.category;
-            spincat.setSelection(poscat - 1);
-            cancel_btn.setText(res.getString(R.string.delete));
+            categoriesSP.setSelection(poscat - 1);
+            cancelBTN.setText(res.getString(R.string.delete));
             cDay = t.day;
             cMonth = t.month - 1;
             cYear = t.year;
-            add_btn.setText(R.string.edit);
+            addBTN.setText(R.string.edit);
         } else {
             String txt = String.format(res.getString(R.string.txt_transaction_date_format), res.getStringArray(R.array.months_filter_spinner)[mMonth + 1], mDay, mYear);
-            data.setText(txt);
+            dateBTN.setText(txt);
             cDay = mDay;
             cMonth = mMonth;
             cYear = mYear;
         }
 
-        data.setOnClickListener(this);
-        cancel_btn.setOnClickListener(this);
-        add_btn.setOnClickListener(this);
+        dateBTN.setOnClickListener(this);
+        cancelBTN.setOnClickListener(this);
+        addBTN.setOnClickListener(this);
 
         builder.setView(view_dialog);
         return builder.create();
@@ -170,26 +170,25 @@ public class TransactionDialogFragment extends DialogFragment implements View.On
         ArrayList<Category> arraycat = db.getCategories();
         MyCategoryAdapter adcat2 = new MyCategoryAdapter(getActivity(), R.layout.item_categoria_spinner, arraycat);
         adcat2.setDropDownViewResource(R.layout.item_categoria);
-        spincat.setAdapter(adcat2);
+        categoriesSP.setAdapter(adcat2);
     }
 
     @Override
     public void onClick(View v) {
 
-        if (v == data) {
+        if (v == dateBTN) {
             if (idtrans == 0)
                 new DatePickerDialog(getActivity(), mDateSetListener, mYear, mMonth, mDay).show();
             else
                 new DatePickerDialog(getActivity(), mDateSetListener, t.year, t.month - 1, t.day).show();
-        } else if (v == cancel_btn) {
+        } else if (v == cancelBTN) {
             if (idtrans != 0) {
                 if (doubleBackToExitPressedOnce) {
                     Transaction del = db.getTransaction(idtrans);
                     db.deleteTransaction(idtrans);
                     Toast.makeText(ctx, R.string.toast_successful_transaction_delete, Toast.LENGTH_SHORT).show();
 
-                    //tdlistener.onDeleteTransazione(del, posizione);
-                    tdlistener.doTransaction(Utils.DELETE, del, 0,posizione);
+                    tdlistener.doTransaction(Utils.DELETE, del, 0,position);
 
                     dismiss();
                     return;
@@ -207,36 +206,33 @@ public class TransactionDialogFragment extends DialogFragment implements View.On
             } else {
                 dismiss();
             }
-        } else if (v == add_btn) {
-            if (etnome.length() != 0 && etimp.length() != 0) {
+        } else if (v == addBTN) {
+            if (nameET.length() != 0 && amountET.length() != 0) {
                 int mese = cMonth + 1;
                 Calendar cal = new GregorianCalendar(cYear, mese, cDay);
                 int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK); // 1=Domenica,
                 // 2=Lunedi
                 // ecc
-                if (spinconti.getCount() < 1) {
+                if (accountsSP.getCount() < 1) {
                     Toast.makeText(ctx, R.string.toast_alert_noaccount, Toast.LENGTH_SHORT).show();
                 } else {
-                    if (spincat.getCount() < 1) {
+                    if (categoriesSP.getCount() < 1) {
                         Toast.makeText(ctx, R.string.toast_alert_nocategory, Toast.LENGTH_SHORT).show();
                     } else {
                         if (idtrans != 0) {
                             t = db.getTransaction(idtrans);
-                            double differenza = Double.parseDouble(etimp.getText().toString()) - t.amount;
-                            db.editTransaction(idtrans, etnome.getText().toString(), differenza, spincat.getSelectedItemId(), t.accountID, dayOfWeek, cDay, mese, cYear);
-                            //tdlistener.onEditTransazione(new Transaction(idtrans, etnome.getText().toString(), t.amount + differenza, spincat.getSelectedItemId(), t.accountID, dayOfWeek, cDay, mese, cYear), differenza, posizione);
-                            tdlistener.doTransaction(Utils.EDIT, new Transaction(idtrans, etnome.getText().toString(), t.amount + differenza, spincat.getSelectedItemId(), t.accountID, dayOfWeek, cDay, mese, cYear), differenza, posizione);
+                            double differenza = Double.parseDouble(amountET.getText().toString()) - t.amount;
+                            db.editTransaction(idtrans, nameET.getText().toString(), differenza, categoriesSP.getSelectedItemId(), t.accountID, dayOfWeek, cDay, mese, cYear);
+                            tdlistener.doTransaction(Utils.EDIT, new Transaction(idtrans, nameET.getText().toString(), t.amount + differenza, categoriesSP.getSelectedItemId(), t.accountID, dayOfWeek, cDay, mese, cYear), differenza, position);
                             Toast.makeText(ctx, R.string.toast_successful_transaction_edit, Toast.LENGTH_SHORT).show();
 
                         } else {
                             if (idconto == 0) {
-                                id_nuova_trans = db.newTransaction(etnome.getText().toString(), Double.parseDouble(etimp.getText().toString()), spincat.getSelectedItemId(), spinconti.getSelectedItemId(), dayOfWeek, cDay, mese, cYear);
-                                //tdlistener.onAddTransazione(new Transaction(id_nuova_trans, etnome.getText().toString(), Double.parseDouble(etimp.getText().toString()), spincat.getSelectedItemId(), spinconti.getSelectedItemId(), dayOfWeek, cDay, mese, cYear));
-                                tdlistener.doTransaction(Utils.ADD, new Transaction(id_nuova_trans, etnome.getText().toString(), Double.parseDouble(etimp.getText().toString()), spincat.getSelectedItemId(), spinconti.getSelectedItemId(), dayOfWeek, cDay, mese, cYear), 0,0);
+                                id_nuova_trans = db.newTransaction(nameET.getText().toString(), Double.parseDouble(amountET.getText().toString()), categoriesSP.getSelectedItemId(), accountsSP.getSelectedItemId(), dayOfWeek, cDay, mese, cYear);
+                                tdlistener.doTransaction(Utils.ADD, new Transaction(id_nuova_trans, nameET.getText().toString(), Double.parseDouble(amountET.getText().toString()), categoriesSP.getSelectedItemId(), accountsSP.getSelectedItemId(), dayOfWeek, cDay, mese, cYear), 0,0);
                             } else {
-                                id_nuova_trans = db.newTransaction(etnome.getText().toString(), Double.parseDouble(etimp.getText().toString()), spincat.getSelectedItemId(), idconto, dayOfWeek, cDay, mese, cYear);
-                                //tdlistener.onAddTransazione(new Transaction(id_nuova_trans, etnome.getText().toString(), Double.parseDouble(etimp.getText().toString()), spincat.getSelectedItemId(), idconto, dayOfWeek, cDay, mese, cYear));
-                                tdlistener.doTransaction(Utils.ADD, new Transaction(id_nuova_trans, etnome.getText().toString(), Double.parseDouble(etimp.getText().toString()), spincat.getSelectedItemId(), idconto, dayOfWeek, cDay, mese, cYear),0,0);
+                                id_nuova_trans = db.newTransaction(nameET.getText().toString(), Double.parseDouble(amountET.getText().toString()), categoriesSP.getSelectedItemId(), idconto, dayOfWeek, cDay, mese, cYear);
+                                tdlistener.doTransaction(Utils.ADD, new Transaction(id_nuova_trans, nameET.getText().toString(), Double.parseDouble(amountET.getText().toString()), categoriesSP.getSelectedItemId(), idconto, dayOfWeek, cDay, mese, cYear),0,0);
                             }
                             Toast.makeText(ctx, R.string.toast_successful_transaction_add, Toast.LENGTH_SHORT).show();
                         }

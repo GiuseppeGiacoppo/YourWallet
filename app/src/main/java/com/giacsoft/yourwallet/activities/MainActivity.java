@@ -23,7 +23,7 @@ import com.giacsoft.yourwallet.dialogs.TransactionDialogFragment;
 import com.giacsoft.yourwallet.types.Account;
 import com.giacsoft.yourwallet.types.Transaction;
 
-public class MainActivity extends Activity implements MainFragment.OnItemSelectedListener, AccountDialogFragment.OnContoDialogListener, TransactionDialogFragment.OnTransazioneDialogListener {
+public class MainActivity extends Activity implements MainFragment.OnItemSelectedListener, AccountDialogFragment.OnAccountDialogListener, TransactionDialogFragment.OnTransazioneDialogListener {
 
     private static final int DLG1 = 1;
     private static final int DLG2 = 2;
@@ -90,7 +90,7 @@ public class MainActivity extends Activity implements MainFragment.OnItemSelecte
         }
 
         if (graphFragment != null && graphFragment.isInLayout()) {
-            graphFragment.aggiornaGrafico(id, selected_item_graph_card_header);
+            graphFragment.updateGraph(id, selected_item_graph_card_header);
             graphFragment.accountID = id;
         }
     }
@@ -125,7 +125,7 @@ public class MainActivity extends Activity implements MainFragment.OnItemSelecte
                 if (graphFragment != null && graphFragment.isInLayout())
                     if (idconto == t.accountID || idconto == 0) {
                         selected_item_graph_card_header = preferences.getInt("selected_item_graph_card_header", 0);
-                        graphFragment.aggiornaGrafico(idconto, selected_item_graph_card_header);
+                        graphFragment.updateGraph(idconto, selected_item_graph_card_header);
                     }
                 break;
             case Utils.EDIT:
@@ -139,7 +139,7 @@ public class MainActivity extends Activity implements MainFragment.OnItemSelecte
                 if (graphFragment != null && graphFragment.isInLayout())
                     if (idconto == t.accountID || idconto == 0) {
                         selected_item_graph_card_header = preferences.getInt("selected_item_graph_card_header", 0);
-                        graphFragment.aggiornaGrafico(idconto, selected_item_graph_card_header);
+                        graphFragment.updateGraph(idconto, selected_item_graph_card_header);
                     }
                 break;
             case Utils.DELETE:
@@ -153,7 +153,7 @@ public class MainActivity extends Activity implements MainFragment.OnItemSelecte
                 if (graphFragment != null && graphFragment.isInLayout())
                     if (idconto == t.accountID || idconto == 0) {
                         selected_item_graph_card_header = preferences.getInt("selected_item_graph_card_header", 0);
-                        graphFragment.aggiornaGrafico(idconto, selected_item_graph_card_header);
+                        graphFragment.updateGraph(idconto, selected_item_graph_card_header);
                     }
                 break;
             default:

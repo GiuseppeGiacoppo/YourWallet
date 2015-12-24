@@ -134,7 +134,7 @@ public class AccountActivity extends Activity implements TransactionDialogFragme
     @Override
     protected void onResume() {
         super.onResume();
-         //aggiornaTransazioni(idarrayin[0]);
+         //updateTransactions(idarrayin[0]);
         //selected_item_graph_card_header = preferences.getInt("selected_item_graph_card_header", 0);
     }
 
@@ -194,31 +194,18 @@ public class AccountActivity extends Activity implements TransactionDialogFragme
                 //TODO
                 accountFragment.doTransaction(Utils.ADD, t,0);
                 selected_item_graph_card_header = preferences.getInt("selected_item_graph_card_header", 0);
-                graphFragment.aggiornaGrafico(accountID, selected_item_graph_card_header);
+                graphFragment.updateGraph(accountID, selected_item_graph_card_header);
                 break;
             case Utils.EDIT:
                 accountFragment.doTransaction(Utils.EDIT, t, p);
                 selected_item_graph_card_header = preferences.getInt("selected_item_graph_card_header", 0);
-                graphFragment.aggiornaGrafico(accountID, selected_item_graph_card_header);
+                graphFragment.updateGraph(accountID, selected_item_graph_card_header);
                 break;
             case Utils.DELETE:
                 accountFragment.doTransaction(Utils.DELETE,t, p);
                 selected_item_graph_card_header = preferences.getInt("selected_item_graph_card_header", 0);
-                graphFragment.aggiornaGrafico(accountID, selected_item_graph_card_header);
+                graphFragment.updateGraph(accountID, selected_item_graph_card_header);
                 break;
         }
     }
-/*
-    @Override
-    public void onAddTransazione(Transaction t) {
-    }
-
-    @Override
-    public void onEditTransazione(Transaction t, double diff, int p) {
-    }
-
-    @Override
-    public void onDeleteTransazione(Transaction t, int p) {
-    }*/
-
 }

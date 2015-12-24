@@ -21,7 +21,7 @@ public class AccountDetailActivity extends Activity {
     EditText etnome;
     MyDatabase db;
     ImageView delete;
-    long idconto;
+    long accountID;
     ActionBar actionBar;
     CharSequence[] account_actions = {"Tutto", "Solo Transazioni"};
     int radio_selected = -1;
@@ -39,7 +39,7 @@ public class AccountDetailActivity extends Activity {
         actionBar.setCustomView(customActionBarView, new ActionBar.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         etnome = (EditText) findViewById(R.id.etnome);
         delete = (ImageView) findViewById(R.id.tab_delete);
-        idconto = getIntent().getExtras().getLong("ID");
+        accountID = getIntent().getExtras().getLong("ID");
 
         customActionBarView.findViewById(R.id.actionbar_done).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,7 +47,7 @@ public class AccountDetailActivity extends Activity {
                 // "Done"
                 if (etnome.length() != 0) {
                     db.open();
-                    db.updateAccount(idconto, etnome.getText().toString());
+                    db.updateAccount(accountID, etnome.getText().toString());
                     Toast.makeText(getApplicationContext(), R.string.toast_successful_account_edit, Toast.LENGTH_SHORT).show();
                     db.close();
                     finish();
@@ -66,7 +66,7 @@ public class AccountDetailActivity extends Activity {
         });
         db = new MyDatabase(getApplicationContext());
         db.open();
-        etnome.setText(db.getAccount(idconto).name);
+        etnome.setText(db.getAccount(accountID).name);
         db.close();
 
         delete.setOnClickListener(new View.OnClickListener() {
@@ -86,14 +86,14 @@ public class AccountDetailActivity extends Activity {
                         switch (radio_selected) {
                             case 0:
                                 db.open();
-                                db.deleteAccount(idconto);
+                                db.deleteAccount(accountID);
                                 db.close();
                                 Toast.makeText(getApplicationContext(), R.string.toast_successful_account_delete, Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(getApplicationContext(), MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                                 break;
                             case 1:
                                 db.open();
-                                db.cleanAccount(idconto);
+                                db.cleanAccount(accountID);
                                 db.close();
 
                                 Toast.makeText(getApplicationContext(), R.string.toast_successful_deleted_transactions, Toast.LENGTH_SHORT).show();

@@ -91,7 +91,7 @@ public class GraphFragment extends Fragment implements TransactionDialogFragment
         spinner_graph_card_header.setSelection(selected_item_graph_card_header);
     }
 
-    public void aggiornaGrafico(long id, int p) {
+    public void updateGraph(long id, int p) {
         // START CODICE GRAFICO
         ArrayList<Transaction> mesecorr = null;
 
@@ -146,7 +146,7 @@ public class GraphFragment extends Fragment implements TransactionDialogFragment
     public void onItemSelected(AdapterView<?> arg0, View view, int i, long l) {
         preferences_editor.putInt("selected_item_graph_card_header", i);
         preferences_editor.commit();
-        aggiornaGrafico(accountID, i);
+        updateGraph(accountID, i);
     }
 
     @Override
@@ -157,13 +157,13 @@ public class GraphFragment extends Fragment implements TransactionDialogFragment
     public void doTransaction(int mode, Transaction t, double diff, int p) {
         switch (mode) {
             case Utils.ADD:
-                aggiornaGrafico(t.accountID, selected_item_graph_card_header);
+                updateGraph(t.accountID, selected_item_graph_card_header);
                 break;
             case Utils.EDIT:
-                aggiornaGrafico(t.accountID, selected_item_graph_card_header);
+                updateGraph(t.accountID, selected_item_graph_card_header);
                 break;
             case Utils.DELETE:
-                aggiornaGrafico(t.accountID, selected_item_graph_card_header);
+                updateGraph(t.accountID, selected_item_graph_card_header);
                 break;
         }
     }

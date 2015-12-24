@@ -39,10 +39,10 @@ public class AccountFiltersActivity extends Activity implements AdapterView.OnIt
     Account c;
     MyDatabase db;
     int mYear, mMonth, mDay;
-    long idconto;
+    long accountID;
     int provenienza;
-    TextView tvtot;
-    Spinner filtro, filtroanno;
+    TextView totalTV;
+    Spinner filterMonthSP, filterYearSP;
     SharedPreferences preferences;
     String cur;
     ActionBar actionBar;
@@ -65,14 +65,14 @@ public class AccountFiltersActivity extends Activity implements AdapterView.OnIt
         cur = preferences.getString("currency", "$");
 
         listtr = (ListView) findViewById(R.id.listtr);
-        tvtot = (TextView) findViewById(R.id.tvtot);
-        filtro = (Spinner) findViewById(R.id.spinfiltro);
-        filtroanno = (Spinner) findViewById(R.id.spinfiltroanno);
+        totalTV = (TextView) findViewById(R.id.tvtot);
+        filterMonthSP = (Spinner) findViewById(R.id.spinfiltro);
+        filterYearSP = (Spinner) findViewById(R.id.spinfiltroanno);
 
-        idconto = getIntent().getExtras().getLong(Utils.ACCOUNT_ID);
+        accountID = getIntent().getExtras().getLong(Utils.ACCOUNT_ID);
         provenienza = getIntent().getExtras().getInt(Utils.FILTRO_PREV_ACTIVITY);
 
-        c = db.getAccount(idconto);
+        c = db.getAccount(accountID);
         actionBar.setTitle(c.name);
 
         final Calendar c = Calendar.getInstance();
@@ -80,33 +80,33 @@ public class AccountFiltersActivity extends Activity implements AdapterView.OnIt
         mMonth = c.get(Calendar.MONTH);
         mDay = c.get(Calendar.DAY_OF_MONTH);
 
-        ArrayAdapter<CharSequence> spinfiltro = ArrayAdapter.createFromResource(getApplicationContext(), R.array.months_filter_spinner, R.layout.item_spinner_elemento);
-        filtro.setAdapter(spinfiltro);
+        ArrayAdapter<CharSequence> monthList = ArrayAdapter.createFromResource(getApplicationContext(), R.array.months_filter_spinner, R.layout.item_spinner_elemento);
+        filterMonthSP.setAdapter(monthList);
 
-        ArrayAdapter<CharSequence> spinfiltroanno = ArrayAdapter.createFromResource(getApplicationContext(), R.array.years_filter_spinner, R.layout.item_spinner_elemento);
-        filtroanno.setAdapter(spinfiltroanno);
+        ArrayAdapter<CharSequence> yearList = ArrayAdapter.createFromResource(getApplicationContext(), R.array.years_filter_spinner, R.layout.item_spinner_elemento);
+        filterYearSP.setAdapter(yearList);
 
         listtr.setDividerHeight(1);
         listtr.setOnItemClickListener(this);
         listtr.setOnItemLongClickListener(this);
 
-        filtro.setSelection(mMonth + 1);
-        filtro.setOnItemSelectedListener(this);
+        filterMonthSP.setSelection(mMonth + 1);
+        filterMonthSP.setOnItemSelectedListener(this);
 
-        filtroanno.setSelection(1);
-        filtroanno.setOnItemSelectedListener(this);
+        filterYearSP.setSelection(1);
+        filterYearSP.setOnItemSelectedListener(this);
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        aggiornaTransazioni(mMonth + 1, 0);
+        updateTransactions(mMonth + 1, 0);
 
     }
 
-    public void aggiornaTransazioni(int mese, int anno) {
-        new AggiornaTransazioniSyncTask().execute(new ItemSelezionati(mese, anno));
+    public void updateTransactions(int mese, int anno) {
+        new UpdateTransactionsSyncTask().execute(new SelectedItems(mese, anno));
     }
 
     @Override
@@ -123,7 +123,7 @@ public class AccountFiltersActivity extends Activity implements AdapterView.OnIt
                 // app icon in action bar clicked; go home
 
                 if (provenienza == 0) { // is phone
-                    startActivity(new Intent(this, AccountActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra(Utils.ACCOUNT_ID, idconto));
+                    startActivity(new Intent(this, AccountActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra(Utils.ACCOUNT_ID, accountID));
                 } else if (provenienza == 1) {// is tablet
                     startActivity(new Intent(this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 }
@@ -135,9 +135,9 @@ public class AccountFiltersActivity extends Activity implements AdapterView.OnIt
     @Override
     public void onItemSelected(AdapterView<?> arg0, View view, int i, long l) {
         if (arg0.getId() == R.id.spinfiltro) {
-            aggiornaTransazioni(i, filtroanno.getSelectedItemPosition());
+            updateTransactions(i, filterYearSP.getSelectedItemPosition());
         } else if (arg0.getId() == R.id.spinfiltroanno) {
-            aggiornaTransazioni(filtro.getSelectedItemPosition(), i);
+            updateTransactions(filterMonthSP.getSelectedItemPosition(), i);
         }
     }
 
@@ -155,7 +155,7 @@ public class AccountFiltersActivity extends Activity implements AdapterView.OnIt
     void mostraDialog(int id, long idtra) {
         switch (id) {
             case DLG3:
-                DialogFragment newFragment = TransactionDialogFragment.newInstance(idconto, idtra);
+                DialogFragment newFragment = TransactionDialogFragment.newInstance(accountID, idtra);
                 newFragment.show(getFragmentManager(), "transazionedialog");
                 break;
         }
@@ -169,7 +169,7 @@ public class AccountFiltersActivity extends Activity implements AdapterView.OnIt
     @Override
     public void onBackPressed() {
         if (provenienza == 0) { // is phone
-            startActivity(new Intent(this, AccountActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra(Utils.ACCOUNT_ID, idconto));
+            startActivity(new Intent(this, AccountActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra(Utils.ACCOUNT_ID, accountID));
         } else if (provenienza == 1) {// is tablet
             startActivity(new Intent(this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         }
@@ -189,26 +189,26 @@ public class AccountFiltersActivity extends Activity implements AdapterView.OnIt
         }
     }
 
-    private static class ItemSelezionati {
-        int filtro;
-        int filtroanno;
+    private static class SelectedItems {
+        int filterMonth;
+        int filterYear;
 
-        public ItemSelezionati(int f, int fa) {
-            this.filtro = f;
-            this.filtroanno = fa;
+        public SelectedItems(int f, int fa) {
+            this.filterMonth = f;
+            this.filterYear = fa;
         }
     }
 
-    private class AggiornaTransazioniSyncTask extends AsyncTask<ItemSelezionati, Void, Void> {
+    private class UpdateTransactionsSyncTask extends AsyncTask<SelectedItems, Void, Void> {
 
         ArrayList<Category> list_cat;
         double totale;
 
-        protected Void doInBackground(ItemSelezionati... arg0) {
+        protected Void doInBackground(SelectedItems... arg0) {
 
-            nuove_transazioni = db.getTransazionibyFiltroMY(idconto, arg0[0].filtro, arg0[0].filtroanno);
+            nuove_transazioni = db.getTransazionibyFiltroMY(accountID, arg0[0].filterMonth, arg0[0].filterYear);
             list_cat = db.getCategories();
-            totale = db.getTotaleTransazionibyFiltroMY(idconto, arg0[0].filtro, arg0[0].filtroanno);
+            totale = db.getTotaleTransazionibyFiltroMY(accountID, arg0[0].filterMonth, arg0[0].filterYear);
             return null;
         }
 
@@ -218,11 +218,11 @@ public class AccountFiltersActivity extends Activity implements AdapterView.OnIt
             adapter = new MyTransactionAdapter(getApplicationContext(), R.layout.item_transaction, nuove_transazioni, cur, list_cat);
             listtr.setAdapter(adapter);
 
-            tvtot.setText(df.format(totale) + " " + cur);
+            totalTV.setText(df.format(totale) + " " + cur);
             if (totale >= 0)
-                tvtot.setTextColor(getResources().getColor(R.color.positive));
+                totalTV.setTextColor(getResources().getColor(R.color.positive));
             else
-                tvtot.setTextColor(getResources().getColor(R.color.negative));
+                totalTV.setTextColor(getResources().getColor(R.color.negative));
         }
     }
 }
