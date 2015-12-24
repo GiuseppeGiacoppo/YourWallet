@@ -9,8 +9,6 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -70,7 +68,7 @@ public class CategoriesDialogFragment extends DialogFragment implements OnClickL
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view_dialog = inflater.inflate(R.layout.dialog_add_categoria_restyle, null);
+        View view_dialog = inflater.inflate(R.layout.dialog_add_category, null);
 
         colore = (Spinner) view_dialog.findViewById(R.id.spin_col);
         nameET = (EditText) view_dialog.findViewById(R.id.newcatnome);
@@ -83,7 +81,7 @@ public class CategoriesDialogFragment extends DialogFragment implements OnClickL
 
         rand = new Random();
 
-        MyColorAdapter colorAdapter = new MyColorAdapter(getActivity().getApplicationContext(), R.layout.item_colore, getResources().getStringArray(R.array.colorarray));
+        MyColorAdapter colorAdapter = new MyColorAdapter(getActivity().getApplicationContext(), R.layout.item_color, getResources().getStringArray(R.array.colorarray));
         colore.setAdapter(colorAdapter);
         colore.setSelection(rand.nextInt(COLORI) + 1);
         if (edit) {
@@ -100,7 +98,7 @@ public class CategoriesDialogFragment extends DialogFragment implements OnClickL
 
             arraycat.remove(position);
 
-            MyCategoryAdapter spincat = new MyCategoryAdapter(getActivity(), R.layout.item_categoria_spinner, arraycat);
+            MyCategoryAdapter spincat = new MyCategoryAdapter(getActivity(), R.layout.item_category_spinner, arraycat);
             move_cat.setAdapter(spincat);
         } else {
             del_layout.setVisibility(View.INVISIBLE);

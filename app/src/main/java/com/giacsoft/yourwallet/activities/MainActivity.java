@@ -23,7 +23,7 @@ import com.giacsoft.yourwallet.dialogs.TransactionDialogFragment;
 import com.giacsoft.yourwallet.types.Account;
 import com.giacsoft.yourwallet.types.Transaction;
 
-public class MainActivity extends Activity implements MainFragment.OnItemSelectedListener, AccountDialogFragment.OnAccountDialogListener, TransactionDialogFragment.OnTransazioneDialogListener {
+public class MainActivity extends Activity implements MainFragment.OnItemSelectedListener, AccountDialogFragment.OnAccountDialogListener, TransactionDialogFragment.OnTransactionDialogListener {
 
     private static final int DLG1 = 1;
     private static final int DLG2 = 2;

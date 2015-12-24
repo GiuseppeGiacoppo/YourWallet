@@ -29,7 +29,7 @@ import com.giacsoft.yourwallet.types.Account;
 import com.giacsoft.yourwallet.types.Transaction;
 
 
-public class AccountActivity extends Activity implements TransactionDialogFragment.OnTransazioneDialogListener, View.OnClickListener {
+public class AccountActivity extends Activity implements TransactionDialogFragment.OnTransactionDialogListener, View.OnClickListener {
     static final int DLG3 = 3;
     Toolbar toolbar;
     TabLayout tabLayout;

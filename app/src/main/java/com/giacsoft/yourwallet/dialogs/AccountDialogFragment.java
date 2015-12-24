@@ -52,7 +52,7 @@ public class AccountDialogFragment extends DialogFragment implements OnClickList
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view_dialog = inflater.inflate(R.layout.dialog_add_conto, null);
+        View view_dialog = inflater.inflate(R.layout.dialog_add_account, null);
 
         accountET = (EditText) view_dialog.findViewById(R.id.etnome);
         add_btn = (Button) view_dialog.findViewById(R.id.addc_btn);

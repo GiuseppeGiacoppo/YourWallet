@@ -33,7 +33,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class AccountFiltersActivity extends Activity implements AdapterView.OnItemLongClickListener, AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener, TransactionDialogFragment.OnTransazioneDialogListener {
+public class AccountFiltersActivity extends Activity implements AdapterView.OnItemLongClickListener, AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener, TransactionDialogFragment.OnTransactionDialogListener {
 
     static final int DLG3 = 3;
     ListView listtr;

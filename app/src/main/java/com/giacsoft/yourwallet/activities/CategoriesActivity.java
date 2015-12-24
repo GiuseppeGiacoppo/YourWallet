@@ -77,7 +77,7 @@ public class CategoriesActivity extends Activity implements AdapterView.OnItemLo
         preferences = PreferenceManager.getDefaultSharedPreferences(ctx);
         cur = preferences.getString("currency", "$");
 
-        adapter = new MyCategoryAdapter(this, R.layout.item_categoria_restyle2, categories, cur);
+        adapter = new MyCategoryAdapter(this, R.layout.item_category, categories, cur);
         cat.setAdapter(adapter);
         cat.setOnItemLongClickListener(this);
         cat.setOnItemClickListener(this);

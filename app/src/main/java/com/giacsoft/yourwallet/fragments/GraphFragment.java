@@ -28,7 +28,7 @@ import java.util.Calendar;
 import java.util.Iterator;
 
 //@SuppressLint("NewApi")
-public class GraphFragment extends Fragment implements TransactionDialogFragment.OnTransazioneDialogListener, AdapterView.OnItemSelectedListener {
+public class GraphFragment extends Fragment implements TransactionDialogFragment.OnTransactionDialogListener, AdapterView.OnItemSelectedListener {
 
     public long accountID;
     LineChart graph;

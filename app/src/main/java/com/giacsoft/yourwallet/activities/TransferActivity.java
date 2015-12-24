@@ -73,8 +73,8 @@ public class TransferActivity extends Activity implements View.OnClickListener {
 
         ArrayList<Account> arrayconti = db.getAccounts();
         //Conti2Adapter spinconti = new Conti2Adapter(this, arrayconti, cur);
-        MyAccountTitleAdapter spinconti = new MyAccountTitleAdapter(this, R.layout.item_spinner1line_spinner, arrayconti);
-        spinconti.setDropDownViewResource(R.layout.item_spinner1line);
+        MyAccountTitleAdapter spinconti = new MyAccountTitleAdapter(this, R.layout.item_1line_spinner, arrayconti);
+        spinconti.setDropDownViewResource(R.layout.item_1line_spinner);
         fromSP.setAdapter(spinconti);
         toSP.setAdapter(spinconti);
 
@@ -126,7 +126,7 @@ public class TransferActivity extends Activity implements View.OnClickListener {
     protected void onResume() {
         super.onResume();
         ArrayList<Category> arraycat = db.getCategories();
-        MyCategoryAdapter spincat = new MyCategoryAdapter(this, R.layout.item_categoria_spinner, arraycat);
+        MyCategoryAdapter spincat = new MyCategoryAdapter(this, R.layout.item_category_spinner, arraycat);
         cat.setAdapter(spincat);
     }
 

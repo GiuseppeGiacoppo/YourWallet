@@ -46,7 +46,7 @@ public class TransactionDetailActivity extends Activity implements OnClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_add_transazione);
+        setContentView(R.layout.layout_add_transaction);
 
 
         final Calendar c = Calendar.getInstance();
@@ -79,13 +79,15 @@ public class TransactionDetailActivity extends Activity implements OnClickListen
         db.open();
 
         ArrayList<Category> arraycat = db.getCategories();
-        MyCategoryAdapter adcat2 = new MyCategoryAdapter(this, R.layout.item_categoria_spinner, arraycat);
-        adcat2.setDropDownViewResource(R.layout.item_categoria);
+        //TODO provare ad usare lo stesso layout
+        MyCategoryAdapter adcat2 = new MyCategoryAdapter(this, R.layout.item_category_spinner, arraycat);
+        //adcat2.setDropDownViewResource(R.layout.item_category);
+        adcat2.setDropDownViewResource(R.layout.item_category_spinner);
         categoriesSP.setAdapter(adcat2);
 
         ArrayList<Account> arrayconti = db.getAccounts();
-        MyAccountTitleAdapter adconti = new MyAccountTitleAdapter(this, R.layout.item_spinner1line_spinner, arrayconti);
-        adconti.setDropDownViewResource(R.layout.item_spinner1line);
+        MyAccountTitleAdapter adconti = new MyAccountTitleAdapter(this, R.layout.item_1line_spinner, arrayconti);
+        adconti.setDropDownViewResource(R.layout.item_1line_spinner);
         accountsSP.setAdapter(adconti);
 
         data.setOnClickListener(this);

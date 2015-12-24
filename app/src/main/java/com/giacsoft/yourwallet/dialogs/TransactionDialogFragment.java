@@ -58,7 +58,7 @@ public class TransactionDialogFragment extends DialogFragment implements View.On
     Transaction t;
     View vert_sep;
     LinearLayout layoutconti;
-    OnTransazioneDialogListener tdlistener;
+    OnTransactionDialogListener tdlistener;
 
     public static TransactionDialogFragment newInstance(long idc, long idt) {
         TransactionDialogFragment frag = new TransactionDialogFragment();
@@ -86,8 +86,8 @@ public class TransactionDialogFragment extends DialogFragment implements View.On
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        if (activity instanceof OnTransazioneDialogListener) {
-            tdlistener = (OnTransazioneDialogListener) activity;
+        if (activity instanceof OnTransactionDialogListener) {
+            tdlistener = (OnTransactionDialogListener) activity;
         } else {
             throw new ClassCastException(activity.toString() + " must implement TransactionDialogFragment.OnTransactionDialogListener");
         }
@@ -113,7 +113,7 @@ public class TransactionDialogFragment extends DialogFragment implements View.On
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view_dialog = inflater.inflate(R.layout.dialog_add_transazione, null);
+        View view_dialog = inflater.inflate(R.layout.dialog_add_transaction, null);
 
         nameET = (EditText) view_dialog.findViewById(R.id.ettra);
         amountET = (EditText) view_dialog.findViewById(R.id.etimp);
@@ -126,10 +126,10 @@ public class TransactionDialogFragment extends DialogFragment implements View.On
 
         doubleBackToExitPressedOnce = false;
 
-        aggiornaCategorie();
+        updateCategories();
         ArrayList<Account> arrayconti = db.getAccounts();
-        MyAccountTitleAdapter adconti = new MyAccountTitleAdapter(getActivity(), R.layout.item_spinner1line_spinner, arrayconti);
-        adconti.setDropDownViewResource(R.layout.item_spinner1line);
+        MyAccountTitleAdapter adconti = new MyAccountTitleAdapter(getActivity(), R.layout.item_1line_spinner, arrayconti);
+        adconti.setDropDownViewResource(R.layout.item_1line_spinner);
         accountsSP.setAdapter(adconti);
 
         if (idconto != 0) {
@@ -166,10 +166,11 @@ public class TransactionDialogFragment extends DialogFragment implements View.On
         return builder.create();
     }
 
-    public void aggiornaCategorie() {
+    public void updateCategories() {
         ArrayList<Category> arraycat = db.getCategories();
-        MyCategoryAdapter adcat2 = new MyCategoryAdapter(getActivity(), R.layout.item_categoria_spinner, arraycat);
-        adcat2.setDropDownViewResource(R.layout.item_categoria);
+        MyCategoryAdapter adcat2 = new MyCategoryAdapter(getActivity(), R.layout.item_category_spinner, arraycat);
+        //adcat2.setDropDownViewResource(R.layout.item_category);
+        adcat2.setDropDownViewResource(R.layout.item_category_spinner);
         categoriesSP.setAdapter(adcat2);
     }
 
@@ -245,7 +246,7 @@ public class TransactionDialogFragment extends DialogFragment implements View.On
         }
     }
 
-    public interface OnTransazioneDialogListener {
+    public interface OnTransactionDialogListener {
         void doTransaction(int mode, Transaction t, double diff, int p);
         //p posizione da eliminare e sostituire se EDIT, da eliminare se DELETE
     }
