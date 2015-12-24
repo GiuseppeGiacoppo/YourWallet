@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Unlicensed dialog messages -->
+    <string name="application_error">App Error:</string>
+    <string name="unlicensed_dialog_title">Es ist nicht möglich die Lizenz zu verifizieren. Bitte verbinde dich mit dem Internet und probiere es erneut</string>
+    <string name="unlicensed_dialog_body">Diese App wurde leider nicht regulär gekauft</string>
+    <string name="buy_button">"Kaufen"</string>
+    <string name="quit_button">Beenden</string>
+    <!-- END -->
+
+    <string name="app_name">Deine Geldbörse</string>
+    <string name="widget_total">Deine Geldbörse: Insgesamt</string>
+    <!-- GENERAL -->
+
+    <string name="account">Konto</string>
+    <string name="add">Hinzufügen</string>
+    <string name="cancel">Abrechen</string>
+    <string name="close">Schließend</string>
+    <string name="delete">Löschen</string>
+    <string name="discard">Verwerfen</string>
+    <string name="done">Fertig</string>
+    <string name="edit">Bearbeiten</string>
+    <string name="graph">Graph</string>
+    <string name="no">Nein</string>
+    <string name="ok">OK</string>
+    <string name="save">Speichern</string>
+    <string name="yes">Ja</string>
+    <string name="total">Insgesamt</string>
+    <string name="toast_hint_holdtoedit">Haten um zu Bearbeiten</string>
+    <string name="toast_alert_invalid_name">Gebe einen möglichen Namen ein</string>
+    <string name="transaction">Transaktion</string>
+    <string name="transactions">Transaktionen</string>
+    <plurals name="transactionPlurals">
+        <item quantity="one">%d Transaktion</item>
+        <item quantity="other">%d Transaktionen</item>
+    </plurals>
+    <!-- END GENERAL -->
+    <!-- MENU -->
+
+    <string name="menu_about">Über</string>
+    <string name="menu_categories">Kategorien</string>
+    <string name="menu_filters">Filter</string>
+    <string name="menu_newaccount">Neues Konto</string>
+    <string name="menu_newcategory">Neue Kategorie</string>
+    <string name="menu_newtransaction">Neue Transaktion</string>
+    <string name="menu_settings">Einstellungen</string>
+    <string name="menu_transfer">Überweisung erstellen</string>
+
+    <!-- END MENU -->
+    <!-- DATABASE SETTINGS -->
+
+    <string name="alert_confirm_overwrite_litetofull"><![CDATA[Stelle sicher, dass du deine Datenbank in der Lite Version exportiert hast.<br /><br />Du wirst all deine aktuellen Daten verlieren. Bist du sicher?]]></string>
+    <string name="alert_confirm_overwritedb">Du wirst alle deine aktuellen Daten verlieren. Bist du sicher?</string>
+    <string name="activity_title_database">Datenbank Einstellungen</string>
+    <string name="btn_import_backupdb">Importiere Datenbank von früherem Backup</string>
+    <string name="btn_import_litedb">Importiere Datenbank von Lite Version</string>
+    <string name="btn_export_currentdb">Exportiere aktuelle Datenbank</string>
+    <string name="btn_alert_existing_backup">Es gibt ein älteres Backup.\nKlicke nochmals um es zu überschreiben</string>
+    <string name="separator_title_databasefull">Datenbank Full Version</string>
+    <string name="separator_title_databaselite">Datenbank Lite Version</string>
+    <string name="toast_failed_dbimport">Import fehlgeschlagen: Keine Datei gefunden</string>
+    <string name="toast_successful_dbimport">Import erfolgreich</string>
+    <string name="toast_failed_dbexport">Export fehlgeschlagen</string>
+    <string name="toast_successful_dbexport">Export erfolgreich</string>
+
+    <!-- END DB -->
+    <!-- ACCOUNT -->
+
+    <string name="alert_confirm_deleteaccount">Entferne dieses Konto mit all seinen Transaktionen?</string>
+    <string name="card_title_youraccounts">Deine Konten</string>
+    <string name="dialog_btn_deleteall">Alle</string>
+    <string name="dialog_btn_deletetransactions">Nur Transaktionen</string>
+    <string name="hint_account_name">Konto Name</string>
+    <string name="toast_successful_account_add">Konto hinzugefügt</string>
+    <string name="toast_successful_account_edit">Konto bearbeitet</string>
+    <string name="toast_successful_account_delete">Konto gelöscht</string>
+    <string name="toast_successful_deleted_transactions">Transaktion entfernet</string>
+    <string name="separator_title_account_edit">Bearbeite das Konto</string>
+    <string name="action_addaccount">Neues Konto</string>
+
+    <!-- END ACCOUNT -->
+    <!-- TRANSACTIONS -->
+
+    <string name="txt_transaction_date_format">%1$s %2$d, %3$d</string>
+    <string name="separator_title_date">Datum</string>
+    <string name="separator_title_transaction_detail">Transaktion Details</string>
+    <string name="hint_transaction_name">Titel (Pizza, Taxi, Kino…)</string>
+    <string name="hint_transaction_amount">Betrag (Schreibe "-", falls negativ)</string>
+    <string name="toast_confirm_deletetransaction">Um die Transaktion zu löschen, drücke nochmals Entfernen.</string>
+    <string name="toast_error_completefields">Bitte fülle alle Felder aus</string>
+    <string name="toast_successful_transaction_edit">Transaktion bearbeiten</string>
+    <string name="toast_successful_transaction_add">Transaktion bearbeiten</string>
+    <string name="toast_successful_transaction_delete">Transaktion entfernen</string>
+    <string name="toast_alert_noaccount">Kein Konto gefunden. Erstelle eins.</string>
+    <string name="action_addtransaction">Neue Transaktion</string>
+
+    <!-- END TRANSACTIONS -->
+    <!-- CATEGORIES -->
+
+    <string name="hint_category_name">Kategorie Name</string>
+    <string name="toast_successful_category_add">Kategorie hinzufügen</string>
+    <string name="toast_successful_category_edit">Kategorie bearbeiten</string>
+    <string name="toast_alert_nocategory">Keine Kategorie gefunden. Erstelle eine</string>
+    <string name="toast_confirm_deletecategory">Um die Kategorie zu löschen, drücke nochmals Entfernen.</string>
+    <string name="action_addcategory">Neue Kategorie</string>
+
+    <!-- END CATEGORIES -->
+    <!-- ABOUT AND POPUP -->
+
+    <string name="dialog_about_text"><![CDATA[Danke, dass du dir unsere App heruntergeladen hast.<br /><br />Wir arbeiten hart, um dir eine tolle App zu bieten.<br /><br />Wenn du einen Bug oder eine falsche Übersetzung gefunden hast, oder einfach eine Idee hast, wie du diese App besser machen kannst, lass es uns wissen! Wähle dazu einfach den Button unten. <br /><br />Wenn du die App kostenlos in eine andere Sprache übersetzen möchtest, kontaktiere uns bitte, damit wir dir eine Kopie der Sätze schicken können. <br />Danke nochmals!<br /><br /><b>Übersetzungen</b><br /><br />Marek Bečica, Samuel Groesch<br /><br /><b>Besonderen Dank</b><br /><br /><b>AChartEngine</b><br /><a href="http://www.achartengine.org">http://www.achartengine.org</a><br /><br /><b>ActionBarSherlock</b><br /><a href="http://www.actionbarsherlock.com">http://www.actionbarsherlock.com</a><br />]]></string>
+    <string name="dialog_btn_contact">Kontaktiere uns</string>
+    <string name="dialog_btn_rate">Bewerten!</string>
+    <string name="popup_title_rate">Bewerte mich</string>
+    <string name="popup_desc_rate">Deine Meinung ist uns wichtig</string>
+
+    <!-- END ABOUT AND POPUP -->
+    <!-- FILTERS -->
+
+    <string name="toast_error_select_account">Wähle ein Konto</string>
+
+    <!-- END FILTERS -->
+    <!-- TRANSFER -->
+
+    <string name="hint_insert_amount">Betrag eingeben</string>
+    <string name="separator_title_fromto">VON/ZU</string>
+    <string name="separator_title_moneytransfer">Überweisung</string>
+    <string name="txt_transfer_desc">Überweisung</string>
+    <string name="toast_error_select_distinct_account">Wähle 2 Konten</string>
+
+    <!-- END TRANSFER -->
+    <!-- PREFERENCES -->
+
+    <string name="preferences_currency_title">Wähle deine Währung</string>
+    <string name="preferences_pin_title">PIN</string>
+    <string name="preferences_pin_desc">Lasse das Feld frei, wenn du keine PIN möchtest. Die PIN berücksichtigt Groß- und Kleinschreibung</string>
+    <string name="separator_title_privacy">Datenschutz</string>
+    <string name="hint_currency_name">Gebe deine Währung ein</string>
+    <string name="card_title_pin">Gebe die PIN ein</string>
+    <string name="dialog_preferences_pin_title">Benutze eine PIN</string>
+    <string name="toast_error_wrong_pin">Falsche PIN</string>
+    <string name="toast_error_noinserted_pin">Keine PIN eingegeben</string>
+    <string name="currency_empty">Keine Währung eingegeben</string>
+
+    <!-- END PREFERENCES -->
+
+    <!-- ARRAY -->
+    <string-array name="account_filters_card_header">
+        <item>Letzten 20 Transaktionen</item>
+        <item>Jetziger Monat</item>
+        <item>Einkommen dieses Monats</item>
+        <item>Ausgaben dieses Monats</item>
+    </string-array>
+    <string-array name="graph_filters_card_header">
+        <item>Graph des jetzigen Monats</item>
+        <item>Letzten 20 Transaktionen</item>
+        <item>Einkommen dieses Monats</item>
+        <item>Ausgaben dieses Monats</item>
+    </string-array>
+    <string-array name="week">
+        <item>null</item>
+        <item>So</item>
+        <item>Mo</item>
+        <item>Di</item>
+        <item>Mi</item>
+        <item>Do</item>
+        <item>Fr</item>
+        <item>Sa</item>
+    </string-array>
+    <string-array name="years_filter_spinner">
+        <item>Alle Jahre</item>
+        <item>Dieses Jahr</item>
+        <item>Letztes Jahr</item>
+        <item>Vor 2 Jahren</item>
+    </string-array>
+    <string-array name="months_filter_spinner">
+        <item>Alle Monate</item>
+        <item>Januar</item>
+        <item>Februar</item>
+        <item>März</item>
+        <item>April</item>
+        <item>Mai</item>
+        <item>Juni</item>
+        <item>Juli</item>
+        <item>August</item>
+        <item>September</item>
+        <item>Oktober</item>
+        <item>November</item>
+        <item>Dezember</item>
+    </string-array>
+
+</resources>

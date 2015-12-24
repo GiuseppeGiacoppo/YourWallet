@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_transaction_add"
+        android:icon="@drawable/ic_add"
+        android:orderInCategory="0"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/menu_newtransaction"></item>
+    <item
+        android:id="@+id/menu_cerca"
+        android:icon="@drawable/ic_search"
+        android:orderInCategory="1"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/menu_filters"></item>
+    <item
+        android:id="@+id/menu_categorie"
+        android:icon="@drawable/ic_label"
+        android:orderInCategory="2"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/menu_categories"></item>
+    <item
+        android:id="@+id/menu_transfer"
+        android:icon="@drawable/ic_transfer"
+        android:orderInCategory="3"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/menu_transfer"></item>
+    <item
+        android:id="@+id/menu_settings"
+        android:icon="@drawable/ic_settings"
+        android:orderInCategory="4"
+        android:showAsAction="never"
+        android:title="@string/menu_settings"></item>
+    <item
+        android:id="@+id/menu_about"
+        android:orderInCategory="5"
+        android:showAsAction="never"
+        android:title="@string/menu_about"></item>
+
+</menu>

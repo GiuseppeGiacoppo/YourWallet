@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="12dp"
+        android:text="@string/separator_title_account_edit" />
+
+    <include layout="@layout/util_horizontal_line_section" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="?android:attr/dividerVertical"
+        android:dividerPadding="12dp"
+        android:showDividers="middle">
+
+        <EditText
+            android:id="@+id/etnome"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/ActionBarHeight"
+            android:layout_marginRight="12dp"
+            android:layout_weight="1"
+            android:hint="@string/hint_account_name"
+            android:maxLength="25"
+            android:singleLine="true" />
+
+        <ImageView
+            android:id="@+id/tab_delete"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_delete" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <View
+        android:layout_width="0px"
+        android:layout_height="0px"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <requestFocus />
+    </View>
+
+</LinearLayout>

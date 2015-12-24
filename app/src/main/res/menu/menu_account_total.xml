@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_categorie"
+        android:icon="@drawable/ic_label"
+        android:orderInCategory="0"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/menu_categories"></item>
+    <item
+        android:id="@+id/menu_cerca"
+        android:icon="@drawable/ic_search"
+        android:orderInCategory="2"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/menu_filters"></item>
+
+</menu>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="@dimen/itemListHeight">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/itemListHorizontalMargin">
+
+        <TextView
+            android:id="@+id/tv_conto_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textColor="@android:color/primary_text_light"
+            android:textSize="@dimen/itemListPrimaryText" />
+
+        <TextView
+            android:id="@+id/tv_conto_transactionnum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textColor="@android:color/secondary_text_light"
+            android:textSize="@dimen/itemListSecondaryText" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_conto_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:text="500 €"
+        android:layout_marginRight="@dimen/itemListHorizontalMargin"
+        android:textSize="@dimen/itemListPrimaryText" />
+
+</RelativeLayout>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/widget_padding">
+
+    <LinearLayout
+        android:id="@+id/widget_add_transazione_rootview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/appwidget_bg"
+        android:divider="?android:attr/dividerVertical"
+        android:dividerPadding="12dp"
+        android:orientation="horizontal"
+        android:showDividers="middle">
+
+        <RelativeLayout
+            android:id="@+id/rl_widget_main"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/appwidget_button_left">
+
+            <ImageView
+                android:id="@+id/app_icon_widget"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_launcher" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/iv_widget_add"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/appwidget_button_right"
+            android:src="@drawable/ic_add" />
+    </LinearLayout>
+
+</FrameLayout>

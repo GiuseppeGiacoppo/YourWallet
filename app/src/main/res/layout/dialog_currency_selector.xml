@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/euro"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="€" />
+
+        <Button
+            android:id="@+id/dollar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="$" />
+
+        <Button
+            android:id="@+id/sterling"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="£" />
+
+        <Button
+            android:id="@+id/yen"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="¥" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/swekr"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="kr" />
+
+        <Button
+            android:id="@+id/dankr"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="kr" />
+
+        <Button
+            android:id="@+id/czkr"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Kč" />
+
+        <Button
+            android:id="@+id/won"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="₩" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/personalcur"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="@dimen/MarginStandard"
+        android:layout_marginRight="@dimen/MarginStandard"
+        android:layout_marginTop="8dp"
+        android:hint="@string/hint_currency_name"
+        android:singleLine="true">
+
+        <requestFocus />
+    </EditText>
+
+    <include layout="@layout/util_horizontal_dialog_section" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="?android:attr/dividerVertical"
+        android:showDividers="middle">
+
+        <Button
+            android:id="@+id/cancel_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/cancel" />
+
+        <Button
+            android:id="@+id/add_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/save" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="0px"
+        android:layout_height="0px"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <requestFocus />
+    </View>
+
+</LinearLayout>

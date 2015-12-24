@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Unlicensed dialog messages -->
+    <string name="application_error">Error aplikace:</string>
+    <string name="unlicensed_dialog_title">Nebylo možné zkontrolovat licenci. Připojte se prosím k internetu a zkuste to znovu.</string>
+    <string name="unlicensed_dialog_body">Tato aplikace nebyla legálně zakoupena.</string>
+    <string name="buy_button">"Koupit aplikaci"</string>
+    <string name="quit_button">Konec</string>
+    <!-- END -->
+
+    <string name="app_name">Your Wallet</string>
+    <string name="widget_total">Your Wallet: Celkem</string>
+    <!-- GENERAL -->
+
+    <string name="account">Účet</string>
+    <string name="add">Přidat</string>
+    <string name="cancel">Zrušit</string>
+    <string name="close">Zavřít</string>
+    <string name="delete">Smazat</string>
+    <string name="discard">Zrušit</string>
+    <string name="done">Hotovo</string>
+    <string name="edit">Upravit</string>
+    <string name="graph">Graf</string>
+    <string name="no">Ne</string>
+    <string name="ok">OK</string>
+    <string name="save">Uložit</string>
+    <string name="yes">Ano</string>
+    <string name="total">Celkem</string>
+    <string name="toast_hint_holdtoedit">Podržte pro editaci</string>
+    <string name="toast_alert_invalid_name">Vložte platné jméno</string>
+    <string name="transaction">Transakce</string>
+    <string name="transactions">Transakce</string>
+    <plurals name="transactionPlurals">
+        <item quantity="one">%d Transakce</item>
+        <item quantity="few">%d Transakce</item>
+        <item quantity="other">%d Transakci</item>
+    </plurals>
+    <!-- END GENERAL -->
+    <!-- MENU -->
+
+    <string name="menu_about">O Programu</string>
+    <string name="menu_categories">Kategorie</string>
+    <string name="menu_filters">Filtry</string>
+    <string name="menu_newaccount">Nový účet</string>
+    <string name="menu_newcategory">Nová kategorie</string>
+    <string name="menu_newtransaction">Nová transakce</string>
+    <string name="menu_settings">Nastavení</string>
+    <string name="menu_transfer">Převod peněz</string>
+
+    <!-- END MENU -->
+    <!-- DATABASE SETTINGS -->
+
+    <string name="alert_confirm_overwrite_litetofull"><![CDATA[Ujistěte se, že jste v lite verzi vyexportovali databázi.<br /><br />Všechna současná data budou přepsána. Chcete pokračovat?]]></string>
+    <string name="alert_confirm_overwritedb">Všechna současná data budou přepsána. Chcete pokračovat?</string>
+    <string name="activity_title_database">Nastavení databáze</string>
+    <string name="btn_import_backupdb">Importovat databázi z předchozí zálohy</string>
+    <string name="btn_import_litedb">Importovat databázi z lite verze</string>
+    <string name="btn_export_currentdb">Exportovat současnou databázi</string>
+    <string name="btn_alert_existing_backup">Existuje předchozí záloha.\nKlikněte znovu pro její přepsání.</string>
+    <string name="separator_title_databasefull">Databáze Plné verze</string>
+    <string name="separator_title_databaselite">Databáze Lite verze</string>
+    <string name="toast_failed_dbimport">Import dat se nezdařil: Nebyla nalezena žádná záloha</string>
+    <string name="toast_successful_dbimport">Import dat proběhl úspěšně</string>
+    <string name="toast_failed_dbexport">Export dat se nezdařil</string>
+    <string name="toast_successful_dbexport">Export dat proběhl úspěšně</string>
+
+    <!-- END DB -->
+    <!-- ACCOUNT -->
+
+    <string name="alert_confirm_deleteaccount">Smazat tento účet a všechny jeho transakce?</string>
+    <string name="card_title_youraccounts">Vaše účty</string>
+    <string name="dialog_btn_deleteall">Smazat vše</string>
+    <string name="dialog_btn_deletetransactions">Pouze transakce</string>
+    <string name="hint_account_name">Název účtu</string>
+    <string name="toast_successful_account_add">Účet přidán</string>
+    <string name="toast_successful_account_edit">Účet upraven</string>
+    <string name="toast_successful_account_delete">Účet smazán</string>
+    <string name="toast_successful_deleted_transactions">Trnsakce smazány</string>
+    <string name="separator_title_account_edit">Upravit účet</string>
+    <string name="action_addaccount">Nový účet</string>
+
+    <!-- END ACCOUNT -->
+    <!-- TRANSACTIONS -->
+
+    <string name="txt_transaction_date_format">%2$d. %1$s %3$d</string>
+    <string name="separator_title_date">Datum</string>
+    <string name="separator_title_transaction_detail">Detaily transakce</string>
+    <string name="hint_transaction_name">Popis (piza, taxi, kino…)</string>
+    <string name="hint_transaction_amount">Částka (Přidejte - ,pokud jde o výdaj)</string>
+    <string name="toast_confirm_deletetransaction">Pro smazání transakce stiskněte Smazat znovu</string>
+    <string name="toast_error_completefields">Prosím vyplňte všechny položky</string>
+    <string name="toast_successful_transaction_edit">Transakce upravena</string>
+    <string name="toast_successful_transaction_add">Transakce přidána</string>
+    <string name="toast_successful_transaction_delete">Transakce smazána</string>
+    <string name="toast_alert_noaccount">Neexistuje žádný účet. Nejprve nějaký přidejte</string>
+    <string name="action_addtransaction">Nová transakce</string>
+    <!-- END TRANSACTIONS -->
+    <!-- CATEGORIES -->
+
+    <string name="hint_category_name">Jméno kategorie</string>
+    <string name="dialog_title_select_category">Přesunout všechny transakce v</string>
+    <string name="toast_successful_category_add">Kategorie přidána</string>
+    <string name="toast_successful_category_edit">Kategorie upravena</string>
+    <string name="toast_successful_category_delete">Kategorie smazána</string>
+    <string name="toast_alert_nocategory">Neexistuje žádná kategorie. Nejprve nějakou přidejte</string>
+    <string name="toast_confirm_deletecategory">Pro smazání kategorie stiskněte Smazat znovu</string>
+    <string name="action_addcategory">Nová kategorie</string>
+    <!-- END CATEGORIES -->
+    <!-- ABOUT AND POPUP -->
+
+    <string name="dialog_about_text"><![CDATA[Děkujeme vám za pořízení aplikace Your Wallet.<br /><br />Velmi se snažíme, abychom vám co nejvíce usnadnili používání.<br /><br />Pokud naleznete chybu, špatný překlad nebo máte nápad, jak tuto aplikaci vypelšit, pošlete mi email pomocí tlačítka níže! <br /><br />Pokud chcete pomoci při překladu aplikace pro další jazyky, prosím kontaktujte mě a obratem vám zašlu kopii souboru obsahující všechny fráze. <br />Ještě jednou děkuji!<br /><br /><b>Překlady</b><br /><br />Marek Bečica, Samuel Groesch<br /><br /><b>Speciální poděkování</b><br /><br /><b>AChartEngine</b><br /><a href="http://www.achartengine.org">http://www.achartengine.org</a><br /><br /><b>ActionBarSherlock</b><br /><a href="http://www.actionbarsherlock.com">http://www.actionbarsherlock.com</a><br />]]></string>
+    <string name="dialog_btn_contact">Kontaktujte nás</string>
+    <string name="dialog_btn_rate">Ohodnotit aplikaci</string>
+    <string name="popup_title_rate">Ohodnoťte mě</string>
+    <string name="popup_desc_rate">Váš názor je pro nás důležitý</string>
+
+    <!-- END ABOUT AND POPUP -->
+    <!-- FILTERS -->
+
+    <string name="toast_error_select_account">Vyberte účet</string>
+
+    <!-- END FILTERS -->
+    <!-- TRANSFER -->
+
+    <string name="hint_insert_amount">Zadejte částku</string>
+    <string name="separator_title_fromto">Z účtu/Na účet</string>
+    <string name="separator_title_moneytransfer">Převod peněz</string>
+    <string name="txt_transfer_desc">Převod peněz</string>
+    <string name="toast_error_select_distinct_account">Vyberte 2 rozdílné účty</string>
+
+    <!-- END TRANSFER -->
+    <!-- PREFERENCES -->
+
+    <string name="preferences_currency_title">Vyberte vaší měnu</string>
+    <string name="preferences_pin_title">Heslo</string>
+    <string name="preferences_pin_desc">Pokud nechcete používat heslo, ponechte jej prázdné. \nV hesle se rozlišují velká a malá písmena.</string>
+    <string name="separator_title_privacy">Soukromí</string>
+    <string name="hint_currency_name">Zadejte vaší měnu</string>
+    <string name="card_title_pin">Zadejte heslo</string>
+    <string name="dialog_preferences_pin_title">Zadejte heslo</string>
+    <string name="toast_error_wrong_pin">Chybné heslo</string>
+    <string name="toast_error_noinserted_pin">Nebylo zadáno žádné heslo</string>
+    <string name="currency_empty">Nebyla zadána žádná měna</string>
+
+    <!-- END PREFERENCES -->
+
+    <!-- ARRAY -->
+    <string-array name="account_filters_card_header">
+        <item>Posledních 20 transakcí</item>
+        <item>Tento měsíc</item>
+        <item>Příjmy tento měsíc</item>
+        <item>Výdaje tento měsíc</item>
+    </string-array>
+    <string-array name="graph_filters_card_header">
+        <item>Graf tohoto měsíce</item>
+        <item>Posledních 20 transakcí</item>
+        <item>Příjmy tento měsíc</item>
+        <item>Výdaje tento měsíc</item>
+    </string-array>
+    <string-array name="week">
+        <item>null</item>
+        <item>Ne</item>
+        <item>Po</item>
+        <item>Út</item>
+        <item>St</item>
+        <item>Čt</item>
+        <item>Pá</item>
+        <item>So</item>
+    </string-array>
+    <string-array name="years_filter_spinner">
+        <item>Všechny roky</item>
+        <item>Současný rok</item>
+        <item>Před rokem</item>
+        <item>Před dvěma lety</item>
+    </string-array>
+    <string-array name="months_filter_spinner">
+        <item>Všechny měsíce</item>
+        <item>Leden</item>
+        <item>Únor</item>
+        <item>Březen</item>
+        <item>Duben</item>
+        <item>Květen</item>
+        <item>Červen</item>
+        <item>Červenec</item>
+        <item>Srpen</item>
+        <item>Září</item>
+        <item>Říjen</item>
+        <item>Listopad</item>
+        <item>Prosinec</item>
+    </string-array>
+
+</resources>

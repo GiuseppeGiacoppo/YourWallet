@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- TODO cardview-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Spinner
+        android:id="@+id/spinner_account_card_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/tv_addtransaction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/MarginSmall"
+        android:layout_marginTop="@dimen/MarginSmall"
+        android:text="@string/action_addtransaction"
+        android:visibility="gone" />
+
+    <ListView
+        android:id="@+id/last5mov"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="8dp"></ListView>
+
+</LinearLayout>

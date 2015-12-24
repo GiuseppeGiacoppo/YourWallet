@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="TestoStandard">20sp</dimen>
+    <dimen name="ActionBarHeight">56dp</dimen>
+
+    <dimen name="MarginStandard">32dp</dimen>
+    <dimen name="MarginSmall">8dp</dimen>
+    <dimen name="Transazione_HorizontalMargin">16dp</dimen>
+    <dimen name="Conto_HorizontalMargin">16dp</dimen>
+
+    <dimen name="PaddingSmall">16dp</dimen>
+
+    <dimen name="text_card_header">26sp</dimen>
+    <dimen name="text_card_header_category_dialog">22sp</dimen>
+    <dimen name="text_item_spinner_card_header">20sp</dimen>
+    <dimen name="text_btn_small">14sp</dimen>
+    <dimen name="text_btn_medium">16sp</dimen>
+
+
+    <dimen name="TestoStandardItem">20sp</dimen>
+    <dimen name="TestoSecondaryItem">16sp</dimen>
+
+</resources>

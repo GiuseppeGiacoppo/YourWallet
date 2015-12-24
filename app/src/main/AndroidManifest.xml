@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.giacsoft.yourwallet">
+
+    <uses-permission android:name="com.android.vending.CHECK_LICENSE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK"></uses-permission>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"></uses-permission>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <!--
+        <activity
+            android:name="com.giacsoft.yourwallet.Main"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>-->
+        <activity
+            android:name=".activities.MainActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.TransactionDetailActivity"
+            android:label="@string/menu_newtransaction"/>
+        <activity android:name=".activities.AccountDetailActivity" />
+        <activity android:name=".activities.AccountFiltersActivity"/>
+        <activity android:name=".activities.CategoriesActivity"/>
+        <activity android:name=".activities.PinActivity" />
+        <activity android:name=".activities.AccountActivity"/>
+        <activity android:name=".activities.TransferActivity" />
+        <activity android:name=".activities.AdvancedActivity" />
+        <activity android:name=".activities.PreferencesActivity"/>
+
+        <receiver
+            android:name="com.giacsoft.yourwallet.widgets.Widget_AddTransazione_1x1"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_provider_add_transazione_1x1" />
+        </receiver>
+        <receiver
+            android:name="com.giacsoft.yourwallet.widgets.Widget_AddTransazione_2x1"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_provider_add_transazione_2x1" />
+        </receiver>
+        <receiver
+            android:name="com.giacsoft.yourwallet.widgets.Widget_Total_4x1"
+            android:label="@string/widget_total">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_provider_total_4x1" />
+        </receiver>
+        <receiver
+            android:name="com.giacsoft.yourwallet.widgets.Widget_AddTransazione_4x1"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_provider_add_transazione_4x1" />
+        </receiver>
+    </application>
+
+</manifest>

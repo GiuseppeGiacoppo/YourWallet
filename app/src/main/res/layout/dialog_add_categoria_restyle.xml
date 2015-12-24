@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/container_category_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
+        <Spinner
+            android:id="@+id/spin_col"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/ActionBarHeight"
+            android:layout_marginLeft="@dimen/MarginStandard"
+            android:layout_marginRight="@dimen/MarginStandard"
+            android:layout_marginTop="8dp" />
+
+        <EditText
+            android:id="@+id/newcatnome"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/ActionBarHeight"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="@dimen/MarginStandard"
+            android:layout_marginRight="@dimen/MarginStandard"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:hint="@string/hint_category_name"
+            android:imeOptions="actionDone"
+            android:singleLine="true" />
+
+        <include
+            android:id="@+id/include1"
+            layout="@layout/util_horizontal_dialog_section" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/container_category_delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+        <TextView
+            android:id="@+id/fti_transactioninfo"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/ActionBarHeight"
+            android:layout_marginLeft="@dimen/MarginStandard"
+            android:layout_marginRight="@dimen/MarginStandard"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:text="@string/dialog_title_select_category" />
+
+        <Spinner
+            android:id="@+id/spin_move_cat"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/ActionBarHeight"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="@dimen/MarginStandard"
+            android:layout_marginRight="@dimen/MarginStandard"
+            android:layout_marginTop="8dp" />
+
+        <include
+            android:id="@+id/include1"
+            layout="@layout/util_horizontal_dialog_section" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/container_category_info">
+
+        <Button
+            android:id="@+id/add_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_weight="1"
+            android:text="@string/add" />
+
+        <LinearLayout
+            android:id="@+id/del_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true">
+
+            <include layout="@layout/util_vertical_line_section" />
+
+            <ImageView
+                android:id="@+id/delete"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_delete" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

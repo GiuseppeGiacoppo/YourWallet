@@ -1,0 +1,39 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="MarginStandard">32dp</dimen>
+    <dimen name="MarginSmall">16dp</dimen>
+
+    <dimen name="tab_max_width">264dp</dimen>
+    <dimen name="tab_padding_bottom">16dp</dimen>
+    <dimen name="tab_label">14sp</dimen>
+    <dimen name="custom_tab_layout_height">72dp</dimen>
+
+    <dimen name="fab_elev">6dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="ActionBarHeight">56dp</dimen>
+    <dimen name="toolbar_elev">4dp</dimen>
+
+    <dimen name="widget_padding">8dp</dimen>
+
+    <dimen name="graph_line_width">3dp</dimen>
+    <dimen name="graph_line_pointsize">6dp</dimen>
+    <dimen name="graph_line_pointstroke">3dp</dimen>
+
+    <dimen name="cardCornerRadius">4dp</dimen>
+    <dimen name="cardElevation">2dp</dimen>
+    <dimen name="cardMargins">16dp</dimen>
+    <dimen name="cardPaddings">8dp</dimen>
+    
+    <dimen name="itemListHeight">72dp</dimen>
+    <dimen name="itemListHorizontalMargin">16dp</dimen>
+    <dimen name="itemListHorizontalMarginBig">32dp</dimen>
+    <dimen name="itemListPrimaryTextBig">24sp</dimen>
+    <dimen name="itemListPrimaryText">16sp</dimen>
+    <dimen name="itemListSecondaryText">14sp</dimen>
+
+    <dimen name="primaryTextBig">24sp</dimen>
+</resources>
