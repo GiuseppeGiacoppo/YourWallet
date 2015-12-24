@@ -17,8 +17,8 @@ import com.giacsoft.yourwallet.R;
 
 public class PinDialogFragment extends DialogFragment implements OnClickListener {
 
-    Button add_btn;
-    EditText inputpin;
+    Button addBTN;
+    EditText inputET;
     SharedPreferences settings;
     SharedPreferences.Editor pinn;
     SharedPreferences preferences;
@@ -41,16 +41,16 @@ public class PinDialogFragment extends DialogFragment implements OnClickListener
         settings = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
         pinn = settings.edit();
 
-        inputpin = (EditText) view_dialog.findViewById(R.id.etpin);
+        inputET = (EditText) view_dialog.findViewById(R.id.etpin);
 
         String pin = preferences.getString("pin", "");
         if (pin.length() == 0)
             ;
         else
-            inputpin.setText(pin);
-        add_btn = (Button) view_dialog.findViewById(R.id.addc_btn);
+            inputET.setText(pin);
+        addBTN = (Button) view_dialog.findViewById(R.id.addc_btn);
 
-        add_btn.setOnClickListener(this);
+        addBTN.setOnClickListener(this);
 
         builder.setView(view_dialog);
         return builder.create();
@@ -58,8 +58,8 @@ public class PinDialogFragment extends DialogFragment implements OnClickListener
 
     @Override
     public void onClick(View v) {
-        if (v == add_btn) {
-            pinn.putString("pin", inputpin.getText().toString());
+        if (v == addBTN) {
+            pinn.putString("pin", inputET.getText().toString());
             pinn.commit();
             dismiss();
         }

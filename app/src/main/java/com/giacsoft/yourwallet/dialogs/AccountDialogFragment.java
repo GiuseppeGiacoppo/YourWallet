@@ -22,8 +22,8 @@ public class AccountDialogFragment extends DialogFragment implements OnClickList
 
     MyDatabase db;
     Context ctx;
-    long idconto;
-    Button add_btn, cancel_btn;
+    long accountID;
+    Button addBTN, cancelBTN;
     EditText accountET;
     OnAccountDialogListener cdlistener;
 
@@ -55,10 +55,10 @@ public class AccountDialogFragment extends DialogFragment implements OnClickList
         View view_dialog = inflater.inflate(R.layout.dialog_add_account, null);
 
         accountET = (EditText) view_dialog.findViewById(R.id.etnome);
-        add_btn = (Button) view_dialog.findViewById(R.id.addc_btn);
-        cancel_btn = (Button) view_dialog.findViewById(R.id.cancel_btn);
+        addBTN = (Button) view_dialog.findViewById(R.id.addc_btn);
+        cancelBTN = (Button) view_dialog.findViewById(R.id.cancel_btn);
 
-        add_btn.setOnClickListener(this);
+        addBTN.setOnClickListener(this);
 
         builder.setView(view_dialog);
         return builder.create();
@@ -66,16 +66,16 @@ public class AccountDialogFragment extends DialogFragment implements OnClickList
 
     @Override
     public void onClick(View v) {
-        if (v == add_btn) {
+        if (v == addBTN) {
             if (accountET.length() > 0) {
-                idconto = db.addAccount(accountET.getText().toString());
+                accountID = db.addAccount(accountET.getText().toString());
                 Toast.makeText(ctx, R.string.toast_successful_account_add, Toast.LENGTH_SHORT).show();
-                cdlistener.doAccount(Utils.ADD, new Account(idconto, accountET.getText().toString(), 0));
+                cdlistener.doAccount(Utils.ADD, new Account(accountID, accountET.getText().toString(), 0));
                 dismiss();
             } else {
                 Toast.makeText(ctx, R.string.toast_alert_invalid_name, Toast.LENGTH_SHORT).show();
             }
-        } else if (v == cancel_btn) {
+        } else if (v == cancelBTN) {
             dismiss();
         }
     }

@@ -52,12 +52,12 @@ public class TransactionDialogFragment extends DialogFragment implements View.On
             dateBTN.setText(txt);
         }
     };
-    int mYear, mMonth, mDay, cYear, cMonth, cDay, poscat;
-    long idtrans, idconto, id_nuova_trans;
+    int mYear, mMonth, mDay, cYear, cMonth, cDay, categoryPosition;
+    long transactionID, accountID, newTransactionID;
     boolean doubleBackToExitPressedOnce;
     Transaction t;
     View vert_sep;
-    LinearLayout layoutconti;
+    LinearLayout accountsLayout;
     OnTransactionDialogListener tdlistener;
 
     public static TransactionDialogFragment newInstance(long idc, long idt) {
@@ -96,8 +96,8 @@ public class TransactionDialogFragment extends DialogFragment implements View.On
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-        idtrans = getArguments().getLong("idt");
-        idconto = getArguments().getLong("idc");
+        transactionID = getArguments().getLong("idt");
+        accountID = getArguments().getLong("idc");
         // provenienza = getArguments().getInt("activity");
 
         final Calendar c = Calendar.getInstance();
@@ -120,31 +120,31 @@ public class TransactionDialogFragment extends DialogFragment implements View.On
         categoriesSP = (Spinner) view_dialog.findViewById(R.id.spincat);
         dateBTN = (Button) view_dialog.findViewById(R.id.date);
         accountsSP = (Spinner) view_dialog.findViewById(R.id.spinconti);
-        layoutconti = (LinearLayout) view_dialog.findViewById(R.id.layoutconti);
+        accountsLayout = (LinearLayout) view_dialog.findViewById(R.id.layoutconti);
         addBTN = (Button) view_dialog.findViewById(R.id.add_btn);
         cancelBTN = (Button) view_dialog.findViewById(R.id.cancel_btn);
 
         doubleBackToExitPressedOnce = false;
 
         updateCategories();
-        ArrayList<Account> arrayconti = db.getAccounts();
-        MyAccountTitleAdapter adconti = new MyAccountTitleAdapter(getActivity(), R.layout.item_1line_spinner, arrayconti);
-        adconti.setDropDownViewResource(R.layout.item_1line_spinner);
-        accountsSP.setAdapter(adconti);
+        ArrayList<Account> mAccounts = db.getAccounts();
+        MyAccountTitleAdapter accountsAdapter = new MyAccountTitleAdapter(getActivity(), R.layout.item_1line_spinner, mAccounts);
+        accountsAdapter.setDropDownViewResource(R.layout.item_1line_spinner);
+        accountsSP.setAdapter(accountsAdapter);
 
-        if (idconto != 0) {
-            layoutconti.setVisibility(View.GONE);
+        if (accountID != 0) {
+            accountsLayout.setVisibility(View.GONE);
         }
 
-        if (idtrans != 0) {
-            t = db.getTransaction(idtrans);
-            layoutconti.setVisibility(View.GONE);
+        if (transactionID != 0) {
+            t = db.getTransaction(transactionID);
+            accountsLayout.setVisibility(View.GONE);
             nameET.setText(t.note);
             amountET.setText(t.amount + "");
             String txt = String.format(res.getString(R.string.txt_transaction_date_format), res.getStringArray(R.array.months_filter_spinner)[t.month], t.day, t.year);
             dateBTN.setText(txt);
-            poscat = (int) t.category;
-            categoriesSP.setSelection(poscat - 1);
+            categoryPosition = (int) t.category;
+            categoriesSP.setSelection(categoryPosition - 1);
             cancelBTN.setText(res.getString(R.string.delete));
             cDay = t.day;
             cMonth = t.month - 1;
@@ -178,15 +178,15 @@ public class TransactionDialogFragment extends DialogFragment implements View.On
     public void onClick(View v) {
 
         if (v == dateBTN) {
-            if (idtrans == 0)
+            if (transactionID == 0)
                 new DatePickerDialog(getActivity(), mDateSetListener, mYear, mMonth, mDay).show();
             else
                 new DatePickerDialog(getActivity(), mDateSetListener, t.year, t.month - 1, t.day).show();
         } else if (v == cancelBTN) {
-            if (idtrans != 0) {
+            if (transactionID != 0) {
                 if (doubleBackToExitPressedOnce) {
-                    Transaction del = db.getTransaction(idtrans);
-                    db.deleteTransaction(idtrans);
+                    Transaction del = db.getTransaction(transactionID);
+                    db.deleteTransaction(transactionID);
                     Toast.makeText(ctx, R.string.toast_successful_transaction_delete, Toast.LENGTH_SHORT).show();
 
                     tdlistener.doTransaction(Utils.DELETE, del, 0,position);
@@ -220,20 +220,20 @@ public class TransactionDialogFragment extends DialogFragment implements View.On
                     if (categoriesSP.getCount() < 1) {
                         Toast.makeText(ctx, R.string.toast_alert_nocategory, Toast.LENGTH_SHORT).show();
                     } else {
-                        if (idtrans != 0) {
-                            t = db.getTransaction(idtrans);
+                        if (transactionID != 0) {
+                            t = db.getTransaction(transactionID);
                             double differenza = Double.parseDouble(amountET.getText().toString()) - t.amount;
-                            db.editTransaction(idtrans, nameET.getText().toString(), differenza, categoriesSP.getSelectedItemId(), t.accountID, dayOfWeek, cDay, mese, cYear);
-                            tdlistener.doTransaction(Utils.EDIT, new Transaction(idtrans, nameET.getText().toString(), t.amount + differenza, categoriesSP.getSelectedItemId(), t.accountID, dayOfWeek, cDay, mese, cYear), differenza, position);
+                            db.editTransaction(transactionID, nameET.getText().toString(), differenza, categoriesSP.getSelectedItemId(), t.accountID, dayOfWeek, cDay, mese, cYear);
+                            tdlistener.doTransaction(Utils.EDIT, new Transaction(transactionID, nameET.getText().toString(), t.amount + differenza, categoriesSP.getSelectedItemId(), t.accountID, dayOfWeek, cDay, mese, cYear), differenza, position);
                             Toast.makeText(ctx, R.string.toast_successful_transaction_edit, Toast.LENGTH_SHORT).show();
 
                         } else {
-                            if (idconto == 0) {
-                                id_nuova_trans = db.addTransaction(nameET.getText().toString(), Double.parseDouble(amountET.getText().toString()), categoriesSP.getSelectedItemId(), accountsSP.getSelectedItemId(), dayOfWeek, cDay, mese, cYear);
-                                tdlistener.doTransaction(Utils.ADD, new Transaction(id_nuova_trans, nameET.getText().toString(), Double.parseDouble(amountET.getText().toString()), categoriesSP.getSelectedItemId(), accountsSP.getSelectedItemId(), dayOfWeek, cDay, mese, cYear), 0,0);
+                            if (accountID == 0) {
+                                newTransactionID = db.addTransaction(nameET.getText().toString(), Double.parseDouble(amountET.getText().toString()), categoriesSP.getSelectedItemId(), accountsSP.getSelectedItemId(), dayOfWeek, cDay, mese, cYear);
+                                tdlistener.doTransaction(Utils.ADD, new Transaction(newTransactionID, nameET.getText().toString(), Double.parseDouble(amountET.getText().toString()), categoriesSP.getSelectedItemId(), accountsSP.getSelectedItemId(), dayOfWeek, cDay, mese, cYear), 0,0);
                             } else {
-                                id_nuova_trans = db.addTransaction(nameET.getText().toString(), Double.parseDouble(amountET.getText().toString()), categoriesSP.getSelectedItemId(), idconto, dayOfWeek, cDay, mese, cYear);
-                                tdlistener.doTransaction(Utils.ADD, new Transaction(id_nuova_trans, nameET.getText().toString(), Double.parseDouble(amountET.getText().toString()), categoriesSP.getSelectedItemId(), idconto, dayOfWeek, cDay, mese, cYear),0,0);
+                                newTransactionID = db.addTransaction(nameET.getText().toString(), Double.parseDouble(amountET.getText().toString()), categoriesSP.getSelectedItemId(), accountID, dayOfWeek, cDay, mese, cYear);
+                                tdlistener.doTransaction(Utils.ADD, new Transaction(newTransactionID, nameET.getText().toString(), Double.parseDouble(amountET.getText().toString()), categoriesSP.getSelectedItemId(), accountID, dayOfWeek, cDay, mese, cYear),0,0);
                             }
                             Toast.makeText(ctx, R.string.toast_successful_transaction_add, Toast.LENGTH_SHORT).show();
                         }

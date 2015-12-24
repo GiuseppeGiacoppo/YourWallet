@@ -29,7 +29,7 @@
             android:layout_marginTop="8dp" />
 
         <ListView
-            android:id="@+id/last5mov"
+            android:id="@+id/transactionsLV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>

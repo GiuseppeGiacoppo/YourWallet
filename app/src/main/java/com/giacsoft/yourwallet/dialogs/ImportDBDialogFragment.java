@@ -2,6 +2,7 @@ package com.giacsoft.yourwallet.dialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.AsyncTask;
@@ -21,6 +22,7 @@ import java.io.IOException;
 public class ImportDBDialogFragment extends DialogFragment {
 
     Resources res;
+    Context ctx;
 
     public static ImportDBDialogFragment newInstance() {
         ImportDBDialogFragment frag = new ImportDBDialogFragment();
@@ -29,7 +31,10 @@ public class ImportDBDialogFragment extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        res = getActivity().getApplicationContext().getResources();
+
+        ctx =getActivity().getApplicationContext();
+        res = ctx.getResources();
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage(Html.fromHtml(res.getString(R.string.alert_confirm_overwritedb)));
         builder.setCancelable(true);
@@ -79,9 +84,9 @@ public class ImportDBDialogFragment extends DialogFragment {
         // can use UI thread here
         protected void onPostExecute(final Boolean success) {
             if (success) {
-                Toast.makeText(getActivity().getApplicationContext(), R.string.toast_successful_dbimport, Toast.LENGTH_SHORT).show();
+                Toast.makeText(ctx, R.string.toast_successful_dbimport, Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(getActivity().getApplicationContext(), R.string.toast_failed_dbimport, Toast.LENGTH_SHORT).show();
+                Toast.makeText(ctx, R.string.toast_failed_dbimport, Toast.LENGTH_SHORT).show();
             }
         }
 

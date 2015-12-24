@@ -17,7 +17,7 @@ import com.giacsoft.yourwallet.R;
 
 public class CurrencyDialogFragment extends DialogFragment implements View.OnClickListener {
 
-    Button add_btn, cancel_btn;
+    Button addBTN, cancelBTN;
     Button euro, dollar, sterling, yen, swekr, dankr, czkr, won;
     EditText currencyET;
     SharedPreferences settings;
@@ -41,8 +41,8 @@ public class CurrencyDialogFragment extends DialogFragment implements View.OnCli
         curr = settings.edit();
 
         currencyET = (EditText) view_dialog.findViewById(R.id.personalcur);
-        add_btn = (Button) view_dialog.findViewById(R.id.add_btn);
-        cancel_btn = (Button) view_dialog.findViewById(R.id.cancel_btn);
+        addBTN = (Button) view_dialog.findViewById(R.id.add_btn);
+        cancelBTN = (Button) view_dialog.findViewById(R.id.cancel_btn);
         euro = (Button) view_dialog.findViewById(R.id.euro);
         dollar = (Button) view_dialog.findViewById(R.id.dollar);
         sterling = (Button) view_dialog.findViewById(R.id.sterling);
@@ -52,7 +52,7 @@ public class CurrencyDialogFragment extends DialogFragment implements View.OnCli
         czkr = (Button) view_dialog.findViewById(R.id.czkr);
         won = (Button) view_dialog.findViewById(R.id.won);
 
-        add_btn.setOnClickListener(this);
+        addBTN.setOnClickListener(this);
 
         euro.setOnClickListener(this);
         dollar.setOnClickListener(this);
@@ -70,9 +70,9 @@ public class CurrencyDialogFragment extends DialogFragment implements View.OnCli
     @Override
     public void onClick(View v) {
 
-        if (v == cancel_btn) {
+        if (v == cancelBTN) {
 
-        } else if (v == add_btn) {
+        } else if (v == addBTN) {
             if (currencyET.length() > 0) {
                 curr.putString("currency", currencyET.getText().toString());
                 curr.commit();

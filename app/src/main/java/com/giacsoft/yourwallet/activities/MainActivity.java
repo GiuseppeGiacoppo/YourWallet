@@ -83,7 +83,7 @@ public class MainActivity extends Activity implements MainFragment.OnItemSelecte
         if (accountFragment != null && accountFragment.isInLayout()) {
             selected_item_account_card_header = preferences.getInt("selected_item_account_card_header", 0);
             selected_item_graph_card_header = preferences.getInt("selected_item_graph_card_header", 0);
-            accountFragment.aggiornaTransazioni(id, selected_item_account_card_header);
+            accountFragment.updateTransactions(id, selected_item_account_card_header);
             accountFragment.accountID = id;
         } else {
             startActivity(new Intent(getApplicationContext(), AccountActivity.class).putExtra(Utils.ACCOUNT_ID, id));

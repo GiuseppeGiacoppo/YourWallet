@@ -209,7 +209,7 @@ public class AccountFiltersActivity extends Activity implements AdapterView.OnIt
 
             nuove_transazioni = db.getTransactionsMYFiltered(accountID, arg0[0].filterMonth, arg0[0].filterYear);
             list_cat = db.getCategories();
-            total = db.getAmountTransactionsMYFiltered(accountID, arg0[0].filterMonth, arg0[0].filterYear);
+            total = db.getTotalAmountMYFiltered(accountID, arg0[0].filterMonth, arg0[0].filterYear);
             return null;
         }
 

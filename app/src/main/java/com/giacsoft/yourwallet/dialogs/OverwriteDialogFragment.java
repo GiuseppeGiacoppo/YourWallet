@@ -2,6 +2,7 @@ package com.giacsoft.yourwallet.dialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,6 +10,7 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.content.ContextCompat;
 import android.text.Html;
 
 import com.giacsoft.yourwallet.R;
@@ -17,6 +19,7 @@ public class OverwriteDialogFragment extends DialogFragment {
 
     Resources res;
     SharedPreferences settings;
+    Context ctx;
 
     public static OverwriteDialogFragment newInstance() {
         OverwriteDialogFragment frag = new OverwriteDialogFragment();
@@ -26,7 +29,8 @@ public class OverwriteDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         settings = getActivity().getSharedPreferences("RATING", 0);
-        res = getActivity().getApplicationContext().getResources();
+        ctx = getActivity().getApplicationContext();
+        res = ctx.getResources();
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(R.string.menu_about);
         builder.setMessage(Html.fromHtml(res.getString(R.string.dialog_about_text)));

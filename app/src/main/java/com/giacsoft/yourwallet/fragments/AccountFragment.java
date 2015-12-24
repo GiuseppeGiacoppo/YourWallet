@@ -37,12 +37,12 @@ public class AccountFragment extends Fragment implements AdapterView.OnItemClick
     SharedPreferences.Editor preferences_editor;
     Spinner spinner_account_card_header;
     String cur;
-    ArrayList<Transaction> nuove_transazioni = new ArrayList<Transaction>();
+    ArrayList<Transaction> mTransactions = new ArrayList<Transaction>();
     int mDay, mYear, mMonth, mese;
     double[] impmov, imptot;
     MyTransactionAdapter adapter;
     int selected_item_account_card_header;
-    ArrayList<Category> categories;
+    ArrayList<Category> mCategories;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -78,7 +78,7 @@ public class AccountFragment extends Fragment implements AdapterView.OnItemClick
         mMonth = mese + 1;
 
         // Istanzia le viste
-        transactionsLV = (ListView) view.findViewById(R.id.last5mov);
+        transactionsLV = (ListView) view.findViewById(R.id.transactionsLV);
         spinner_account_card_header = (Spinner) view.findViewById(R.id.spinner_account_card_header);
 
         ArrayAdapter<CharSequence> adapter_account_card_header = ArrayAdapter.createFromResource(getActivity().getApplicationContext(), R.array.account_filters_card_header, R.layout.item_spinner_elemento_card_header);
@@ -98,30 +98,30 @@ public class AccountFragment extends Fragment implements AdapterView.OnItemClick
         spinner_account_card_header.setSelection(selected_item_account_card_header);
     }
 
-    public void aggiornaTransazioni(long id, int p) {
+    public void updateTransactions(long id, int p) {
         switch (p) {
             case 0:
-                    nuove_transazioni = db.getLastTransactions(Utils.DESC, id, 20);
+                    mTransactions = db.getLastTransactions(Utils.DESC, id, 20);
                 break;
             case 1:
-                    nuove_transazioni = db.getTransactions(Utils.AMOUNT_ALL, true, id, mMonth, mYear);
+                    mTransactions = db.getTransactions(Utils.AMOUNT_ALL, true, id, mMonth, mYear);
                 break;
             case 2:
-                    nuove_transazioni = db.getTransactions(Utils.AMOUNT_POSITIVE, false, id, mMonth, mYear);
+                    mTransactions = db.getTransactions(Utils.AMOUNT_POSITIVE, false, id, mMonth, mYear);
                 break;
             case 3:
-                    nuove_transazioni = db.getTransactions(Utils.AMOUNT_NEGATIVE, false, id, mMonth, mYear);
+                    mTransactions = db.getTransactions(Utils.AMOUNT_NEGATIVE, false, id, mMonth, mYear);
                 break;
         }
 
-        categories = db.getCategories();
-        adapter = new MyTransactionAdapter(getActivity().getApplicationContext(), R.layout.item_transaction, nuove_transazioni, cur, categories);
+        mCategories = db.getCategories();
+        adapter = new MyTransactionAdapter(getActivity().getApplicationContext(), R.layout.item_transaction, mTransactions, cur, mCategories);
         transactionsLV.setAdapter(adapter);
     }
 
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-        mostraDialog(DLG3, id, position);
+        showDialog(DLG3, id, position);
         return false;
     }
 
@@ -130,10 +130,10 @@ public class AccountFragment extends Fragment implements AdapterView.OnItemClick
         Toast.makeText(getActivity().getApplicationContext(), R.string.toast_hint_holdtoedit, Toast.LENGTH_SHORT).show();
     }
 
-    void mostraDialog(int id, long idtra, int position) {
+    void showDialog(int id, long transactionID, int position) {
         switch (id) {
             case DLG3:
-                DialogFragment newFragment = TransactionDialogFragment.newInstance(accountID, idtra, position);
+                DialogFragment newFragment = TransactionDialogFragment.newInstance(accountID, transactionID, position);
                 newFragment.show(getActivity().getFragmentManager(), "transazionedialog");
                 break;
         }
@@ -142,14 +142,14 @@ public class AccountFragment extends Fragment implements AdapterView.OnItemClick
     public void doTransaction(int mode, Transaction t, int p) {
         switch (mode) {
             case Utils.ADD:
-                aggiornaTransazioni(accountID, selected_item_account_card_header);
+                updateTransactions(accountID, selected_item_account_card_header);
                 break;
             case Utils.EDIT:
-                nuove_transazioni.set(p, t);
+                mTransactions.set(p, t);
                 adapter.notifyDataSetChanged();
                 break;
             case Utils.DELETE:
-                nuove_transazioni.remove(p);
+                mTransactions.remove(p);
                 adapter.notifyDataSetChanged();
                 break;
             default:
@@ -160,7 +160,7 @@ public class AccountFragment extends Fragment implements AdapterView.OnItemClick
     public void onItemSelected(AdapterView<?> arg0, View view, int i, long l) {
         preferences_editor.putInt("selected_item_account_card_header", i);
         preferences_editor.commit();
-        aggiornaTransazioni(accountID, i);
+        updateTransactions(accountID, i);
     }
 
     @Override

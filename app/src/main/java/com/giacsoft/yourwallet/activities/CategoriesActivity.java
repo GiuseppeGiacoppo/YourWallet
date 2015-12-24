@@ -35,7 +35,7 @@ import com.github.mikephil.charting.data.PieDataSet;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class CategoriesActivity extends Activity implements AdapterView.OnItemLongClickListener, AdapterView.OnItemClickListener, CategoriesDialogFragment.OnCategorieDialogListener, OnClickListener {
+public class CategoriesActivity extends Activity implements AdapterView.OnItemLongClickListener, AdapterView.OnItemClickListener, CategoriesDialogFragment.OnCategoryDialogListener, OnClickListener {
 
     private static final int DLG1 = 1;
     private static final int DLG2 = 2;

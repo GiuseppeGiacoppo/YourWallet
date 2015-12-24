@@ -38,10 +38,10 @@ public class MainFragment extends Fragment implements View.OnClickListener, Adap
     String cur;
     DecimalFormat df = new DecimalFormat("0.00");
     View actualViewSelected;
-    long item_selezionato;
+    long selectedItem;
     MyAccountAdapter adapter;
     double totalAccountsAmount;
-    ArrayList<Account> conti_array;
+    ArrayList<Account> mAccounts;
     private OnItemSelectedListener listener;
 
     @Override
@@ -77,7 +77,7 @@ public class MainFragment extends Fragment implements View.OnClickListener, Adap
         setSelected(totale_conti, 0);
         preferences = PreferenceManager.getDefaultSharedPreferences(ctx);
         cur = preferences.getString("currency", "$");
-        aggiornaConti();
+        updateAccounts();
         return view;
     }
 
@@ -92,13 +92,13 @@ public class MainFragment extends Fragment implements View.OnClickListener, Adap
 
         if (!cur.equals(preferences.getString("currency", "$"))) {
             cur = preferences.getString("currency", "$");
-            aggiornaConti();
+            updateAccounts();
         }
     }
 
-    public void aggiornaConti() {
+    public void updateAccounts() {
 
-        conti_array = db.getAccounts();
+        mAccounts = db.getAccounts();
         totalAccountsAmount = db.getTotalAccountsAmount();
         totalTV.setText(df.format(totalAccountsAmount) + " " + cur);
         if (db.getTotalAccountsAmount() >= 0)
@@ -106,10 +106,10 @@ public class MainFragment extends Fragment implements View.OnClickListener, Adap
         else
             totalTV.setTextColor(ContextCompat.getColor(ctx, R.color.negative));
 
-        adapter = new MyAccountAdapter(ctx, R.layout.item_account, conti_array, cur);
+        adapter = new MyAccountAdapter(ctx, R.layout.item_account, mAccounts, cur);
         accountsLV.setAdapter(adapter);
         /*
-		 * if (conti_array.size() == 0) addaccount.setVisibility(View.VISIBLE);
+		 * if (mAccounts.size() == 0) addaccount.setVisibility(View.VISIBLE);
 		 * else addaccount.setVisibility(View.GONE);
 		 */
         // setSelezionato(totale_conti, 0);
@@ -148,12 +148,12 @@ public class MainFragment extends Fragment implements View.OnClickListener, Adap
             //view.setBackgroundResource(R.drawable.list_focused_yourwallet_greenab);
         }
         actualViewSelected = view;
-        item_selezionato = id;
+        selectedItem = id;
     }
     public void doAccount (int mode, Account c) {
         switch (mode) {
             case Utils.ADD:
-                conti_array.add(c);
+                mAccounts.add(c);
                 adapter.notifyDataSetChanged();
                 break;
         }

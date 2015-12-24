@@ -118,7 +118,7 @@ public class MyDatabase {
         delAccountFromDB(accountID);
     }
 
-    public void delAccountFromDB(long id) {
+    private void delAccountFromDB(long id) {
         mDb.delete(AccountsTable.TABLE_NAME, AccountsTable._ID + " = \'" + id + "\'", null);
     }
 
@@ -203,34 +203,34 @@ public class MyDatabase {
         return res;
     }
 
-    public ArrayList<Transaction> getTransactions(int amount_filter, boolean reverse, double accountID, int m, int y) {
+    public ArrayList<Transaction> getTransactions(int amount_filter, boolean reverse, double accountID, int _month, int _year) {
         long id = (long) accountID;
         Cursor c =null;
         switch (amount_filter) {
             case Utils.AMOUNT_ALL:
                 if(accountID==0) {
                     if (reverse)
-                        c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.YEAR + " = " + y + " AND " + TransactionsTable.MONTH + " = " + m, null, null, null, TransactionsTable.DAY + " DESC, " + TransactionsTable._ID + " DESC", null);
+                        c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.YEAR + " = " + _year + " AND " + TransactionsTable.MONTH + " = " + _month, null, null, null, TransactionsTable.DAY + " DESC, " + TransactionsTable._ID + " DESC", null);
                     else
-                        c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.YEAR + " = " + y + " AND " + TransactionsTable.MONTH + " = " + m, null, null, null, TransactionsTable.DAY + " ASC, " + TransactionsTable._ID + " ASC", null);
+                        c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.YEAR + " = " + _year + " AND " + TransactionsTable.MONTH + " = " + _month, null, null, null, TransactionsTable.DAY + " ASC, " + TransactionsTable._ID + " ASC", null);
                 } else {
                     if (reverse)
-                        c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.YEAR + " = " + y + " AND " + TransactionsTable.MONTH + " = " + m + " AND " + TransactionsTable.ACCOUNT + " = " + id, null, null, null, TransactionsTable.DAY + " DESC, " + TransactionsTable._ID + " DESC", null);
+                        c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.YEAR + " = " + _year + " AND " + TransactionsTable.MONTH + " = " + _month + " AND " + TransactionsTable.ACCOUNT + " = " + id, null, null, null, TransactionsTable.DAY + " DESC, " + TransactionsTable._ID + " DESC", null);
                     else
-                        c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.YEAR + " = " + y + " AND " + TransactionsTable.MONTH + " = " + m + " AND " + TransactionsTable.ACCOUNT + " = " + id, null, null, null, TransactionsTable.DAY + " ASC, " + TransactionsTable._ID + " ASC", null);
+                        c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.YEAR + " = " + _year + " AND " + TransactionsTable.MONTH + " = " + _month + " AND " + TransactionsTable.ACCOUNT + " = " + id, null, null, null, TransactionsTable.DAY + " ASC, " + TransactionsTable._ID + " ASC", null);
                 }
                 break;
             case Utils.AMOUNT_POSITIVE:
                 if(accountID==0)
-                    c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.YEAR + " = " + y + " AND " + TransactionsTable.MONTH + " = " + m + " AND " + TransactionsTable.AMOUNT + " >= " + 0, null, null, null, TransactionsTable.DAY+ " ASC, " + TransactionsTable._ID + " ASC", null);
+                    c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.YEAR + " = " + _year + " AND " + TransactionsTable.MONTH + " = " + _month + " AND " + TransactionsTable.AMOUNT + " >= " + 0, null, null, null, TransactionsTable.DAY+ " ASC, " + TransactionsTable._ID + " ASC", null);
                 else
-                    c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.YEAR + " = " + y + " AND " + TransactionsTable.MONTH + " = " + m + " AND " + TransactionsTable.ACCOUNT + " = " + id + " AND " + TransactionsTable.AMOUNT + " >= "+ 0, null, null, null, TransactionsTable.DAY + " ASC, " + TransactionsTable._ID + " ASC", null);
+                    c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.YEAR + " = " + _year + " AND " + TransactionsTable.MONTH + " = " + _month + " AND " + TransactionsTable.ACCOUNT + " = " + id + " AND " + TransactionsTable.AMOUNT + " >= "+ 0, null, null, null, TransactionsTable.DAY + " ASC, " + TransactionsTable._ID + " ASC", null);
                 break;
             case Utils.AMOUNT_NEGATIVE:
                 if(accountID==0)
-                    c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.YEAR + " = " + y + " AND " + TransactionsTable.MONTH + " = " + m + " AND " + TransactionsTable.AMOUNT + " < " + 0, null, null, null, TransactionsTable.DAY+ " ASC, " + TransactionsTable._ID + " ASC", null);
+                    c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.YEAR + " = " + _year + " AND " + TransactionsTable.MONTH + " = " + _month + " AND " + TransactionsTable.AMOUNT + " < " + 0, null, null, null, TransactionsTable.DAY+ " ASC, " + TransactionsTable._ID + " ASC", null);
                 else
-                    c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.YEAR + " = " + y + " AND " + TransactionsTable.MONTH + " = " + m + " AND " + TransactionsTable.ACCOUNT + " = " + id + " AND " + TransactionsTable.AMOUNT + " < "+ 0, null, null, null, TransactionsTable.DAY + " ASC, " + TransactionsTable._ID + " ASC", null);
+                    c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.YEAR + " = " + _year + " AND " + TransactionsTable.MONTH + " = " + _month + " AND " + TransactionsTable.ACCOUNT + " = " + id + " AND " + TransactionsTable.AMOUNT + " < "+ 0, null, null, null, TransactionsTable.DAY + " ASC, " + TransactionsTable._ID + " ASC", null);
                 break;
         }
 
@@ -241,22 +241,22 @@ public class MyDatabase {
         return res;
     }
 
-    public ArrayList<Transaction> getTransactionsMYFiltered(long accountID, int month, int y) {
+    public ArrayList<Transaction> getTransactionsMYFiltered(long accountID, int _month, int _year) {
         Cursor c;
 
         Calendar cal = new GregorianCalendar();
         int year = cal.get(Calendar.YEAR);
-        int anno = year + 1 - y;
-        if (month == 0 && y == 0) {
+        int anno = year + 1 - _year;
+        if (_month == 0 && _year == 0) {
             c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.ACCOUNT + " = " + accountID, null, null, null, null, null);
-        } else if (month == 0) {
+        } else if (_month == 0) {
             c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.ACCOUNT + " = " + accountID + " AND " + TransactionsTable.YEAR + " = " + anno, null, null, null, TransactionsTable.YEAR + " ASC, " + TransactionsTable.MONTH + " ASC, "
                     + TransactionsTable.DAY + " ASC, " + TransactionsTable._ID + " ASC", null);
-        } else if (y == 0) {
-            c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.ACCOUNT + " = " + accountID + " AND " + TransactionsTable.MONTH + " = " + month, null, null, null, TransactionsTable.YEAR + " ASC, " + TransactionsTable.MONTH + " ASC, "
+        } else if (_year == 0) {
+            c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.ACCOUNT + " = " + accountID + " AND " + TransactionsTable.MONTH + " = " + _month, null, null, null, TransactionsTable.YEAR + " ASC, " + TransactionsTable.MONTH + " ASC, "
                     + TransactionsTable.DAY + " ASC, " + TransactionsTable._ID + " ASC", null);
         } else {
-            c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.ACCOUNT + " = " + accountID + " AND " + TransactionsTable.MONTH + " = " + month + " AND " + TransactionsTable.YEAR + " = " + anno, null, null, null, TransactionsTable.YEAR
+            c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.ACCOUNT + " = " + accountID + " AND " + TransactionsTable.MONTH + " = " + _month + " AND " + TransactionsTable.YEAR + " = " + anno, null, null, null, TransactionsTable.YEAR
                     + " ASC, " + TransactionsTable.MONTH + " ASC, " + TransactionsTable.DAY + " ASC, " + TransactionsTable._ID + " ASC", null);
         }
         ArrayList<Transaction> res = new ArrayList<Transaction>();
@@ -268,28 +268,28 @@ public class MyDatabase {
         return res;
     }
 
-    public double getAmountTransactionsMYFiltered(long accountID, int m, int y) {
-        double totale = 0;
+    public double getTotalAmountMYFiltered(long accountID, int _month, int _year) {
+        double total = 0;
         Cursor c;
         Calendar cal = new GregorianCalendar();
         int year = cal.get(Calendar.YEAR);
-        int anno = year + 1 - y;
+        int anno = year + 1 - _year;
 
-        if (m == 0 && y == 0) {
+        if (_month == 0 && _year == 0) {
             c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.ACCOUNT + " = " + accountID, null, null, null, null, null);
-        } else if (m == 0) {
+        } else if (_month == 0) {
             c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.ACCOUNT + " = " + accountID + " AND " + TransactionsTable.YEAR + " = " + anno, null, null, null, TransactionsTable.YEAR + " ASC, " + TransactionsTable.MONTH + " ASC, "
                     + TransactionsTable.DAY + " ASC, " + TransactionsTable._ID + " ASC", null);
-        } else if (y == 0) {
-            c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.ACCOUNT + " = " + accountID + " AND " + TransactionsTable.MONTH + " = " + m, null, null, null, TransactionsTable.YEAR + " ASC, " + TransactionsTable.MONTH + " ASC, "
+        } else if (_year == 0) {
+            c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.ACCOUNT + " = " + accountID + " AND " + TransactionsTable.MONTH + " = " + _month, null, null, null, TransactionsTable.YEAR + " ASC, " + TransactionsTable.MONTH + " ASC, "
                     + TransactionsTable.DAY + " ASC, " + TransactionsTable._ID + " ASC", null);
         } else {
-            c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.ACCOUNT + " = " + accountID + " AND " + TransactionsTable.MONTH + " = " + m + " AND " + TransactionsTable.YEAR + " = " + anno, null, null, null, TransactionsTable.YEAR
+            c = mDb.query(TransactionsTable.TABLE_NAME, null, TransactionsTable.ACCOUNT + " = " + accountID + " AND " + TransactionsTable.MONTH + " = " + _month + " AND " + TransactionsTable.YEAR + " = " + anno, null, null, null, TransactionsTable.YEAR
                     + " ASC, " + TransactionsTable.MONTH + " ASC, " + TransactionsTable.DAY + " ASC, " + TransactionsTable._ID + " ASC", null);
         }
         while (c.moveToNext())
-            totale += c.getDouble(2);
-        return totale;
+            total += c.getDouble(2);
+        return total;
     }
 
     private void delTransactionFromDBByAccount(long accountID) {
@@ -307,17 +307,17 @@ public class MyDatabase {
         updateTotalAccountsAmount(t.accountID, negativo);
     }
 
-    public long addCategory(String nome, String colore) {
+    public long addCategory(String name, String color) {
         ContentValues v = new ContentValues();
-        v.put(CategoriesTable.NAME, nome);
-        v.put(CategoriesTable.COLOR, colore);
+        v.put(CategoriesTable.NAME, name);
+        v.put(CategoriesTable.COLOR, color);
         return mDb.insert(CategoriesTable.TABLE_NAME, null, v);
     }
 
-    public void editCategory(long id, String nome, String colore) {
+    public void editCategory(long id, String name, String color) {
         ContentValues v = new ContentValues();
-        v.put(CategoriesTable.NAME, nome);
-        v.put(CategoriesTable.COLOR, colore);
+        v.put(CategoriesTable.NAME, name);
+        v.put(CategoriesTable.COLOR, color);
         String[] wargs = {String.valueOf(id)};
         mDb.update(CategoriesTable.TABLE_NAME, v, CategoriesTable._ID + " = ?", wargs);
     }
