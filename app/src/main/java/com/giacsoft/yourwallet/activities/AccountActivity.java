@@ -96,9 +96,9 @@ public class AccountActivity extends Activity implements TransactionDialogFragme
     public void onClick(View v) {
         if(v==fab) {
                 if (accountID != 0)
-                    mostraDialog(DLG3, accountID, 0);
+                    showDialog(DLG3, accountID, 0);
                 else
-                    mostraDialog(DLG3, 0, 0);
+                    showDialog(DLG3, 0, 0);
         }
     }
 
@@ -178,7 +178,7 @@ public class AccountActivity extends Activity implements TransactionDialogFragme
         return super.onOptionsItemSelected(item);
     }
 
-    void mostraDialog(int id, long idc, long idt) {
+    void showDialog(int id, long idc, long idt) {
         switch (id) {
             case DLG3:
                 DialogFragment tdf = TransactionDialogFragment.newInstance(idc, idt);

@@ -29,7 +29,7 @@ public class MainActivity extends Activity implements MainFragment.OnItemSelecte
     private static final int DLG2 = 2;
     private static final int DLG3 = 3;
     MyDatabase db;
-    long idconto;
+    long accountID;
     View V;
     long item_selezionato;
     MainFragment mainFragment;
@@ -78,7 +78,7 @@ public class MainActivity extends Activity implements MainFragment.OnItemSelecte
 
     @Override
     public void onAccountSelected(long id) {
-        idconto = id;
+        accountID = id;
 
         if (accountFragment != null && accountFragment.isInLayout()) {
             selected_item_account_card_header = preferences.getInt("selected_item_account_card_header", 0);
@@ -119,13 +119,13 @@ public class MainActivity extends Activity implements MainFragment.OnItemSelecte
                 if (mainFragment != null && mainFragment.isInLayout())
                     mainFragment.doTransaction(Utils.ADD, t,0,0);
                 if (accountFragment != null && accountFragment.isInLayout())
-                    if (idconto == t.accountID || idconto == 0)
+                    if (accountID == t.accountID || accountID == 0)
                         accountFragment.doTransaction(Utils.ADD, t, 0);
 
                 if (graphFragment != null && graphFragment.isInLayout())
-                    if (idconto == t.accountID || idconto == 0) {
+                    if (accountID == t.accountID || accountID == 0) {
                         selected_item_graph_card_header = preferences.getInt("selected_item_graph_card_header", 0);
-                        graphFragment.updateGraph(idconto, selected_item_graph_card_header);
+                        graphFragment.updateGraph(accountID, selected_item_graph_card_header);
                     }
                 break;
             case Utils.EDIT:
@@ -133,13 +133,13 @@ public class MainActivity extends Activity implements MainFragment.OnItemSelecte
                 mainFragment.doTransaction(Utils.EDIT, t, diff, p);
 
                 if (accountFragment != null && accountFragment.isInLayout())
-                    if (idconto == t.accountID || idconto == 0)
+                    if (accountID == t.accountID || accountID == 0)
                         accountFragment.doTransaction(Utils.EDIT, t, p);
 
                 if (graphFragment != null && graphFragment.isInLayout())
-                    if (idconto == t.accountID || idconto == 0) {
+                    if (accountID == t.accountID || accountID == 0) {
                         selected_item_graph_card_header = preferences.getInt("selected_item_graph_card_header", 0);
-                        graphFragment.updateGraph(idconto, selected_item_graph_card_header);
+                        graphFragment.updateGraph(accountID, selected_item_graph_card_header);
                     }
                 break;
             case Utils.DELETE:
@@ -147,13 +147,13 @@ public class MainActivity extends Activity implements MainFragment.OnItemSelecte
                 mainFragment.doTransaction(Utils.DELETE, t,0, p);
 
                 if (accountFragment != null && accountFragment.isInLayout())
-                    if (idconto == t.accountID || idconto == 0)
+                    if (accountID == t.accountID || accountID == 0)
                         accountFragment.doTransaction(Utils.DELETE, t, p);
 
                 if (graphFragment != null && graphFragment.isInLayout())
-                    if (idconto == t.accountID || idconto == 0) {
+                    if (accountID == t.accountID || accountID == 0) {
                         selected_item_graph_card_header = preferences.getInt("selected_item_graph_card_header", 0);
-                        graphFragment.updateGraph(idconto, selected_item_graph_card_header);
+                        graphFragment.updateGraph(accountID, selected_item_graph_card_header);
                     }
                 break;
             default:

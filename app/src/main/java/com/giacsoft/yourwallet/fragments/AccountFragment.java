@@ -13,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.giacsoft.yourwallet.R;
@@ -31,7 +30,7 @@ public class AccountFragment extends Fragment implements AdapterView.OnItemClick
 
     private static final int DLG3 = 3;
     public long accountID;
-    ListView lista_transazioni;
+    ListView transactionsLV;
     MyDatabase db;
     //int fromtab = 1; // se 0 proviene da tablet
     SharedPreferences preferences, edit_preferences;
@@ -43,7 +42,7 @@ public class AccountFragment extends Fragment implements AdapterView.OnItemClick
     double[] impmov, imptot;
     MyTransactionAdapter adapter;
     int selected_item_account_card_header;
-    ArrayList<Category> list_cat;
+    ArrayList<Category> categories;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -53,15 +52,12 @@ public class AccountFragment extends Fragment implements AdapterView.OnItemClick
         db = new MyDatabase(getActivity().getApplicationContext());
         db.open();
 
-
         // Prendi la valuta preferita, in caso non sia stata settata mostra l'euro
 
         preferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
         cur = preferences.getString("currency", "$");
         edit_preferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
         preferences_editor = edit_preferences.edit();
-
-
     }
 
     @Override
@@ -82,15 +78,15 @@ public class AccountFragment extends Fragment implements AdapterView.OnItemClick
         mMonth = mese + 1;
 
         // Istanzia le viste
-        lista_transazioni = (ListView) view.findViewById(R.id.last5mov);
+        transactionsLV = (ListView) view.findViewById(R.id.last5mov);
         spinner_account_card_header = (Spinner) view.findViewById(R.id.spinner_account_card_header);
 
         ArrayAdapter<CharSequence> adapter_account_card_header = ArrayAdapter.createFromResource(getActivity().getApplicationContext(), R.array.account_filters_card_header, R.layout.item_spinner_elemento_card_header);
         adapter_account_card_header.setDropDownViewResource(R.layout.item_spinner_dropdown_card_header);
         spinner_account_card_header.setAdapter(adapter_account_card_header);
 
-        lista_transazioni.setOnItemClickListener(this);
-        lista_transazioni.setOnItemLongClickListener(this);
+        transactionsLV.setOnItemClickListener(this);
+        transactionsLV.setOnItemLongClickListener(this);
         spinner_account_card_header.setOnItemSelectedListener(this);
         return view;
     }
@@ -118,9 +114,9 @@ public class AccountFragment extends Fragment implements AdapterView.OnItemClick
                 break;
         }
 
-        list_cat = db.getCategories();
-        adapter = new MyTransactionAdapter(getActivity().getApplicationContext(), R.layout.item_transaction, nuove_transazioni, cur, list_cat);
-        lista_transazioni.setAdapter(adapter);
+        categories = db.getCategories();
+        adapter = new MyTransactionAdapter(getActivity().getApplicationContext(), R.layout.item_transaction, nuove_transazioni, cur, categories);
+        transactionsLV.setAdapter(adapter);
     }
 
     @Override

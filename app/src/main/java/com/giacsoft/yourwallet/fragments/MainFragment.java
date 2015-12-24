@@ -30,17 +30,17 @@ import java.util.ArrayList;
 public class MainFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
 
     RelativeLayout totale_conti;
-    ListView conti;
+    ListView accountsLV;
     MyDatabase db;
     Context ctx;
-    TextView tvtot;
+    TextView totalTV;
     SharedPreferences preferences;
     String cur;
     DecimalFormat df = new DecimalFormat("0.00");
     View actualViewSelected;
     long item_selezionato;
     MyAccountAdapter adapter;
-    double tot_cifra_conti;
+    double totalAccountsAmount;
     ArrayList<Account> conti_array;
     private OnItemSelectedListener listener;
 
@@ -64,15 +64,15 @@ public class MainFragment extends Fragment implements View.OnClickListener, Adap
         db = new MyDatabase(ctx);
         db.open();
 
-        conti = (ListView) view.findViewById(R.id.lvconti);
+        accountsLV = (ListView) view.findViewById(R.id.lvconti);
         totale_conti = (RelativeLayout) view.findViewById(R.id.totale_conti);
-        tvtot = (TextView) view.findViewById(R.id.tvtot);
+        totalTV = (TextView) view.findViewById(R.id.tvtot);
 
         totale_conti.setOnClickListener(this);
 
-        conti.setDividerHeight(1);
-        conti.setOnItemClickListener(this);
-        conti.setOnItemLongClickListener(this);
+        accountsLV.setDividerHeight(1);
+        accountsLV.setOnItemClickListener(this);
+        accountsLV.setOnItemLongClickListener(this);
 
         setSelected(totale_conti, 0);
         preferences = PreferenceManager.getDefaultSharedPreferences(ctx);
@@ -99,15 +99,15 @@ public class MainFragment extends Fragment implements View.OnClickListener, Adap
     public void aggiornaConti() {
 
         conti_array = db.getAccounts();
-        tot_cifra_conti = db.getTotConti();
-        tvtot.setText(df.format(tot_cifra_conti) + " " + cur);
+        totalAccountsAmount = db.getTotConti();
+        totalTV.setText(df.format(totalAccountsAmount) + " " + cur);
         if (db.getTotConti() >= 0)
-            tvtot.setTextColor(ContextCompat.getColor(ctx, R.color.positive));
+            totalTV.setTextColor(ContextCompat.getColor(ctx, R.color.positive));
         else
-            tvtot.setTextColor(ContextCompat.getColor(ctx, R.color.negative));
+            totalTV.setTextColor(ContextCompat.getColor(ctx, R.color.negative));
 
         adapter = new MyAccountAdapter(ctx, R.layout.item_account, conti_array, cur);
-        conti.setAdapter(adapter);
+        accountsLV.setAdapter(adapter);
         /*
 		 * if (conti_array.size() == 0) addaccount.setVisibility(View.VISIBLE);
 		 * else addaccount.setVisibility(View.GONE);
@@ -161,10 +161,10 @@ public class MainFragment extends Fragment implements View.OnClickListener, Adap
     public void doTransaction(int mode, Transaction t, double diff, int p) {
         switch (mode) {
             case Utils.ADD:
-                tot_cifra_conti += t.amount;
-                tvtot.setText(df.format(tot_cifra_conti) + cur);
+                totalAccountsAmount += t.amount;
+                totalTV.setText(df.format(totalAccountsAmount) + cur);
 
-                for (int i = 0; i < conti.getCount(); i++) {
+                for (int i = 0; i < accountsLV.getCount(); i++) {
                     if (adapter.getItem(i).id == t.accountID) {
                         Account cc = adapter.getItem(i);
                         cc.transactions_number++;
@@ -174,10 +174,10 @@ public class MainFragment extends Fragment implements View.OnClickListener, Adap
                 adapter.notifyDataSetChanged();
                 break;
             case Utils.EDIT:
-                tot_cifra_conti += diff;
-                tvtot.setText(df.format(tot_cifra_conti) + cur);
+                totalAccountsAmount += diff;
+                totalTV.setText(df.format(totalAccountsAmount) + cur);
 
-                for (int i = 0; i < conti.getCount(); i++) {
+                for (int i = 0; i < accountsLV.getCount(); i++) {
                     if (adapter.getItem(i).id == t.accountID) {
                         Account cc = adapter.getItem(i);
                         cc.total += diff;
@@ -186,10 +186,10 @@ public class MainFragment extends Fragment implements View.OnClickListener, Adap
                 adapter.notifyDataSetChanged();
                 break;
             case Utils.DELETE:
-                tot_cifra_conti -= t.amount;
-                tvtot.setText(df.format(tot_cifra_conti) + cur);
+                totalAccountsAmount -= t.amount;
+                totalTV.setText(df.format(totalAccountsAmount) + cur);
 
-                for (int i = 0; i < conti.getCount(); i++) {
+                for (int i = 0; i < accountsLV.getCount(); i++) {
                     if (adapter.getItem(i).id == t.accountID) {
                         Account cc = adapter.getItem(i);
                         cc.transactions_number--;
@@ -201,7 +201,6 @@ public class MainFragment extends Fragment implements View.OnClickListener, Adap
         }
     }
     public interface OnItemSelectedListener {
-        public void onAccountSelected(long id);
+        void onAccountSelected(long id);
     }
-
 }

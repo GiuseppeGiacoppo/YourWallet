@@ -29,8 +29,8 @@ public class TransactionDetailActivity extends Activity implements OnClickListen
 
     ActionBar actionBar;
     MyDatabase db;
-    EditText etnome, etimp;
-    Spinner spincat, spinconti;
+    EditText nameET, amountET;
+    Spinner categoriesSP, accountsSP;
     Button data;
     public DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -62,11 +62,11 @@ public class TransactionDetailActivity extends Activity implements OnClickListen
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM, ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_SHOW_TITLE);
         actionBar.setCustomView(customActionBarView, new ActionBar.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
-        etnome = (EditText) findViewById(R.id.ettra);
-        etimp = (EditText) findViewById(R.id.etimp);
-        spincat = (Spinner) findViewById(R.id.spincat);
+        nameET = (EditText) findViewById(R.id.ettra);
+        amountET = (EditText) findViewById(R.id.etimp);
+        categoriesSP = (Spinner) findViewById(R.id.spincat);
         data = (Button) findViewById(R.id.date);
-        spinconti = (Spinner) findViewById(R.id.spinconti);
+        accountsSP = (Spinner) findViewById(R.id.spinconti);
 
 
         String txt = String.format(getResources().getString(R.string.txt_transaction_date_format), getResources().getStringArray(R.array.months_filter_spinner)[mMonth + 1], mDay, mYear);
@@ -81,30 +81,30 @@ public class TransactionDetailActivity extends Activity implements OnClickListen
         ArrayList<Category> arraycat = db.getCategories();
         MyCategoryAdapter adcat2 = new MyCategoryAdapter(this, R.layout.item_categoria_spinner, arraycat);
         adcat2.setDropDownViewResource(R.layout.item_categoria);
-        spincat.setAdapter(adcat2);
+        categoriesSP.setAdapter(adcat2);
 
         ArrayList<Account> arrayconti = db.getAccounts();
         MyAccountTitleAdapter adconti = new MyAccountTitleAdapter(this, R.layout.item_spinner1line_spinner, arrayconti);
         adconti.setDropDownViewResource(R.layout.item_spinner1line);
-        spinconti.setAdapter(adconti);
+        accountsSP.setAdapter(adconti);
 
         data.setOnClickListener(this);
         customActionBarView.findViewById(R.id.actionbar_done).setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                if (etnome.length() != 0 && etimp.length() != 0) {
+                if (nameET.length() != 0 && amountET.length() != 0) {
                     int mese = cMonth + 1;
                     Calendar cal = new GregorianCalendar(cYear, mese, cDay);
                     int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK); // 1=Domenica,
                     // 2=Lunedi
                     // ecc
-                    if (spinconti.getCount() < 1) {
+                    if (accountsSP.getCount() < 1) {
                         Toast.makeText(getApplicationContext(), R.string.toast_alert_noaccount, Toast.LENGTH_SHORT).show();
-                    } else if (spincat.getCount() < 1) {
+                    } else if (categoriesSP.getCount() < 1) {
                         Toast.makeText(getApplicationContext(), R.string.toast_alert_nocategory, Toast.LENGTH_SHORT).show();
                     } else {
-                        db.newTransaction(etnome.getText().toString(), Double.parseDouble(etimp.getText().toString()), spincat.getSelectedItemId(), spinconti.getSelectedItemId(), dayOfWeek, cDay, mese, cYear);
+                        db.newTransaction(nameET.getText().toString(), Double.parseDouble(amountET.getText().toString()), categoriesSP.getSelectedItemId(), accountsSP.getSelectedItemId(), dayOfWeek, cDay, mese, cYear);
                         Toast.makeText(getApplicationContext(), R.string.toast_successful_transaction_add, Toast.LENGTH_SHORT).show();
                         onBackPressed();
                     }

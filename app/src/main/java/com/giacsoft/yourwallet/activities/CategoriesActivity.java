@@ -41,7 +41,7 @@ public class CategoriesActivity extends Activity implements AdapterView.OnItemLo
     private static final int DLG2 = 2;
     ListView cat;
     RelativeLayout newCategory;
-    ArrayList<Category> list_cat;
+    ArrayList<Category> categories;
     PieChart pieChart;
     SharedPreferences preferences;
     MyDatabase db;
@@ -67,7 +67,7 @@ public class CategoriesActivity extends Activity implements AdapterView.OnItemLo
         ctx = getApplicationContext();
         db = new MyDatabase(ctx);
         db.open();
-        list_cat = db.getCategories();
+        categories = db.getCategories();
         db.close();
 
         cat = (ListView) findViewById(R.id.listcat);
@@ -77,7 +77,7 @@ public class CategoriesActivity extends Activity implements AdapterView.OnItemLo
         preferences = PreferenceManager.getDefaultSharedPreferences(ctx);
         cur = preferences.getString("currency", "$");
 
-        adapter = new MyCategoryAdapter(this, R.layout.item_categoria_restyle2, list_cat, cur);
+        adapter = new MyCategoryAdapter(this, R.layout.item_categoria_restyle2, categories, cur);
         cat.setAdapter(adapter);
         cat.setOnItemLongClickListener(this);
         cat.setOnItemClickListener(this);
@@ -85,8 +85,8 @@ public class CategoriesActivity extends Activity implements AdapterView.OnItemLo
 
         ArrayList<Entry> yVals = new ArrayList<Entry>();
         ArrayList<String> xVals = new ArrayList<String>();
-        int[] cVals = new int[list_cat.size()];
-        Iterator<Category> it = list_cat.iterator();
+        int[] cVals = new int[categories.size()];
+        Iterator<Category> it = categories.iterator();
 
         Resources resources = ctx.getResources();
         int resid;
@@ -138,7 +138,7 @@ public class CategoriesActivity extends Activity implements AdapterView.OnItemLo
     public boolean onItemLongClick(AdapterView<?> arg0, View view, int position, long id) {
 
         if (arg0.getId() == R.id.listcat) {
-            mostraDialog(DLG2, list_cat.get(position), list_cat.get(position).getColoreId(ctx), position);
+            showDialog(DLG2, categories.get(position), categories.get(position).getColoreId(ctx), position);
             return false;
         }
         return false;
@@ -161,7 +161,7 @@ public class CategoriesActivity extends Activity implements AdapterView.OnItemLo
     }
 */
 
-    public void mostraDialog(int id, Category c, int color_position, int position) {
+    public void showDialog(int id, Category c, int color_position, int position) {
         DialogFragment newFragment;
         switch (id) {
             case DLG1:
@@ -178,26 +178,26 @@ public class CategoriesActivity extends Activity implements AdapterView.OnItemLo
     @Override
     public void onClick(View v) {
         if (v == newCategory)
-            mostraDialog(DLG1,null,0,0);
+            showDialog(DLG1, null, 0, 0);
     }
 
     @Override
     public void doCategory(int mode, Category c, int p) {
         switch (mode) {
             case Utils.ADD:
-                list_cat.add(c);
+                categories.add(c);
                 adapter.notifyDataSetChanged();
                 break;
             case Utils.EDIT:
-                list_cat.set(p, c);
+                categories.set(p, c);
                 adapter.notifyDataSetChanged();
 /*      myPie.editDoughnutChartCategory(p, c);
         mChartView.repaint();*/
                 break;
             case Utils.DELETE:
-                list_cat.remove(p);
+                categories.remove(p);
                 adapter.notifyDataSetChanged();
-/*      mChartView = myPie.getDoughnutChart(list_cat);
+/*      mChartView = myPie.getDoughnutChart(categories);
         graph.removeAllViews();
         graph.addView(mChartView, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));*/
                 break;

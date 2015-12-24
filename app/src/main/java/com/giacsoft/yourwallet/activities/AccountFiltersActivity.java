@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.content.ContextCompat;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -202,13 +203,13 @@ public class AccountFiltersActivity extends Activity implements AdapterView.OnIt
     private class UpdateTransactionsSyncTask extends AsyncTask<SelectedItems, Void, Void> {
 
         ArrayList<Category> list_cat;
-        double totale;
+        double total;
 
         protected Void doInBackground(SelectedItems... arg0) {
 
             nuove_transazioni = db.getTransazionibyFiltroMY(accountID, arg0[0].filterMonth, arg0[0].filterYear);
             list_cat = db.getCategories();
-            totale = db.getTotaleTransazionibyFiltroMY(accountID, arg0[0].filterMonth, arg0[0].filterYear);
+            total = db.getTotaleTransazionibyFiltroMY(accountID, arg0[0].filterMonth, arg0[0].filterYear);
             return null;
         }
 
@@ -218,11 +219,11 @@ public class AccountFiltersActivity extends Activity implements AdapterView.OnIt
             adapter = new MyTransactionAdapter(getApplicationContext(), R.layout.item_transaction, nuove_transazioni, cur, list_cat);
             listtr.setAdapter(adapter);
 
-            totalTV.setText(df.format(totale) + " " + cur);
-            if (totale >= 0)
-                totalTV.setTextColor(getResources().getColor(R.color.positive));
+            totalTV.setText(df.format(total) + " " + cur);
+            if (total >= 0)
+                totalTV.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.positive));
             else
-                totalTV.setTextColor(getResources().getColor(R.color.negative));
+                totalTV.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.negative));
         }
     }
 }

@@ -19,7 +19,7 @@ public class CurrencyDialogFragment extends DialogFragment implements View.OnCli
 
     Button add_btn, cancel_btn;
     Button euro, dollar, sterling, yen, swekr, dankr, czkr, won;
-    EditText perscur;
+    EditText currencyET;
     SharedPreferences settings;
     SharedPreferences.Editor curr;
     boolean doubleBackToExitPressedOnce;
@@ -40,7 +40,7 @@ public class CurrencyDialogFragment extends DialogFragment implements View.OnCli
         settings = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
         curr = settings.edit();
 
-        perscur = (EditText) view_dialog.findViewById(R.id.personalcur);
+        currencyET = (EditText) view_dialog.findViewById(R.id.personalcur);
         add_btn = (Button) view_dialog.findViewById(R.id.add_btn);
         cancel_btn = (Button) view_dialog.findViewById(R.id.cancel_btn);
         euro = (Button) view_dialog.findViewById(R.id.euro);
@@ -73,8 +73,8 @@ public class CurrencyDialogFragment extends DialogFragment implements View.OnCli
         if (v == cancel_btn) {
 
         } else if (v == add_btn) {
-            if (perscur.length() > 0) {
-                curr.putString("currency", perscur.getText().toString());
+            if (currencyET.length() > 0) {
+                curr.putString("currency", currencyET.getText().toString());
                 curr.commit();
             } else {
                 Toast.makeText(getActivity(), R.string.currency_empty, Toast.LENGTH_SHORT).show();

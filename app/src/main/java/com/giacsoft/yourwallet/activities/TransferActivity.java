@@ -29,8 +29,8 @@ import java.util.GregorianCalendar;
 
 public class TransferActivity extends Activity implements View.OnClickListener {
 
-    EditText importo;
-    Spinner fromaccount, toaccount, cat;
+    EditText amountET;
+    Spinner fromSP, toSP, cat;
     MyDatabase db;
     SharedPreferences preferences;
     String cur;
@@ -51,9 +51,9 @@ public class TransferActivity extends Activity implements View.OnClickListener {
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM, ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_SHOW_TITLE);
         actionBar.setCustomView(customActionBarView, new ActionBar.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
-        importo = (EditText) findViewById(R.id.etimp);
-        fromaccount = (Spinner) findViewById(R.id.fromaccount);
-        toaccount = (Spinner) findViewById(R.id.toaccount);
+        amountET = (EditText) findViewById(R.id.etimp);
+        fromSP = (Spinner) findViewById(R.id.fromaccount);
+        toSP = (Spinner) findViewById(R.id.toaccount);
         ivlabel = (ImageView) findViewById(R.id.tab_label);
         cat = (Spinner) findViewById(R.id.spincat);
         res = getResources();
@@ -75,21 +75,21 @@ public class TransferActivity extends Activity implements View.OnClickListener {
         //Conti2Adapter spinconti = new Conti2Adapter(this, arrayconti, cur);
         MyAccountTitleAdapter spinconti = new MyAccountTitleAdapter(this, R.layout.item_spinner1line_spinner, arrayconti);
         spinconti.setDropDownViewResource(R.layout.item_spinner1line);
-        fromaccount.setAdapter(spinconti);
-        toaccount.setAdapter(spinconti);
+        fromSP.setAdapter(spinconti);
+        toSP.setAdapter(spinconti);
 
         customActionBarView.findViewById(R.id.actionbar_done).setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         // "Done"
-                        if (importo.length() == 0) {
+                        if (amountET.length() == 0) {
                             Toast.makeText(getApplicationContext(), R.string.toast_error_completefields, Toast.LENGTH_SHORT).show();
                         } else {
                             if (cat.getCount() < 1) {
                                 Toast.makeText(getApplicationContext(), R.string.toast_alert_nocategory, Toast.LENGTH_SHORT).show();
                             } else {
-                                if (fromaccount.getSelectedItemId() == toaccount.getSelectedItemId()) {
+                                if (fromSP.getSelectedItemId() == toSP.getSelectedItemId()) {
                                     Toast.makeText(getApplicationContext(), R.string.toast_error_select_distinct_account, Toast.LENGTH_SHORT).show();
                                 } else {
 
@@ -98,13 +98,13 @@ public class TransferActivity extends Activity implements View.OnClickListener {
                                     // 2=Lunedi
                                     // ecc
 
-                                    double sottrai = Double.parseDouble(importo.getText().toString());
+                                    double sottrai = Double.parseDouble(amountET.getText().toString());
                                     sottrai *= (-1);
-                                    double aggiungi = Double.parseDouble(importo.getText().toString());
+                                    double aggiungi = Double.parseDouble(amountET.getText().toString());
                                     int mese = mMonth + 1;
 
-                                    db.newTransaction(res.getString(R.string.txt_transfer_desc), sottrai, cat.getSelectedItemId(), fromaccount.getSelectedItemId(), dayOfWeek, mDay, mese, mYear);
-                                    db.newTransaction(res.getString(R.string.txt_transfer_desc), aggiungi, cat.getSelectedItemId(), toaccount.getSelectedItemId(), dayOfWeek, mDay, mese, mYear);
+                                    db.newTransaction(res.getString(R.string.txt_transfer_desc), sottrai, cat.getSelectedItemId(), fromSP.getSelectedItemId(), dayOfWeek, mDay, mese, mYear);
+                                    db.newTransaction(res.getString(R.string.txt_transfer_desc), aggiungi, cat.getSelectedItemId(), toSP.getSelectedItemId(), dayOfWeek, mDay, mese, mYear);
                                     finish();
                                 }
                             }

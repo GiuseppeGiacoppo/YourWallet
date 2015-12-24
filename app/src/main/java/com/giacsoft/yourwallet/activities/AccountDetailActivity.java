@@ -18,9 +18,9 @@ import com.giacsoft.yourwallet.db.MyDatabase;
 
 public class AccountDetailActivity extends Activity {
 
-    EditText etnome;
+    EditText nameET;
     MyDatabase db;
-    ImageView delete;
+    ImageView deleteIV;
     long accountID;
     ActionBar actionBar;
     CharSequence[] account_actions = {"Tutto", "Solo Transazioni"};
@@ -37,17 +37,17 @@ public class AccountDetailActivity extends Activity {
         actionBar = getActionBar();
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM, ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_SHOW_TITLE);
         actionBar.setCustomView(customActionBarView, new ActionBar.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        etnome = (EditText) findViewById(R.id.etnome);
-        delete = (ImageView) findViewById(R.id.tab_delete);
+        nameET = (EditText) findViewById(R.id.etnome);
+        deleteIV = (ImageView) findViewById(R.id.tab_delete);
         accountID = getIntent().getExtras().getLong("ID");
 
         customActionBarView.findViewById(R.id.actionbar_done).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // "Done"
-                if (etnome.length() != 0) {
+                if (nameET.length() != 0) {
                     db.open();
-                    db.updateAccount(accountID, etnome.getText().toString());
+                    db.updateAccount(accountID, nameET.getText().toString());
                     Toast.makeText(getApplicationContext(), R.string.toast_successful_account_edit, Toast.LENGTH_SHORT).show();
                     db.close();
                     finish();
@@ -66,10 +66,10 @@ public class AccountDetailActivity extends Activity {
         });
         db = new MyDatabase(getApplicationContext());
         db.open();
-        etnome.setText(db.getAccount(accountID).name);
+        nameET.setText(db.getAccount(accountID).name);
         db.close();
 
-        delete.setOnClickListener(new View.OnClickListener() {
+        deleteIV.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {

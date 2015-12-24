@@ -36,8 +36,8 @@ public class CategoriesDialogFragment extends DialogFragment implements OnClickL
     static int col_position, position;
     MyDatabase db;
     Button add_btn;
-    EditText nome;
-    ImageView delete;
+    EditText nameET;
+    ImageView deleteIV;
     LinearLayout container_category_info, container_category_delete, del_layout;
     Spinner colore, move_cat;
     boolean isDeleteMode = false;
@@ -73,10 +73,10 @@ public class CategoriesDialogFragment extends DialogFragment implements OnClickL
         View view_dialog = inflater.inflate(R.layout.dialog_add_categoria_restyle, null);
 
         colore = (Spinner) view_dialog.findViewById(R.id.spin_col);
-        nome = (EditText) view_dialog.findViewById(R.id.newcatnome);
+        nameET = (EditText) view_dialog.findViewById(R.id.newcatnome);
         add_btn = (Button) view_dialog.findViewById(R.id.add_btn);
         move_cat = (Spinner) view_dialog.findViewById(R.id.spin_move_cat);
-        delete = (ImageView) view_dialog.findViewById(R.id.delete);
+        deleteIV = (ImageView) view_dialog.findViewById(R.id.delete);
         container_category_info = (LinearLayout) view_dialog.findViewById(R.id.container_category_info);
         container_category_delete = (LinearLayout) view_dialog.findViewById(R.id.container_category_delete);
         del_layout = (LinearLayout) view_dialog.findViewById(R.id.del_layout);
@@ -87,7 +87,7 @@ public class CategoriesDialogFragment extends DialogFragment implements OnClickL
         colore.setAdapter(colorAdapter);
         colore.setSelection(rand.nextInt(COLORI) + 1);
         if (edit) {
-            nome.setText(cat.name);
+            nameET.setText(cat.name);
             colore.setSelection(col_position);
             add_btn.setText(R.string.done);
 
@@ -95,7 +95,7 @@ public class CategoriesDialogFragment extends DialogFragment implements OnClickL
             if (arraycat.size() <= 1) {
                 del_layout.setVisibility(View.INVISIBLE);
             } else {
-                delete.setOnClickListener(this);
+                deleteIV.setOnClickListener(this);
             }
 
             arraycat.remove(position);
@@ -116,17 +116,17 @@ public class CategoriesDialogFragment extends DialogFragment implements OnClickL
     public void onClick(View v) {
         if (v == add_btn) {
             if (isDeleteMode == false) {
-                if (nome.length() > 0) {
+                if (nameET.length() > 0) {
                     if (edit) {
-                        db.editCategory(cat.id, nome.getText().toString(), (String) colore.getSelectedItem());
+                        db.editCategory(cat.id, nameET.getText().toString(), (String) colore.getSelectedItem());
                         Toast.makeText(getActivity().getApplicationContext(), R.string.toast_successful_category_edit, Toast.LENGTH_SHORT).show();
                         OnCategorieDialogListener listener = (OnCategorieDialogListener) getActivity();
-                        listener.doCategory(Utils.EDIT,new Category(cat.id, nome.getText().toString(), (String) colore.getSelectedItem()), position);
+                        listener.doCategory(Utils.EDIT,new Category(cat.id, nameET.getText().toString(), (String) colore.getSelectedItem()), position);
                     } else {
-                        long new_id = db.addCategory(nome.getText().toString(), (String) colore.getSelectedItem());
+                        long new_id = db.addCategory(nameET.getText().toString(), (String) colore.getSelectedItem());
                         Toast.makeText(getActivity().getApplicationContext(), R.string.toast_successful_category_add, Toast.LENGTH_SHORT).show();
                         OnCategorieDialogListener listener = (OnCategorieDialogListener) getActivity();
-                        listener.doCategory(Utils.ADD,new Category(new_id, nome.getText().toString(), (String) colore.getSelectedItem()),0);
+                        listener.doCategory(Utils.ADD,new Category(new_id, nameET.getText().toString(), (String) colore.getSelectedItem()),0);
                     }
 
                     dismiss();
@@ -156,7 +156,7 @@ public class CategoriesDialogFragment extends DialogFragment implements OnClickL
                     }
                 }, 3000);
             }
-        } else if (v == delete) {
+        } else if (v == deleteIV) {
             if (isDeleteMode == false) {
 
                 add_btn.setText(R.string.delete);
