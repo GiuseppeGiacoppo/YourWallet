@@ -6,12 +6,6 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/accent</item>
-        <item name="windowActionBar">false</item>
-        <item name="android:windowNoTitle">true</item>
     </style>
 
-    <style name="ActionBarThemeOverlay" parent="ThemeOverlay.AppCompat.ActionBar">
-        <item name="android:textColorPrimary">@color/text_on_primary</item>
-        <item name="android:textColorSecondary">@color/subtitle_on_primary</item>
-    </style>
 </resources>

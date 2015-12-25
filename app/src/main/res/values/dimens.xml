@@ -18,10 +18,6 @@
     <dimen name="graph_line_pointsize">6dp</dimen>
     <dimen name="graph_line_pointstroke">3dp</dimen>
 
-    <dimen name="cardCornerRadius">4dp</dimen>
-    <dimen name="cardElevation">2dp</dimen>
-    <dimen name="cardMargins">16dp</dimen>
-    <dimen name="cardPaddings">8dp</dimen>
     
     <dimen name="itemListHeight">72dp</dimen>
     <dimen name="itemListHorizontalMargin">16dp</dimen>
@@ -50,6 +46,8 @@
 
     <dimen name="card_elevation">2dp</dimen>
     <dimen name="card_corner_radius">2dp</dimen>
+    <dimen name="card_margins">16dp</dimen>
+    <dimen name="card_paddings">8dp</dimen>
 
     <dimen name="keyline_2">72dp</dimen>
 </resources>

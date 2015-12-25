@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.widget.Toolbar
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/toolbar_actionbar"
     android:layout_width="match_parent"
-    android:layout_height="?actionBarSize"
-    style="@style/ActionBarThemeOverlay" />
+    android:layout_height="wrap_content"
+    android:minHeight="?actionBarSize"/>
