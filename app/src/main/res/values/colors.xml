@@ -5,27 +5,6 @@
     <color name="accent">#FFAB40</color>
     <color name="iconColor">#424242</color>
 
-        <!-- COLORI NUOVI -->
-    <!--
-    <color name="white">#FFFF</color>
-    <color name="trasparente">#00ffffff</color>
-
-    <color name="bg">#ffe9e9e9</color>
-    <color name="bgdialog">#fff5f5f5</color>
-    <color name="top">#ff3a3a3a</color>
-    <color name="pressed_yourwallet">#CC33b5e5</color>
-
-        <color name="font1">#ff222222</color>
-        <color name="font2">#ff777777</color>
-        <color name="font3">#ff484848</color>
-
-        <color name="Text_Primary_Holo">#FF333333</color>
-        <color name="Text_Secondary_Holo">#FFAAAAAA</color>
-
-        <color name="traslucent">#ccffffff</color>
-        <color name="traslucent2">#77ffffff</color>
-        <color name="color3_pressed">#73C08F</color>-->
-
     <color name="sectionSeparatorColour">#33b5e5</color>
     <color name="dialogSeparatorColour">#DCDCDC</color>
     <color name="positive">#1A8763</color>
@@ -33,4 +12,7 @@
     <color name="negative">#D3362D</color>
     <color name="negative_light">#33D3362D</color>
 
+    <!-- text-->
+    <color name="text_on_primary">#ff004446</color>
+    <color name="subtitle_on_primary">#de004446</color>
 </resources>

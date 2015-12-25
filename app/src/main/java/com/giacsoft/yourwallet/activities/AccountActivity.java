@@ -29,7 +29,7 @@ import com.giacsoft.yourwallet.types.Account;
 import com.giacsoft.yourwallet.types.Transaction;
 
 
-public class AccountActivity extends Activity implements TransactionDialogFragment.OnTransactionDialogListener, View.OnClickListener {
+public class AccountActivity extends BaseActivity implements TransactionDialogFragment.OnTransactionDialogListener, View.OnClickListener {
     static final int DLG3 = 3;
     Toolbar toolbar;
     TabLayout tabLayout;
@@ -48,9 +48,7 @@ public class AccountActivity extends Activity implements TransactionDialogFragme
         setContentView(R.layout.layout_account);
         accountID = getIntent().getExtras().getLong(Utils.ACCOUNT_ID);
 
-        toolbar = (Toolbar) findViewById(R.id.account_toolbar);
-        setActionBar(toolbar);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar = getActionBarToolbar();
 
         fab = (FloatingActionButton) findViewById(R.id.fab_account);
         fab.setOnClickListener(this);

@@ -35,7 +35,7 @@ import com.github.mikephil.charting.data.PieDataSet;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class CategoriesActivity extends Activity implements AdapterView.OnItemLongClickListener, AdapterView.OnItemClickListener, CategoriesDialogFragment.OnCategoryDialogListener, OnClickListener {
+public class CategoriesActivity extends BaseActivity implements AdapterView.OnItemLongClickListener, AdapterView.OnItemClickListener, CategoriesDialogFragment.OnCategoryDialogListener, OnClickListener {
 
     private static final int DLG1 = 1;
     private static final int DLG2 = 2;
@@ -61,8 +61,7 @@ public class CategoriesActivity extends Activity implements AdapterView.OnItemLo
         accountID = getIntent().getExtras().getLong(Utils.ACCOUNT_ID);
         provenienza = getIntent().getExtras().getInt(Utils.CAT_PREV_ACTIVITY);
 
-        toolbar = (Toolbar) findViewById(R.id.categories_toolbar);
-        toolbar.setTitle(R.string.menu_categories);
+        toolbar = getActionBarToolbar();
 
         ctx = getApplicationContext();
         db = new MyDatabase(ctx);

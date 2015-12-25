@@ -23,7 +23,7 @@ import com.giacsoft.yourwallet.dialogs.TransactionDialogFragment;
 import com.giacsoft.yourwallet.types.Account;
 import com.giacsoft.yourwallet.types.Transaction;
 
-public class MainActivity extends Activity implements MainFragment.OnItemSelectedListener, AccountDialogFragment.OnAccountDialogListener, TransactionDialogFragment.OnTransactionDialogListener {
+public class MainActivity extends BaseActivity implements MainFragment.OnItemSelectedListener, AccountDialogFragment.OnAccountDialogListener, TransactionDialogFragment.OnTransactionDialogListener {
 
     private static final int DLG1 = 1;
     private static final int DLG2 = 2;
@@ -53,10 +53,8 @@ public class MainActivity extends Activity implements MainFragment.OnItemSelecte
 
         preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
+        Toolbar toolbar = getActionBarToolbar();
         toolbar.setLogo(R.drawable.ic_launcher);
-        toolbar.setTitle(R.string.app_name);
-        toolbar.setSubtitle("prova");
         toolbar.inflateMenu(R.menu.menu_main_app);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override

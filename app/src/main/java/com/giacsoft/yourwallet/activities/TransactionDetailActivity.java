@@ -13,6 +13,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.giacsoft.yourwallet.R;
 import com.giacsoft.yourwallet.adapters.MyAccountTitleAdapter;
@@ -25,9 +26,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class TransactionDetailActivity extends Activity implements OnClickListener {
+public class TransactionDetailActivity extends BaseActivity implements OnClickListener {
 
-    ActionBar actionBar;
+    //ActionBar actionBar;
+    Toolbar toolbar;
     MyDatabase db;
     EditText nameET, amountET;
     Spinner categoriesSP, accountsSP;
@@ -54,14 +56,15 @@ public class TransactionDetailActivity extends Activity implements OnClickListen
         mMonth = c.get(Calendar.MONTH);
         mDay = c.get(Calendar.DAY_OF_MONTH);
 
-
+/*
         LayoutInflater inflater = (LayoutInflater) getActionBar().getThemedContext().getSystemService(LAYOUT_INFLATER_SERVICE);
         final View customActionBarView = inflater.inflate(R.layout.actionbar_custom_view_done_discard, null);
 
         actionBar = getActionBar();
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM, ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_SHOW_TITLE);
         actionBar.setCustomView(customActionBarView, new ActionBar.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-
+*/
+        toolbar = getActionBarToolbar();
         nameET = (EditText) findViewById(R.id.ettra);
         amountET = (EditText) findViewById(R.id.etimp);
         categoriesSP = (Spinner) findViewById(R.id.spincat);
@@ -91,7 +94,7 @@ public class TransactionDetailActivity extends Activity implements OnClickListen
         accountsSP.setAdapter(adconti);
 
         data.setOnClickListener(this);
-        customActionBarView.findViewById(R.id.actionbar_done).setOnClickListener(new View.OnClickListener() {
+        /*customActionBarView.findViewById(R.id.actionbar_done).setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -122,7 +125,7 @@ public class TransactionDetailActivity extends Activity implements OnClickListen
             public void onClick(View v) {
                 onBackPressed();
             }
-        });
+        });*/
     }
 
     @Override

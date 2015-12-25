@@ -8,14 +8,9 @@
 
     <dimen name="tab_max_width">264dp</dimen>
     <dimen name="tab_padding_bottom">16dp</dimen>
-    <dimen name="tab_label">14sp</dimen>
     <dimen name="custom_tab_layout_height">72dp</dimen>
 
-    <dimen name="fab_elev">6dp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
-
     <dimen name="ActionBarHeight">56dp</dimen>
-    <dimen name="toolbar_elev">4dp</dimen>
 
     <dimen name="widget_padding">8dp</dimen>
 
@@ -31,9 +26,30 @@
     <dimen name="itemListHeight">72dp</dimen>
     <dimen name="itemListHorizontalMargin">16dp</dimen>
     <dimen name="itemListHorizontalMarginBig">32dp</dimen>
-    <dimen name="itemListPrimaryTextBig">24sp</dimen>
-    <dimen name="itemListPrimaryText">16sp</dimen>
-    <dimen name="itemListSecondaryText">14sp</dimen>
 
-    <dimen name="primaryTextBig">24sp</dimen>
+    <!-- standard metrics -->
+    <dimen name="spacing_normal">8dp</dimen>
+    <dimen name="spacing_micro">4dp</dimen>
+    <dimen name="padding_normal">16dp</dimen>
+
+    <!-- App Primary Text Sizes -->
+    <dimen name="app_text_size_xsmall">11sp</dimen>
+    <dimen name="app_text_size_small">12sp</dimen>
+    <dimen name="app_text_size_medium">14sp</dimen>
+    <dimen name="app_text_size_large">18sp</dimen>
+    <dimen name="app_text_size_xlarge">20sp</dimen>
+    <dimen name="app_text_size_diff_large_small">6sp</dimen>
+
+    <!-- UI elements -->
+    <dimen name="fab_elevation">8dp</dimen>
+    <dimen name="fab_press_translation_z">6dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="headerbar_elevation">4dp</dimen>
+    <dimen name="session_detail_max_header_elevation">@dimen/headerbar_elevation</dimen>
+
+    <dimen name="card_elevation">2dp</dimen>
+    <dimen name="card_corner_radius">2dp</dimen>
+
+    <dimen name="keyline_2">72dp</dimen>
 </resources>

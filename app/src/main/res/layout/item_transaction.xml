@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:text="Sun"
             android:textColor="@android:color/primary_text_light"
-            android:textSize="@dimen/itemListSecondaryText" />
+            android:textSize="@dimen/app_text_size_small" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:text="01"
                 android:textColor="@android:color/secondary_text_light"
-                android:textSize="@dimen/itemListPrimaryTextBig" />
+                android:textSize="@dimen/app_text_size_medium" />
 
             <TextView
                 android:id="@+id/tvmese"
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:text="Nuova Nota"
             android:textColor="@android:color/primary_text_light"
-            android:textSize="@dimen/itemListPrimaryText" />
+            android:textSize="@dimen/app_text_size_medium" />
 
         <TextView
             android:id="@+id/tvconto"
@@ -70,7 +70,7 @@
             android:layout_height="wrap_content"
             android:text="Risparmi"
             android:textColor="@android:color/secondary_text_light"
-            android:textSize="@dimen/itemListSecondaryText" />
+            android:textSize="@dimen/app_text_size_small" />
     </LinearLayout>
 
     <View
@@ -85,6 +85,6 @@
         android:layout_centerVertical="true"
         android:layout_gravity="center_vertical"
         android:text="15 €"
-        android:textSize="@dimen/itemListPrimaryText"
+        android:textSize="@dimen/app_text_size_medium"
         android:layout_marginRight="@dimen/itemListHorizontalMargin"/>
 </LinearLayout>

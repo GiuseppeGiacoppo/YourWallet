@@ -10,18 +10,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.Toolbar;
 
 import com.giacsoft.yourwallet.R;
 import com.giacsoft.yourwallet.dialogs.CurrencyDialogFragment;
 import com.giacsoft.yourwallet.dialogs.PinDialogFragment;
 
-public class PreferencesActivity extends Activity {
+public class PreferencesActivity extends BaseActivity {
 
     private static final int DLG1 = 1;
     private static final int DLG2 = 2;
     FrameLayout pr_currency, pr_database;
     LinearLayout pr_pin;
-    ActionBar actionBar;
+    //ActionBar actionBar;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +33,12 @@ public class PreferencesActivity extends Activity {
         pr_currency = (FrameLayout) findViewById(R.id.preferences_currency);
         pr_database = (FrameLayout) findViewById(R.id.preferences_database);
         pr_pin = (LinearLayout) findViewById(R.id.preferences_pin);
-
+/*
         actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle(R.string.menu_settings);
-        actionBar.setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP | ActionBar.DISPLAY_SHOW_TITLE);
+        actionBar.setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP | ActionBar.DISPLAY_SHOW_TITLE);*/
+        toolbar = getActionBarToolbar();
         pr_currency.setOnClickListener(new View.OnClickListener() {
 
             @Override

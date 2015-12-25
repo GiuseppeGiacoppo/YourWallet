@@ -19,6 +19,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.giacsoft.yourwallet.R;
 import com.giacsoft.yourwallet.Utils;
@@ -33,7 +34,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class AccountFiltersActivity extends Activity implements AdapterView.OnItemLongClickListener, AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener, TransactionDialogFragment.OnTransactionDialogListener {
+public class AccountFiltersActivity extends BaseActivity implements AdapterView.OnItemLongClickListener, AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener, TransactionDialogFragment.OnTransactionDialogListener {
 
     static final int DLG3 = 3;
     ListView listtr;
@@ -46,7 +47,8 @@ public class AccountFiltersActivity extends Activity implements AdapterView.OnIt
     Spinner filterMonthSP, filterYearSP;
     SharedPreferences preferences;
     String cur;
-    ActionBar actionBar;
+    //ActionBar actionBar;
+    Toolbar toolbar;
     MyTransactionAdapter adapter;
     ArrayList<Transaction> nuove_transazioni;
     DecimalFormat df = new DecimalFormat("0.00");
@@ -55,9 +57,10 @@ public class AccountFiltersActivity extends Activity implements AdapterView.OnIt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_account_filters);
-
+/*
         actionBar = getActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);*/
+        toolbar = getActionBarToolbar();
 
         db = new MyDatabase(getApplicationContext());
         db.open();
@@ -74,8 +77,8 @@ public class AccountFiltersActivity extends Activity implements AdapterView.OnIt
         provenienza = getIntent().getExtras().getInt(Utils.FILTRO_PREV_ACTIVITY);
 
         c = db.getAccount(accountID);
-        actionBar.setTitle(c.name);
-
+        //actionBar.setTitle(c.name);
+        toolbar.setTitle(c.name);
         final Calendar c = Calendar.getInstance();
         mYear = c.get(Calendar.YEAR);
         mMonth = c.get(Calendar.MONTH);

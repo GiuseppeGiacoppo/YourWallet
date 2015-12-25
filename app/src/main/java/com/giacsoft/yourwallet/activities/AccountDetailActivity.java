@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,13 +17,14 @@ import android.widget.Toast;
 import com.giacsoft.yourwallet.R;
 import com.giacsoft.yourwallet.db.MyDatabase;
 
-public class AccountDetailActivity extends Activity {
+public class AccountDetailActivity extends BaseActivity {
 
     EditText nameET;
     MyDatabase db;
     ImageView deleteIV;
     long accountID;
     ActionBar actionBar;
+    Toolbar toolbar;
     CharSequence[] account_actions = {"Tutto", "Solo Transazioni"};
     int radio_selected = -1;
 
@@ -33,10 +35,11 @@ public class AccountDetailActivity extends Activity {
 
         LayoutInflater inflater = (LayoutInflater) getActionBar().getThemedContext().getSystemService(LAYOUT_INFLATER_SERVICE);
         final View customActionBarView = inflater.inflate(R.layout.actionbar_custom_view_done_discard, null);
-
+/*
         actionBar = getActionBar();
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM, ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_SHOW_TITLE);
-        actionBar.setCustomView(customActionBarView, new ActionBar.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        actionBar.setCustomView(customActionBarView, new ActionBar.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));*/
+        toolbar = getActionBarToolbar();
         nameET = (EditText) findViewById(R.id.etnome);
         deleteIV = (ImageView) findViewById(R.id.tab_delete);
         accountID = getIntent().getExtras().getLong("ID");
