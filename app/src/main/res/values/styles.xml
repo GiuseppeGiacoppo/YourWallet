@@ -12,6 +12,7 @@
         <item name="android:background">@color/colorPrimary</item>
         <item name="android:titleTextStyle">@style/AppTheme.Toolbar.ActionBar.Title</item>
         <item name="android:elevation">@dimen/headerbar_elevation</item>
+        <item name="android:fillColor">@android:color/white</item>
     </style>
     <style name="AppTheme.Toolbar.ActionBar.Title" parent="AppTheme">
         <item name="android:textStyle">bold</item>
