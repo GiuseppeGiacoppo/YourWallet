@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menu_transfer"
         android:icon="@drawable/ic_transfer"
         android:orderInCategory="0"
-        android:showAsAction="ifRoom|withText"
+        app:showAsAction="ifRoom|withText"
         android:title="@string/menu_transfer"/>
     <item
         android:id="@+id/menu_settings"
         android:icon="@drawable/ic_settings"
         android:orderInCategory="1"
-        android:showAsAction="never"
+        app:showAsAction="never"
         android:title="@string/menu_settings"/>
     <item
         android:id="@+id/menu_about"
         android:orderInCategory="2"
-        android:showAsAction="never"
+        app:showAsAction="never"
         android:title="@string/menu_about"/>
-
 </menu>

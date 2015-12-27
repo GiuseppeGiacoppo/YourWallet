@@ -3,14 +3,13 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <dimen name="MarginStandard">32dp</dimen>
-    <dimen name="MarginSmall">16dp</dimen>
-
     <dimen name="tab_max_width">264dp</dimen>
     <dimen name="tab_padding_bottom">16dp</dimen>
     <dimen name="custom_tab_layout_height">72dp</dimen>
 
-    <dimen name="ActionBarHeight">56dp</dimen>
+    <dimen name="title_height">72dp</dimen>
+    <dimen name="actionbar_height">56dp</dimen>
+    <dimen name="subtitle_height">48dp</dimen>
 
     <dimen name="widget_padding">8dp</dimen>
 
@@ -18,12 +17,9 @@
     <dimen name="graph_line_pointsize">6dp</dimen>
     <dimen name="graph_line_pointstroke">3dp</dimen>
 
-    
-    <dimen name="itemListHeight">72dp</dimen>
-    <dimen name="itemListHorizontalMargin">16dp</dimen>
-    <dimen name="itemListHorizontalMarginBig">32dp</dimen>
-
+    <dimen name="list_item_height">72dp</dimen>
     <!-- standard metrics -->
+    <dimen name="spacing_content">72dp</dimen>
     <dimen name="spacing_normal">8dp</dimen>
     <dimen name="spacing_micro">4dp</dimen>
     <dimen name="padding_normal">16dp</dimen>
@@ -34,6 +30,7 @@
     <dimen name="app_text_size_medium">14sp</dimen>
     <dimen name="app_text_size_large">18sp</dimen>
     <dimen name="app_text_size_xlarge">20sp</dimen>
+    <dimen name="app_text_size_xxlarge">24sp</dimen>
     <dimen name="app_text_size_diff_large_small">6sp</dimen>
 
     <!-- UI elements -->

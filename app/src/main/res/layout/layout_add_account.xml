@@ -23,7 +23,7 @@
         <EditText
             android:id="@+id/etnome"
             android:layout_width="0dp"
-            android:layout_height="@dimen/ActionBarHeight"
+            android:layout_height="@dimen/actionbar_height"
             android:layout_marginRight="12dp"
             android:layout_weight="1"
             android:hint="@string/hint_account_name"

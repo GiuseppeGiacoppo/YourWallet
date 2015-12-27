@@ -10,7 +10,7 @@
     <RelativeLayout
         android:id="@+id/rl_newcategory"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/ActionBarHeight"
+        android:layout_height="@dimen/actionbar_height"
         android:layout_marginTop="8dp">
 
         <TextView
@@ -29,7 +29,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/MarginSmall"
             android:text="@string/action_addcategory" />
     </RelativeLayout>
 

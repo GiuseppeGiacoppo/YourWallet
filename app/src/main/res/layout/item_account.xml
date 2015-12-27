@@ -2,15 +2,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="@dimen/itemListHeight">
+    android:minHeight="@dimen/list_item_height"
+    android:paddingLeft="@dimen/padding_normal"
+    android:paddingRight="@dimen/padding_normal">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:orientation="vertical"
-        android:layout_marginLeft="@dimen/itemListHorizontalMargin">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_conto_name"
@@ -36,7 +37,6 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:text="500 €"
-        android:layout_marginRight="@dimen/itemListHorizontalMargin"
         android:textSize="@dimen/app_text_size_medium" />
 
 </RelativeLayout>

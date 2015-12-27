@@ -3,7 +3,9 @@
     android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/padding_normal"
+    android:paddingRight="@dimen/padding_normal">
 
     <LinearLayout
         android:id="@+id/container_category_info"
@@ -16,18 +18,14 @@
         <Spinner
             android:id="@+id/spin_col"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/ActionBarHeight"
-            android:layout_marginLeft="@dimen/MarginStandard"
-            android:layout_marginRight="@dimen/MarginStandard"
+            android:layout_height="@dimen/actionbar_height"
             android:layout_marginTop="8dp" />
 
         <EditText
             android:id="@+id/newcatnome"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/ActionBarHeight"
+            android:layout_height="@dimen/actionbar_height"
             android:layout_marginBottom="8dp"
-            android:layout_marginLeft="@dimen/MarginStandard"
-            android:layout_marginRight="@dimen/MarginStandard"
             android:layout_marginTop="8dp"
             android:ems="10"
             android:hint="@string/hint_category_name"
@@ -52,9 +50,7 @@
         <TextView
             android:id="@+id/fti_transactioninfo"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/ActionBarHeight"
-            android:layout_marginLeft="@dimen/MarginStandard"
-            android:layout_marginRight="@dimen/MarginStandard"
+            android:layout_height="@dimen/actionbar_height"
             android:layout_marginTop="8dp"
             android:gravity="center_vertical"
             android:text="@string/dialog_title_select_category" />
@@ -62,10 +58,8 @@
         <Spinner
             android:id="@+id/spin_move_cat"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/ActionBarHeight"
+            android:layout_height="@dimen/actionbar_height"
             android:layout_marginBottom="8dp"
-            android:layout_marginLeft="@dimen/MarginStandard"
-            android:layout_marginRight="@dimen/MarginStandard"
             android:layout_marginTop="8dp" />
 
         <include

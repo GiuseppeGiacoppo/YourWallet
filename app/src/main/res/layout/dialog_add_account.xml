@@ -2,15 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/padding_normal"
+    android:paddingRight="@dimen/padding_normal">
 
     <EditText
         android:id="@+id/etnome"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginLeft="@dimen/MarginStandard"
-        android:layout_marginRight="@dimen/MarginStandard"
         android:layout_marginTop="16dp"
         android:hint="@string/hint_account_name"
         android:imeOptions="actionDone"
@@ -30,14 +30,16 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/cancel" />
+            android:text="@string/cancel"
+            style="@android:style/Widget.Material.Light.Button.Borderless" />
 
         <Button
             android:id="@+id/addc_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/add" />
+            android:text="@string/add"
+            style="@android:style/Widget.Material.Light.Button.Borderless" />
     </LinearLayout>
 
     <View
@@ -45,7 +47,6 @@
         android:layout_height="0px"
         android:focusable="true"
         android:focusableInTouchMode="true">
-
         <requestFocus />
     </View>
 

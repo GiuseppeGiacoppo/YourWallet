@@ -25,10 +25,7 @@
         <EditText
             android:id="@+id/etpin"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/ActionBarHeight"
-            android:layout_marginBottom="@dimen/MarginStandard"
-            android:layout_marginLeft="@dimen/MarginStandard"
-            android:layout_marginRight="@dimen/MarginStandard"
+            android:layout_height="@dimen/actionbar_height"
             android:hint="@string/card_title_pin"
             android:maxLength="15" />
     </LinearLayout>

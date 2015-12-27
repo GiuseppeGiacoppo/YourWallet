@@ -20,8 +20,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="@dimen/MarginSmall"
-        android:layout_marginTop="@dimen/MarginSmall"
         android:text="@string/action_addtransaction"
         android:visibility="gone" />
 
@@ -32,6 +30,6 @@
         android:layout_marginBottom="4dp"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"
-        android:layout_marginTop="8dp"></ListView>
+        android:layout_marginTop="8dp"/>
 
 </LinearLayout>

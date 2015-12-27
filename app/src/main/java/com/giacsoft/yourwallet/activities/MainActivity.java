@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 
+import android.support.design.widget.FloatingActionButton;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toolbar;
@@ -23,7 +24,7 @@ import com.giacsoft.yourwallet.dialogs.TransactionDialogFragment;
 import com.giacsoft.yourwallet.types.Account;
 import com.giacsoft.yourwallet.types.Transaction;
 
-public class MainActivity extends BaseActivity implements MainFragment.OnItemSelectedListener, AccountDialogFragment.OnAccountDialogListener, TransactionDialogFragment.OnTransactionDialogListener {
+public class MainActivity extends BaseActivity implements MainFragment.OnItemSelectedListener, AccountDialogFragment.OnAccountDialogListener, TransactionDialogFragment.OnTransactionDialogListener, View.OnClickListener {
 
     private static final int DLG1 = 1;
     private static final int DLG2 = 2;
@@ -35,6 +36,7 @@ public class MainActivity extends BaseActivity implements MainFragment.OnItemSel
     MainFragment mainFragment;
     AccountFragment accountFragment;
     GraphFragment graphFragment;
+    FloatingActionButton fab;
 
     int selected_item_account_card_header, selected_item_graph_card_header;
 
@@ -53,6 +55,8 @@ public class MainActivity extends BaseActivity implements MainFragment.OnItemSel
 
         preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
+        fab = (FloatingActionButton) findViewById(R.id.fab_main);
+        fab.setOnClickListener(this);
         Toolbar toolbar = getActionBarToolbar();
         toolbar.setLogo(R.drawable.ic_launcher);
         toolbar.inflateMenu(R.menu.menu_main_app);
@@ -168,6 +172,13 @@ public class MainActivity extends BaseActivity implements MainFragment.OnItemSel
                 break;
             default:
                 return;
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v==fab) {
+            mostraDialog(DLG1,0);
         }
     }
 }

@@ -28,11 +28,6 @@ public class Utils {
     public static final int AMOUNT_POSITIVE=1;
     public static final int AMOUNT_NEGATIVE=2;
 
-    public static final int ONE_SECOND = 1000;
-    public static final int ONE_MINUTE = 60000;
-    public static final int ONE_HOUR = 3600000;
-    public static final int ONE_DAY = 86400000;
-
     public static String getId(Context c) {
 
         StringBuffer b = new StringBuffer();
@@ -48,7 +43,6 @@ public class Utils {
     }
 
     public static String md5sum(String s) {
-
         try {
 
             MessageDigest md = java.security.MessageDigest.getInstance("MD5");

@@ -39,11 +39,10 @@ public class MyColorAdapter implements SpinnerAdapter {
         for (int i = 0; i < colors.length; i++) {
             resid[i] = resources.getIdentifier(colors[i], "colors", context.getPackageName());
         }
-        String colore = colors[position];
+        String color = colors[position];
 
-        if (colore != null) {
+        if (color != null) {
             View c = v.findViewById(R.id.col_ll);
-            //c.setBackgroundColor(resources.getColor(resid[position]));
             c.setBackgroundColor(ContextCompat.getColor(context, resid[position]));
         }
         return v;

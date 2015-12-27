@@ -19,8 +19,6 @@
         android:id="@+id/date"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_marginLeft="@dimen/MarginStandard"
-        android:layout_marginRight="@dimen/MarginStandard"
         android:layout_marginTop="8dp"
         android:gravity="left|center"
         android:paddingBottom="8dp"
@@ -40,8 +38,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/MarginStandard"
-        android:layout_marginRight="@dimen/MarginStandard"
         android:layout_marginTop="8dp">
 
         <Spinner
@@ -56,8 +52,6 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="@dimen/MarginStandard"
-        android:layout_marginRight="@dimen/MarginStandard"
         android:layout_marginTop="8dp"
         android:hint="@string/hint_transaction_name"
         android:singleLine="true" />
@@ -67,8 +61,6 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginBottom="16dp"
-        android:layout_marginLeft="@dimen/MarginStandard"
-        android:layout_marginRight="@dimen/MarginStandard"
         android:layout_marginTop="8dp"
         android:hint="@string/hint_transaction_amount"
         android:imeOptions="actionDone"
@@ -95,8 +87,6 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginBottom="16dp"
-            android:layout_marginLeft="@dimen/MarginStandard"
-            android:layout_marginRight="@dimen/MarginStandard"
             android:layout_marginTop="8dp" />
     </LinearLayout>
 

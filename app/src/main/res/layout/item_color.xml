@@ -9,8 +9,6 @@
         android:id="@+id/col_ll"
         android:layout_width="match_parent"
         android:layout_height="36dp"
-        android:layout_gravity="center"
-        android:layout_marginLeft="@dimen/MarginStandard"
-        android:layout_marginRight="@dimen/MarginStandard" />
+        android:layout_gravity="center" />
 
 </LinearLayout>

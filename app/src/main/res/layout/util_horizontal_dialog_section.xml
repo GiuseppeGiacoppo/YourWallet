@@ -5,4 +5,4 @@
     android:layout_height="1dip"
     android:layout_marginLeft="0dp"
     android:layout_marginRight="0dp"
-    android:background="@color/dialogSeparatorColour" />
+    android:background="@color/hint_on_primary" />

@@ -25,7 +25,7 @@
         <Spinner
             android:id="@+id/spincat"
             android:layout_width="0dp"
-            android:layout_height="@dimen/ActionBarHeight"
+            android:layout_height="@dimen/actionbar_height"
             android:layout_weight="1" />
 
         <ImageView
@@ -39,7 +39,7 @@
     <EditText
         android:id="@+id/etimp"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/ActionBarHeight"
+        android:layout_height="@dimen/actionbar_height"
         android:layout_marginTop="8dp"
         android:hint="@string/hint_insert_amount"
         android:inputType="numberDecimal" />
@@ -61,7 +61,7 @@
         <Spinner
             android:id="@+id/fromaccount"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/ActionBarHeight"
+            android:layout_height="@dimen/actionbar_height"
             android:layout_marginRight="4dp"
             android:layout_marginTop="8dp"
             android:layout_weight="1" />
@@ -78,7 +78,7 @@
         <Spinner
             android:id="@+id/toaccount"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/ActionBarHeight"
+            android:layout_height="@dimen/actionbar_height"
             android:layout_marginLeft="4dp"
             android:layout_marginTop="8dp"
             android:layout_weight="1" />

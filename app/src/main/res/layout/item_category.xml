@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/MarginSmall">
+    android:layout_height="match_parent">
 
     <View
         android:id="@+id/view_category_color"
         android:layout_width="8dp"
-        android:layout_height="@dimen/ActionBarHeight"
+        android:layout_height="@dimen/actionbar_height"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="@dimen/MarginSmall"
-        android:layout_marginTop="@dimen/MarginSmall"
         android:background="@android:color/holo_red_dark" />
 
     <TextView
@@ -21,14 +18,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="@dimen/MarginSmall"
         android:text="15€" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="@dimen/MarginSmall"
         android:layout_toRightOf="@+id/view_category_color"
         android:orientation="vertical">
 

@@ -2,25 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/itemListHeight"
+    android:layout_height="@dimen/list_item_height"
     android:layout_centerVertical="true"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/padding_normal"
+    android:paddingRight="@dimen/padding_normal">
 
     <View
-        android:id="@+id/llbgcat"
+        android:id="@+id/transaction_categoryColor"
         android:layout_width="8dp"
-        android:layout_height="@dimen/itemListHeight"
-        android:layout_marginLeft="@dimen/itemListHorizontalMargin"/>
+        android:layout_height="@dimen/list_item_height"
+        android:background="#ff0000" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/itemListHorizontalMargin"
+        android:layout_marginLeft="@dimen/spacing_normal"
         android:orientation="vertical"
         android:layout_gravity="center_vertical">
 
         <TextView
-            android:id="@+id/tvgiorno"
+            android:id="@+id/transaction_dowTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sun"
@@ -32,7 +34,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/tvdata"
+                android:id="@+id/transaction_dayTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="01"
@@ -40,7 +42,7 @@
                 android:textSize="@dimen/app_text_size_medium" />
 
             <TextView
-                android:id="@+id/tvmese"
+                android:id="@+id/transaction_monthTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="/01"
@@ -52,12 +54,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="@dimen/itemListHorizontalMarginBig"
+        android:layout_marginLeft="@dimen/spacing_normal"
         android:orientation="vertical"
         android:paddingBottom="2dp">
 
         <TextView
-            android:id="@+id/tvnota"
+            android:id="@+id/transaction_noteTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nuova Nota"
@@ -65,7 +67,7 @@
             android:textSize="@dimen/app_text_size_medium" />
 
         <TextView
-            android:id="@+id/tvconto"
+            android:id="@+id/transaction_accountTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Risparmi"
@@ -79,12 +81,11 @@
         android:layout_weight="1" />
 
     <TextView
-        android:id="@+id/tvimporto"
+        android:id="@+id/transaction_amountTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_gravity="center_vertical"
         android:text="15 €"
-        android:textSize="@dimen/app_text_size_medium"
-        android:layout_marginRight="@dimen/itemListHorizontalMargin"/>
+        android:textSize="@dimen/app_text_size_large"/>
 </LinearLayout>

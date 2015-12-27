@@ -9,8 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginLeft="@dimen/MarginStandard"
-        android:layout_marginRight="@dimen/MarginStandard"
         android:layout_marginTop="16dp"
         android:hint="@string/dialog_preferences_pin_title"
         android:imeOptions="actionDone" />

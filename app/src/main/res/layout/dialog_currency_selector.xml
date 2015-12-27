@@ -76,8 +76,6 @@
         android:layout_height="48dp"
         android:layout_gravity="center_vertical"
         android:layout_marginBottom="8dp"
-        android:layout_marginLeft="@dimen/MarginStandard"
-        android:layout_marginRight="@dimen/MarginStandard"
         android:layout_marginTop="8dp"
         android:hint="@string/hint_currency_name"
         android:singleLine="true">
