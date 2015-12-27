@@ -7,36 +7,10 @@
     <EditText
         android:id="@+id/etpin"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/padding_normal"
+        android:layout_marginRight="@dimen/padding_normal"
         android:hint="@string/dialog_preferences_pin_title"
         android:imeOptions="actionDone" />
-
-    <include layout="@layout/util_horizontal_dialog_section" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:measureWithLargestChild="true"
-        android:orientation="horizontal"
-        android:paddingTop="0dp">
-
-        <Button
-            android:id="@+id/addc_btn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.0"
-            android:text="@string/ok" />
-    </LinearLayout>
-
-    <View
-        android:layout_width="0px"
-        android:layout_height="0px"
-        android:focusable="true"
-        android:focusableInTouchMode="true">
-
-        <requestFocus />
-    </View>
 
 </LinearLayout>

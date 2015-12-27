@@ -1,7 +1,5 @@
 package com.giacsoft.yourwallet.activities;
 
-import android.app.Activity;
-import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
@@ -30,7 +28,6 @@ import com.giacsoft.yourwallet.types.Transaction;
 
 
 public class AccountActivity extends BaseActivity implements TransactionDialogFragment.OnTransactionDialogListener, View.OnClickListener {
-    static final int DLG3 = 3;
     Toolbar toolbar;
     TabLayout tabLayout;
     FloatingActionButton fab;
@@ -94,9 +91,9 @@ public class AccountActivity extends BaseActivity implements TransactionDialogFr
     public void onClick(View v) {
         if(v==fab) {
                 if (accountID != 0)
-                    showDialog(DLG3, accountID, 0);
+                    showDialog(Utils.TRANSACTION_DIALOG,getFragmentManager(), accountID, 0);
                 else
-                    showDialog(DLG3, 0, 0);
+                    showDialog(Utils.TRANSACTION_DIALOG,getFragmentManager(), 0, 0);
         }
     }
 
@@ -175,16 +172,6 @@ public class AccountActivity extends BaseActivity implements TransactionDialogFr
         }
         return super.onOptionsItemSelected(item);
     }
-
-    void showDialog(int id, long idc, long idt) {
-        switch (id) {
-            case DLG3:
-                DialogFragment tdf = TransactionDialogFragment.newInstance(idc, idt);
-                tdf.show(getFragmentManager(), "transazionedialog");
-                break;
-        }
-    }
-
     @Override
     public void doTransaction(int mode, Transaction t,double diff, int p) {
         switch (mode) {

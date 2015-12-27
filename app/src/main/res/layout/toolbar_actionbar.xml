@@ -5,4 +5,4 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="?actionBarSize"
-    android:background="@color/colorPrimary"/>
+    style="@style/AppTheme.Toolbar.ActionBar"/>

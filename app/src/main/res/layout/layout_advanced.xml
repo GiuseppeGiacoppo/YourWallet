@@ -6,42 +6,41 @@
     <include layout="@layout/toolbar_actionbar"/>
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:layout_marginLeft="12dp"
-        android:text="@string/separator_title_databaselite" />
-
-    <include layout="@layout/util_horizontal_line_section" />
+        android:layout_height="@dimen/subtitle_height"
+        android:layout_marginLeft="@dimen/padding_normal"
+        android:text="@string/separator_title_databaselite"
+        style="@style/AppTheme.Subtitle"/>
 
     <Button
         android:id="@+id/importalite"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginLeft="@dimen/padding_normal"
+        android:layout_marginRight="@dimen/padding_normal"
         android:text="@string/btn_import_litedb" />
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/separator_title_databasefull" />
-
-    <include layout="@layout/util_horizontal_line_section" />
+        android:layout_height="@dimen/subtitle_height"
+        android:layout_marginLeft="@dimen/padding_normal"
+        android:text="@string/separator_title_databasefull"
+        style="@style/AppTheme.Subtitle"/>
 
     <Button
         android:id="@+id/esportadb"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginLeft="@dimen/padding_normal"
+        android:layout_marginRight="@dimen/padding_normal"
         android:text="@string/btn_export_currentdb" />
 
     <Button
         android:id="@+id/importadb"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/spacing_normal"
+        android:layout_marginLeft="@dimen/padding_normal"
+        android:layout_marginRight="@dimen/padding_normal"
         android:text="@string/btn_import_backupdb" />
 
 </LinearLayout>

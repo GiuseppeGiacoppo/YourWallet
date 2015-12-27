@@ -96,7 +96,6 @@ public class CategoriesActivity extends BaseActivity implements AdapterView.OnIt
             xVals.add(c.name);
             yVals.add(new Entry((float) c.totalAmount, k));
             resid = resources.getIdentifier(c.color, "color", ctx.getPackageName());
-            //cVals.add(Color.parseColor(resources.getString(resid)));
             cVals[k]=Color.parseColor(resources.getString(resid));
         }
 
@@ -109,9 +108,7 @@ public class CategoriesActivity extends BaseActivity implements AdapterView.OnIt
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_categorie, menu);
-
+        getMenuInflater().inflate(R.menu.menu_categorie, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -120,7 +117,6 @@ public class CategoriesActivity extends BaseActivity implements AdapterView.OnIt
         switch (item.getItemId()) {
             case android.R.id.home:
                 // app icon in action bar clicked; go home
-
                 if (provenienza == 0) {// is phone
                     startActivity(new Intent(this, AccountActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra(Utils.ACCOUNT_ID, accountID));
                 } else if (provenienza == 1) {// is tablet

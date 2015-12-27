@@ -10,19 +10,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toolbar;
 
 import com.giacsoft.yourwallet.R;
+import com.giacsoft.yourwallet.Utils;
 import com.giacsoft.yourwallet.dialogs.CurrencyDialogFragment;
 import com.giacsoft.yourwallet.dialogs.PinDialogFragment;
 
-public class PreferencesActivity extends BaseActivity {
+public class PreferencesActivity extends BaseActivity implements View.OnClickListener {
 
-    private static final int DLG1 = 1;
-    private static final int DLG2 = 2;
-    FrameLayout pr_currency, pr_database;
+    TextView pr_currency, pr_database;
     LinearLayout pr_pin;
-    //ActionBar actionBar;
     Toolbar toolbar;
 
     @Override
@@ -30,37 +29,15 @@ public class PreferencesActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_preferences);
 
-        pr_currency = (FrameLayout) findViewById(R.id.preferences_currency);
-        pr_database = (FrameLayout) findViewById(R.id.preferences_database);
+        pr_currency = (TextView) findViewById(R.id.preferences_currency);
+        pr_database = (TextView) findViewById(R.id.preferences_database);
         pr_pin = (LinearLayout) findViewById(R.id.preferences_pin);
-/*
-        actionBar = getActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle(R.string.menu_settings);
-        actionBar.setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP | ActionBar.DISPLAY_SHOW_TITLE);*/
+
         toolbar = getActionBarToolbar();
-        pr_currency.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                mostraDialog(DLG1);
-            }
-        });
-        pr_database.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), AdvancedActivity.class));
-            }
-        });
-
-        pr_pin.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                mostraDialog(DLG2);
-            }
-        });
+        setActionBar(toolbar);
+        pr_currency.setOnClickListener(this);
+        pr_database.setOnClickListener(this);
+        pr_pin.setOnClickListener(this);
     }
 
     @Override
@@ -81,15 +58,18 @@ public class PreferencesActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    void mostraDialog(int id) {
-        switch (id) {
-            case DLG1:
-                CurrencyDialogFragment cdf2 = CurrencyDialogFragment.newInstance();
-                cdf2.show(getFragmentManager(), "currencydialog");
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.preferences_currency:
+                showDialog(Utils.CURRENCY_DIALOG,getFragmentManager());
                 break;
-            case DLG2:
-                PinDialogFragment pdf = PinDialogFragment.newInstance();
-                pdf.show(getFragmentManager(), "pindialog");
+            case R.id.preferences_database:
+                startActivity(new Intent(getApplicationContext(), AdvancedActivity.class));
+                break;
+            case R.id.preferences_pin:
+                showDialog(Utils.PIN_DIALOG,getFragmentManager());
                 break;
         }
     }

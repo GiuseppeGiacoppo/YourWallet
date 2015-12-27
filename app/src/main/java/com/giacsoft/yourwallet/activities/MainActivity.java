@@ -1,6 +1,5 @@
 package com.giacsoft.yourwallet.activities;
 
-import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,6 +7,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 
 import android.support.design.widget.FloatingActionButton;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toolbar;
@@ -26,9 +26,6 @@ import com.giacsoft.yourwallet.types.Transaction;
 
 public class MainActivity extends BaseActivity implements MainFragment.OnItemSelectedListener, AccountDialogFragment.OnAccountDialogListener, TransactionDialogFragment.OnTransactionDialogListener, View.OnClickListener {
 
-    private static final int DLG1 = 1;
-    private static final int DLG2 = 2;
-    private static final int DLG3 = 3;
     MyDatabase db;
     long accountID;
     View V;
@@ -42,6 +39,26 @@ public class MainActivity extends BaseActivity implements MainFragment.OnItemSel
 
     SharedPreferences preferences;
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main_app, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_transfer:
+                startActivity(new Intent(getApplicationContext(), TransferActivity.class));
+            return true;
+            case R.id.menu_settings:
+                startActivity(new Intent(getApplicationContext(), PreferencesActivity.class));
+                return true;
+            case R.id.menu_about:
+                showDialog(Utils.ABOUT_DIALOG, getFragmentManager());
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,24 +75,7 @@ public class MainActivity extends BaseActivity implements MainFragment.OnItemSel
         fab = (FloatingActionButton) findViewById(R.id.fab_main);
         fab.setOnClickListener(this);
         Toolbar toolbar = getActionBarToolbar();
-        toolbar.setLogo(R.drawable.ic_launcher);
-        toolbar.inflateMenu(R.menu.menu_main_app);
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.menu_transfer:
-                        startActivity(new Intent(getApplicationContext(), CategoriesActivity.class));
-                        return true;
-                    case R.id.menu_settings:
-                        return true;
-                    case R.id.menu_about:
-                        return true;
-                }
-                return false;
-            }
-        });
-
+        setActionBar(toolbar);
     }
 
     @Override
@@ -96,24 +96,6 @@ public class MainActivity extends BaseActivity implements MainFragment.OnItemSel
             graphFragment.accountID = id;
         }
     }
-
-    void mostraDialog(int id, long idc) {
-        switch (id) {
-            case DLG1:
-                AccountDialogFragment cdf = AccountDialogFragment.newIstance();
-                cdf.show(getFragmentManager(), "contodialog");
-                break;
-            case DLG2:
-                DialogFragment newFragment = AboutDialogFragment.newInstance();
-                newFragment.show(getFragmentManager(), "aboutdialog");
-                break;
-            case DLG3:
-                DialogFragment tdf = TransactionDialogFragment.newInstance(idc, 0);
-                tdf.show(getFragmentManager(), "transazionedialog");
-                break;
-        }
-    }
-
     @Override
     public void doTransaction(int mode, Transaction t, double diff, int p) {
         switch (mode) {
@@ -178,7 +160,7 @@ public class MainActivity extends BaseActivity implements MainFragment.OnItemSel
     @Override
     public void onClick(View v) {
         if(v==fab) {
-            mostraDialog(DLG1,0);
+            showDialog(Utils.ACCOUNT_DIALOG, getFragmentManager(),0);
         }
     }
 }

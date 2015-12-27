@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -17,12 +18,10 @@ import com.giacsoft.yourwallet.R;
 
 public class CurrencyDialogFragment extends DialogFragment implements View.OnClickListener {
 
-    Button addBTN, cancelBTN;
     Button euro, dollar, sterling, yen, swekr, dankr, czkr, won;
     EditText currencyET;
     SharedPreferences settings;
     SharedPreferences.Editor curr;
-    boolean doubleBackToExitPressedOnce;
 
     public static CurrencyDialogFragment newInstance() {
         CurrencyDialogFragment frag = new CurrencyDialogFragment();
@@ -41,8 +40,6 @@ public class CurrencyDialogFragment extends DialogFragment implements View.OnCli
         curr = settings.edit();
 
         currencyET = (EditText) view_dialog.findViewById(R.id.personalcur);
-        addBTN = (Button) view_dialog.findViewById(R.id.add_btn);
-        cancelBTN = (Button) view_dialog.findViewById(R.id.cancel_btn);
         euro = (Button) view_dialog.findViewById(R.id.euro);
         dollar = (Button) view_dialog.findViewById(R.id.dollar);
         sterling = (Button) view_dialog.findViewById(R.id.sterling);
@@ -51,8 +48,6 @@ public class CurrencyDialogFragment extends DialogFragment implements View.OnCli
         dankr = (Button) view_dialog.findViewById(R.id.dankr);
         czkr = (Button) view_dialog.findViewById(R.id.czkr);
         won = (Button) view_dialog.findViewById(R.id.won);
-
-        addBTN.setOnClickListener(this);
 
         euro.setOnClickListener(this);
         dollar.setOnClickListener(this);
@@ -63,23 +58,30 @@ public class CurrencyDialogFragment extends DialogFragment implements View.OnCli
         czkr.setOnClickListener(this);
         won.setOnClickListener(this);
 
+        builder.setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (currencyET.length() > 0) {
+                    curr.putString("currency", currencyET.getText().toString());
+                    curr.commit();
+                } else {
+                    Toast.makeText(getActivity(), R.string.currency_empty, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dismiss();
+            }
+        });
         builder.setView(view_dialog);
         return builder.create();
     }
 
     @Override
     public void onClick(View v) {
-
-        if (v == cancelBTN) {
-
-        } else if (v == addBTN) {
-            if (currencyET.length() > 0) {
-                curr.putString("currency", currencyET.getText().toString());
-                curr.commit();
-            } else {
-                Toast.makeText(getActivity(), R.string.currency_empty, Toast.LENGTH_SHORT).show();
-            }
-        } else if (v == euro) {
+        if (v == euro) {
             curr.putString("currency", "€");
             curr.commit();
         } else if (v == dollar) {
@@ -104,7 +106,6 @@ public class CurrencyDialogFragment extends DialogFragment implements View.OnCli
             curr.putString("currency", "₩");
             curr.commit();
         }
-
         dismiss();
     }
 

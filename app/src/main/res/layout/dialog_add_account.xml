@@ -9,45 +9,10 @@
     <EditText
         android:id="@+id/etnome"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="wrap_content"
         android:hint="@string/hint_account_name"
         android:imeOptions="actionDone"
         android:maxLength="25"
         android:singleLine="true" />
-
-    <include layout="@layout/util_horizontal_dialog_section" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:divider="?android:attr/dividerVertical"
-        android:showDividers="middle">
-
-        <Button
-            android:id="@+id/cancel_btn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/cancel"
-            style="@android:style/Widget.Material.Light.Button.Borderless" />
-
-        <Button
-            android:id="@+id/addc_btn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/add"
-            style="@android:style/Widget.Material.Light.Button.Borderless" />
-    </LinearLayout>
-
-    <View
-        android:layout_width="0px"
-        android:layout_height="0px"
-        android:focusable="true"
-        android:focusableInTouchMode="true">
-        <requestFocus />
-    </View>
 
 </LinearLayout>

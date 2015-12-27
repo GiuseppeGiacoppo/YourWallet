@@ -40,16 +40,14 @@
         android:layout_width="wrap_content"
         android:layout_height="@dimen/subtitle_height"
         android:text="@string/card_title_youraccounts"
-        android:textColor="@color/subtitle_on_primary"
         android:id="@+id/textView"
         android:layout_marginLeft="@dimen/padding_normal"
-        android:textStyle="bold"
-        android:textSize="@dimen/app_text_size_medium"
-        android:gravity="center_vertical" />
+        style="@style/AppTheme.Subtitle"/>
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:cardElevation="@dimen/card_elevation">
             <ListView
                 android:id="@+id/lvconti"
                 android:layout_width="match_parent"

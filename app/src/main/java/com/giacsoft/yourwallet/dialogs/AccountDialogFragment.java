@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,12 +19,11 @@ import com.giacsoft.yourwallet.Utils;
 import com.giacsoft.yourwallet.db.MyDatabase;
 import com.giacsoft.yourwallet.types.Account;
 
-public class AccountDialogFragment extends DialogFragment implements OnClickListener {
+public class AccountDialogFragment extends DialogFragment {
 
     MyDatabase db;
     Context ctx;
     long accountID;
-    Button addBTN, cancelBTN;
     EditText accountET;
     OnAccountDialogListener cdlistener;
 
@@ -50,34 +50,34 @@ public class AccountDialogFragment extends DialogFragment implements OnClickList
         db = new MyDatabase(ctx);
         db.open();
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(R.string.action_addaccount);
 
         LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view_dialog = inflater.inflate(R.layout.dialog_add_account, null);
 
         accountET = (EditText) view_dialog.findViewById(R.id.etnome);
-        addBTN = (Button) view_dialog.findViewById(R.id.addc_btn);
-        cancelBTN = (Button) view_dialog.findViewById(R.id.cancel_btn);
 
-        addBTN.setOnClickListener(this);
-
+        builder.setPositiveButton(R.string.add, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (accountET.length() > 0) {
+                    accountID = db.addAccount(accountET.getText().toString());
+                    Toast.makeText(ctx, R.string.toast_successful_account_add, Toast.LENGTH_SHORT).show();
+                    cdlistener.doAccount(Utils.ADD, new Account(accountID, accountET.getText().toString(), 0));
+                    dismiss();
+                } else {
+                    Toast.makeText(ctx, R.string.toast_alert_invalid_name, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dismiss();
+            }
+        });
         builder.setView(view_dialog);
         return builder.create();
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (v == addBTN) {
-            if (accountET.length() > 0) {
-                accountID = db.addAccount(accountET.getText().toString());
-                Toast.makeText(ctx, R.string.toast_successful_account_add, Toast.LENGTH_SHORT).show();
-                cdlistener.doAccount(Utils.ADD, new Account(accountID, accountET.getText().toString(), 0));
-                dismiss();
-            } else {
-                Toast.makeText(ctx, R.string.toast_alert_invalid_name, Toast.LENGTH_SHORT).show();
-            }
-        } else if (v == cancelBTN) {
-            dismiss();
-        }
     }
 
     public interface OnAccountDialogListener {

@@ -13,6 +13,9 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class Utils {
+    public static final String APP_PLAYSTORE ="market://details?id=com.giacsoft.yourwallet";
+    public static final String APP_MAIL = "giacsoft@gmail.com";
+
     public static final String ACCOUNT_ID = "ACCOUNTID";
     public static final String CAT_PREV_ACTIVITY = "CATPREVACTIVITY";
     public static final String FILTRO_PREV_ACTIVITY = "FILTROPREVACTIVITY";
@@ -28,6 +31,19 @@ public class Utils {
     public static final int AMOUNT_POSITIVE=1;
     public static final int AMOUNT_NEGATIVE=2;
 
+    //DIALOGS
+    public static final int ABOUT_DIALOG=1;
+    public static final int ACCOUNT_DIALOG=2;
+    public static final int CATEGORIES_DIALOG=3;
+    public static final int CURRENCY_DIALOG=4;
+    public static final int IMPORT_DIALOG=5;
+    public static final int IMPORTLITE_DIALOG=6;
+    public static final int OVERWRITE_DIALOG=7;
+    public static final int PIN_DIALOG=8;
+    public static final int TRANSACTION_DIALOG=9;
+
+    //SHAREDPREFERENCES
+    public static final String RATING = "RATING";
     public static String getId(Context c) {
 
         StringBuffer b = new StringBuffer();

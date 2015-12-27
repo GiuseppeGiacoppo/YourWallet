@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -15,9 +16,8 @@ import android.widget.EditText;
 
 import com.giacsoft.yourwallet.R;
 
-public class PinDialogFragment extends DialogFragment implements OnClickListener {
+public class PinDialogFragment extends DialogFragment  {
 
-    Button addBTN;
     EditText inputET;
     SharedPreferences settings;
     SharedPreferences.Editor pinn;
@@ -48,20 +48,16 @@ public class PinDialogFragment extends DialogFragment implements OnClickListener
             ;
         else
             inputET.setText(pin);
-        addBTN = (Button) view_dialog.findViewById(R.id.addc_btn);
 
-        addBTN.setOnClickListener(this);
-
+        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                pinn.putString("pin", inputET.getText().toString());
+                pinn.apply();
+                dismiss();
+            }
+        });
         builder.setView(view_dialog);
         return builder.create();
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (v == addBTN) {
-            pinn.putString("pin", inputET.getText().toString());
-            pinn.commit();
-            dismiss();
-        }
     }
 }

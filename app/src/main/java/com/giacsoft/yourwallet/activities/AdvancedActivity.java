@@ -25,10 +25,8 @@ import java.io.File;
 import java.io.IOException;
 
 
-public class AdvancedActivity extends FragmentActivity implements OnClickListener {
+public class AdvancedActivity extends BaseActivity implements OnClickListener {
 
-    private static final int IMPORTDB = 1;
-    private static final int IMPORTLITE = 2;
     boolean clicked;
     Button exportdb, importlite, importdb;
     ActionBar actionBar;
@@ -88,22 +86,9 @@ public class AdvancedActivity extends FragmentActivity implements OnClickListene
             }
 
         } else if (v == importdb) {
-            mostraDialog(IMPORTDB);
+            showDialog(Utils.IMPORT_DIALOG,getFragmentManager());
         } else if (v == importlite) {
-            mostraDialog(IMPORTLITE);
-        }
-    }
-
-    void mostraDialog(int id) {
-        switch (id) {
-            case IMPORTDB:
-                DialogFragment iddf = ImportDBDialogFragment.newInstance();
-                iddf.show(getSupportFragmentManager(), "importlitedialog");
-                break;
-            case IMPORTLITE:
-                DialogFragment ildf = ImportLiteDialogFragment.newInstance();
-                ildf.show(getSupportFragmentManager(), "importlitedialog");
-                break;
+            showDialog(Utils.IMPORTLITE_DIALOG,getFragmentManager());
         }
     }
 

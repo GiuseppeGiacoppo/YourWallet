@@ -6,6 +6,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
@@ -162,6 +163,75 @@ public class TransactionDialogFragment extends DialogFragment implements View.On
         cancelBTN.setOnClickListener(this);
         addBTN.setOnClickListener(this);
 
+        builder.setPositiveButton(R.string.add, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (nameET.length() != 0 && amountET.length() != 0) {
+                    int mese = cMonth + 1;
+                    Calendar cal = new GregorianCalendar(cYear, mese, cDay);
+                    int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK); // 1=Domenica,
+                    // 2=Lunedi
+                    // ecc
+                    if (accountsSP.getCount() < 1) {
+                        Toast.makeText(ctx, R.string.toast_alert_noaccount, Toast.LENGTH_SHORT).show();
+                    } else {
+                        if (categoriesSP.getCount() < 1) {
+                            Toast.makeText(ctx, R.string.toast_alert_nocategory, Toast.LENGTH_SHORT).show();
+                        } else {
+                            if (transactionID != 0) {
+                                t = db.getTransaction(transactionID);
+                                double differenza = Double.parseDouble(amountET.getText().toString()) - t.amount;
+                                db.editTransaction(transactionID, nameET.getText().toString(), differenza, categoriesSP.getSelectedItemId(), t.accountID, dayOfWeek, cDay, mese, cYear);
+                                tdlistener.doTransaction(Utils.EDIT, new Transaction(transactionID, nameET.getText().toString(), t.amount + differenza, categoriesSP.getSelectedItemId(), t.accountID, dayOfWeek, cDay, mese, cYear), differenza, position);
+                                Toast.makeText(ctx, R.string.toast_successful_transaction_edit, Toast.LENGTH_SHORT).show();
+
+                            } else {
+                                if (accountID == 0) {
+                                    newTransactionID = db.addTransaction(nameET.getText().toString(), Double.parseDouble(amountET.getText().toString()), categoriesSP.getSelectedItemId(), accountsSP.getSelectedItemId(), dayOfWeek, cDay, mese, cYear);
+                                    tdlistener.doTransaction(Utils.ADD, new Transaction(newTransactionID, nameET.getText().toString(), Double.parseDouble(amountET.getText().toString()), categoriesSP.getSelectedItemId(), accountsSP.getSelectedItemId(), dayOfWeek, cDay, mese, cYear), 0,0);
+                                } else {
+                                    newTransactionID = db.addTransaction(nameET.getText().toString(), Double.parseDouble(amountET.getText().toString()), categoriesSP.getSelectedItemId(), accountID, dayOfWeek, cDay, mese, cYear);
+                                    tdlistener.doTransaction(Utils.ADD, new Transaction(newTransactionID, nameET.getText().toString(), Double.parseDouble(amountET.getText().toString()), categoriesSP.getSelectedItemId(), accountID, dayOfWeek, cDay, mese, cYear),0,0);
+                                }
+                                Toast.makeText(ctx, R.string.toast_successful_transaction_add, Toast.LENGTH_SHORT).show();
+                            }
+                            dismiss();
+                        }
+                    }
+                } else {
+                    Toast.makeText(ctx, R.string.toast_error_completefields, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (transactionID != 0) {
+                    if (doubleBackToExitPressedOnce) {
+                        Transaction del = db.getTransaction(transactionID);
+                        db.deleteTransaction(transactionID);
+                        Toast.makeText(ctx, R.string.toast_successful_transaction_delete, Toast.LENGTH_SHORT).show();
+
+                        tdlistener.doTransaction(Utils.DELETE, del, 0,position);
+
+                        dismiss();
+                        return;
+                    }
+
+                    doubleBackToExitPressedOnce = true;
+                    Toast.makeText(ctx, R.string.toast_confirm_deletetransaction, Toast.LENGTH_SHORT).show();
+                    new Handler().postDelayed(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            doubleBackToExitPressedOnce = false;
+                        }
+                    }, 3000);
+                } else {
+                    dismiss();
+                }
+            }
+        });
         builder.setView(view_dialog);
         return builder.create();
     }
@@ -176,73 +246,13 @@ public class TransactionDialogFragment extends DialogFragment implements View.On
 
     @Override
     public void onClick(View v) {
-
         if (v == dateBTN) {
             if (transactionID == 0)
                 new DatePickerDialog(getActivity(), mDateSetListener, mYear, mMonth, mDay).show();
             else
                 new DatePickerDialog(getActivity(), mDateSetListener, t.year, t.month - 1, t.day).show();
         } else if (v == cancelBTN) {
-            if (transactionID != 0) {
-                if (doubleBackToExitPressedOnce) {
-                    Transaction del = db.getTransaction(transactionID);
-                    db.deleteTransaction(transactionID);
-                    Toast.makeText(ctx, R.string.toast_successful_transaction_delete, Toast.LENGTH_SHORT).show();
-
-                    tdlistener.doTransaction(Utils.DELETE, del, 0,position);
-
-                    dismiss();
-                    return;
-                }
-
-                doubleBackToExitPressedOnce = true;
-                Toast.makeText(ctx, R.string.toast_confirm_deletetransaction, Toast.LENGTH_SHORT).show();
-                new Handler().postDelayed(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        doubleBackToExitPressedOnce = false;
-                    }
-                }, 3000);
-            } else {
-                dismiss();
-            }
         } else if (v == addBTN) {
-            if (nameET.length() != 0 && amountET.length() != 0) {
-                int mese = cMonth + 1;
-                Calendar cal = new GregorianCalendar(cYear, mese, cDay);
-                int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK); // 1=Domenica,
-                // 2=Lunedi
-                // ecc
-                if (accountsSP.getCount() < 1) {
-                    Toast.makeText(ctx, R.string.toast_alert_noaccount, Toast.LENGTH_SHORT).show();
-                } else {
-                    if (categoriesSP.getCount() < 1) {
-                        Toast.makeText(ctx, R.string.toast_alert_nocategory, Toast.LENGTH_SHORT).show();
-                    } else {
-                        if (transactionID != 0) {
-                            t = db.getTransaction(transactionID);
-                            double differenza = Double.parseDouble(amountET.getText().toString()) - t.amount;
-                            db.editTransaction(transactionID, nameET.getText().toString(), differenza, categoriesSP.getSelectedItemId(), t.accountID, dayOfWeek, cDay, mese, cYear);
-                            tdlistener.doTransaction(Utils.EDIT, new Transaction(transactionID, nameET.getText().toString(), t.amount + differenza, categoriesSP.getSelectedItemId(), t.accountID, dayOfWeek, cDay, mese, cYear), differenza, position);
-                            Toast.makeText(ctx, R.string.toast_successful_transaction_edit, Toast.LENGTH_SHORT).show();
-
-                        } else {
-                            if (accountID == 0) {
-                                newTransactionID = db.addTransaction(nameET.getText().toString(), Double.parseDouble(amountET.getText().toString()), categoriesSP.getSelectedItemId(), accountsSP.getSelectedItemId(), dayOfWeek, cDay, mese, cYear);
-                                tdlistener.doTransaction(Utils.ADD, new Transaction(newTransactionID, nameET.getText().toString(), Double.parseDouble(amountET.getText().toString()), categoriesSP.getSelectedItemId(), accountsSP.getSelectedItemId(), dayOfWeek, cDay, mese, cYear), 0,0);
-                            } else {
-                                newTransactionID = db.addTransaction(nameET.getText().toString(), Double.parseDouble(amountET.getText().toString()), categoriesSP.getSelectedItemId(), accountID, dayOfWeek, cDay, mese, cYear);
-                                tdlistener.doTransaction(Utils.ADD, new Transaction(newTransactionID, nameET.getText().toString(), Double.parseDouble(amountET.getText().toString()), categoriesSP.getSelectedItemId(), accountID, dayOfWeek, cDay, mese, cYear),0,0);
-                            }
-                            Toast.makeText(ctx, R.string.toast_successful_transaction_add, Toast.LENGTH_SHORT).show();
-                        }
-                        dismiss();
-                    }
-                }
-            } else {
-                Toast.makeText(ctx, R.string.toast_error_completefields, Toast.LENGTH_SHORT).show();
-            }
         }
     }
 

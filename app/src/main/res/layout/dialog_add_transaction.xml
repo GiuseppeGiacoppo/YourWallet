@@ -9,56 +9,43 @@
     <TextView
         android:id="@+id/datecap"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:layout_marginLeft="28dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/separator_title_date" />
-
-    <include layout="@layout/util_horizontal_line_section_margin" />
+        android:layout_height="@dimen/subtitle_height"
+        android:text="@string/separator_title_date"
+        style="@style/AppTheme.Subtitle"/>
 
     <Button
         android:id="@+id/date"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="@dimen/subtitle_height"
         android:gravity="left|center"
-        android:paddingBottom="8dp"
-        android:paddingLeft="16dp"
         android:text="1 Gennaio 2000"
-        style="@style/Widget.AppCompat.Spinner.DropDown" />
+        style="@android:style/Widget.Material.Spinner"/>
+
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:layout_marginLeft="28dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/separator_title_transaction_detail" />
-
-    <include layout="@layout/util_horizontal_line_section_margin" />
+        android:layout_height="@dimen/subtitle_height"
+        android:text="@string/separator_title_transaction_detail"
+        style="@style/AppTheme.Subtitle"/>
 
     <Spinner
         android:id="@+id/spincat"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="8dp"
-        android:layout_weight="1" />
+        android:layout_height="@dimen/subtitle_height"
+        android:layout_marginTop="@dimen/spacing_normal" />
 
     <EditText
         android:id="@+id/ettra"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_gravity="center_vertical"
-        android:layout_marginTop="8dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_normal"
         android:hint="@string/hint_transaction_name"
         android:singleLine="true" />
 
     <EditText
         android:id="@+id/etimp"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_normal"
         android:hint="@string/hint_transaction_amount"
         android:imeOptions="actionDone"
         android:inputType="numberSigned|numberDecimal"/>
@@ -71,29 +58,22 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:layout_marginLeft="28dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/account"/>
-
-        <include layout="@layout/util_horizontal_line_section_margin" />
+            android:layout_height="@dimen/subtitle_height"
+            android:text="@string/account"
+            style="@style/AppTheme.Subtitle"/>
 
         <Spinner
             android:id="@+id/spinconti"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="8dp" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
-
-    <include layout="@layout/util_horizontal_dialog_section" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:divider="?android:attr/dividerVertical"
-        android:showDividers="middle">
+        android:showDividers="middle"
+        android:visibility="gone">
 
         <Button
             android:id="@+id/cancel_btn"

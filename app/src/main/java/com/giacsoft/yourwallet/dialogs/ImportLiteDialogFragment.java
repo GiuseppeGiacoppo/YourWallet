@@ -8,7 +8,7 @@ import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v4.app.DialogFragment;
+import android.app.DialogFragment;
 import android.text.Html;
 import android.util.Log;
 import android.widget.Toast;

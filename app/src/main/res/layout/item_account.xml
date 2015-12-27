@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:text="TextView"
             android:textColor="@android:color/primary_text_light"
-            android:textSize="@dimen/app_text_size_medium" />
+            android:textSize="@dimen/app_text_size_large" />
 
         <TextView
             android:id="@+id/tv_conto_transactionnum"
@@ -37,6 +37,6 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:text="500 €"
-        android:textSize="@dimen/app_text_size_medium" />
+        android:textSize="@dimen/app_text_size_large" />
 
 </RelativeLayout>

@@ -14,8 +14,8 @@
     <dimen name="widget_padding">8dp</dimen>
 
     <dimen name="graph_line_width">3dp</dimen>
-    <dimen name="graph_line_pointsize">6dp</dimen>
-    <dimen name="graph_line_pointstroke">3dp</dimen>
+    <dimen name="graph_line_point_size">6dp</dimen>
+    <dimen name="graph_line_point_stroke">3dp</dimen>
 
     <dimen name="list_item_height">72dp</dimen>
     <!-- standard metrics -->
@@ -45,6 +45,4 @@
     <dimen name="card_corner_radius">2dp</dimen>
     <dimen name="card_margins">16dp</dimen>
     <dimen name="card_paddings">8dp</dimen>
-
-    <dimen name="keyline_2">72dp</dimen>
 </resources>
